@@ -32,6 +32,7 @@ window.onload = function (e) {
   if (key) {
     try {
     json = JSON.parse(Base64.decode(key));
+    alert(json.memo);
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-').replace('%3D', '=');
     $('textarea[name="memo"]').val(Base64.decode(memo));
     } catch (ex) {
