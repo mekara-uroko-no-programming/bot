@@ -21,14 +21,11 @@ var Base64 = {
     return decodeURIComponent(escape(atob(str)));
   }
 };
+
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  var key = location.search.substring(1)
-              .replace(/\//g, '_')
-              .replace(/\+/g, '-')
-              .replace('%3D', '=')
-              .slice(4);
+  var key = location.search.substring(1).slice(4);
   if (key) {
     try {
     json = JSON.parse(Base64.decode(key));
