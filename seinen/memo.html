@@ -22,7 +22,8 @@ window.onload = function (e) {
               .replace('%3D', '=')
               .slice(4);
   if (key) {
-    $('textarea[name="memo"]').val(window.atob(key));
+    json = JSON.parse(window.atob(key));
+    $('textarea[name="memo"]').val(window.atob(json.memo));
   }
   activation();
   $(":checkbox").change(function() {
