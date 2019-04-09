@@ -13,12 +13,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
-var Base64 = {
+var WebSafeBase64 = {
   encode: function(str) {
-    return btoa(unescape(encodeURIComponent(str)));
+    var s = str.replace(/\+/g, '-').replace(/\//g, '_');
+    return btoa(unescape(encodeURIComponent(s)));
   },
   decode: function(str) {
-    return decodeURIComponent(escape(atob(str)));
+    var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace('%3D', '=');
+    return decodeURIComponent(escape(atob(s)));
   }
 };
 
@@ -28,10 +30,8 @@ window.onload = function (e) {
   var key = location.search.substring(1).slice(4);
   if (key) {
     try {
-    json = JSON.parse(Base64.decode(key));
-    alert(json.memo);
-    memo = json.memo;
-    $('textarea[name="memo"]').val(Base64.decode(memo));
+    json = JSON.parse(WebSafeBase64.decode(key));
+    $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
     } catch (ex) {
       alert(ex);
     }
