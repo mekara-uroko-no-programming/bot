@@ -18,8 +18,7 @@ window.onload = function (e) {
   });
   var key = location.search.substring(1).replace(/\//g, '_').replace(/\+/g, '-');
   if (key) {
-    alert(key);
-    $('textarea[name="memo"]').val(window.atob(key));
+    $('textarea[name="memo"]').val(window.atob(decodeURI(key)));
   }
   activation();
   $(":checkbox").change(function() {
