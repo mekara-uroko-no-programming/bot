@@ -16,7 +16,7 @@
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  var key = location.search.substring(1).replace(/\//g, '_').replace(/\+/g, '-');
+  var key = location.search.substring(1).replace(/\//g, '_').replace(/\+/g, '-').slice(4);
   if (key) {
     $('textarea[name="memo"]').val(window.atob(decodeURI(key)));
   }
