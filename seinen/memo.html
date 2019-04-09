@@ -15,14 +15,27 @@
 <script>
 window.onload = function (e) {
   liff.init(function (data) {
-    const id = data.context.id;
-    const memo = atob(data.context.memo.replace(/_/g, '/').replace(/-/g, '+'));
   });
-  alert(location.search.substring(1));
+  var arr  = toObject();
+  var id   = arr['id'];
+  var memo = arr['memo'];
+  if (memo) {
+    $('textarea[name="memo"]').val(memo);
+  }
   activation();
   $(":checkbox").change(function() {
     activation();
   });
+};
+function toObject(str) {
+  str = str || location.search;
+  var result = {}, hash;
+  var param = str.substring(str.indexOf('?')+1).split('&');
+  for (var i=0; i<param.length; i++) {
+    hash = param[i].split('=');
+    result[hash[0]] = hash[1];
+  }
+  return result;
 };
 function sendMsg() {
   var text = '利用規約並びに個人情報保護方針の両方に同意しました。';
@@ -62,7 +75,7 @@ input[type=checkbox] {
   <div class="row">
     <div class="col-sm-1">備考</div>
     <div class="col-sm-11">
-      <textarea rows="5" cols="50"></textarea>
+      <textarea name="memo" rows="5" cols="50"></textarea>
     </div>
   </div>
   <div class="row">
