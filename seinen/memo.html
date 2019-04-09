@@ -24,7 +24,7 @@ window.onload = function (e) {
   if (key) {
     json = JSON.parse(window.atob(key));
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
-    alert(memo);
+    alert(window.atob(memo));
     $('textarea[name="memo"]').val(window.atob(memo));
   }
   activation();
