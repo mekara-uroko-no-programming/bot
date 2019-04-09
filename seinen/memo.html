@@ -15,7 +15,9 @@
 <script>
 window.onload = function (e) {
   liff.init(function (data) {
-    const key = data.context.key;
+    const id = data.context.id;
+    const memo = atob(data.context.memo.replace(/_/g, '/').replace(/-/g, '+'));
+    alert(memo);
   });
   activation();
   $(":checkbox").change(function() {
@@ -60,7 +62,7 @@ input[type=checkbox] {
   <div class="row">
     <div class="col-sm-1">備考</div>
     <div class="col-sm-11">
-      <textarea rows="5" cols="60"></textarea>
+      <textarea rows="5" cols="50"></textarea>
     </div>
   </div>
   <div class="row">
