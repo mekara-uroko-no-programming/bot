@@ -19,6 +19,7 @@ window.onload = function (e) {
   var arr  = toObject();
   var key  = arr['key'].replace(/\//g, '_').replace(/\+/g, '-');
   if (key) {
+    alert(window.atob(key));
     $('textarea[name="memo"]').val(window.atob(key));
   }
   activation();
