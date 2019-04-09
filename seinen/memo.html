@@ -13,6 +13,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
+var Base64 = {
+  encode: function(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  },
+  decode: function(str) {
+    return decodeURIComponent(escape(atob(str)));
+  }
+};
 window.onload = function (e) {
   liff.init(function (data) {
   });
@@ -22,10 +30,9 @@ window.onload = function (e) {
               .replace('%3D', '=')
               .slice(4);
   if (key) {
-    json = JSON.parse(decodeURIComponent(escape(atob(key))));
+    json = JSON.parse(Base64.decode(key));
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
-    alert(decodeURIComponent(escape(atob(memo))));
-    $('textarea[name="memo"]').val(decodeURIComponent(escape(atob(memo))));
+    $('textarea[name="memo"]').val(Base64.decode(memo));
   }
   activation();
   $(":checkbox").change(function() {
