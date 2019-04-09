@@ -34,25 +34,13 @@ window.onload = function (e) {
   }
 };
 function sendMsg() {
-  var text = $('input:hidden[name="dateid"]').val();
+  var id   = $('input:hidden[name="dateid"]').val();
+  var memo = $('textarea[name="memo"]').val();
+  var text = $.format('%s:\n%s', id, memo);
   liff.sendMessages([
-    {  
-      'type': 'flex',
-      'altText': 'this is a flex message',
-      'contents': {
-        'type': 'bubble',
-        'body': {
-          'type': 'box',
-          'layout': 'vertical',
-          'contents': [
-            {
-              'type': 'text',
-              'wrap': true,
-              'text': text
-            }
-          ]
-        }
-      }
+    {
+      'type': 'text',
+      'text':  text
     }
   ])
   .then(() => {
