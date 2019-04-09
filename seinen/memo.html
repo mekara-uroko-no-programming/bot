@@ -34,10 +34,6 @@ window.onload = function (e) {
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
     $('textarea[name="memo"]').val(Base64.decode(memo));
   }
-  activation();
-  $(":checkbox").change(function() {
-    activation();
-  });
 };
 function sendMsg() {
   var text = '利用規約並びに個人情報保護方針の両方に同意しました。';
@@ -54,22 +50,7 @@ function sendMsg() {
     liff.closeWindow();
   });
 }
-function activation() {
-  if($("#kiyaku-check").is(":checked") && $("#kojin-check").is(":checked")) {
-    $("#agree").prop("disabled", false);
-  } else {
-    $("#agree").prop("disabled", true);
-  }
-}
 </script>
-<style>
-input[type=checkbox] {
-  -ms-transform: scale(1.5, 1.5);
-  -webkit-transform: scale(1.5, 1.5);
-  transform: scale(1.5, 1.5);
-  margin-left:5px;
-}
-</style>
 <title>項目の修正</title>
 </head>
 <body>
@@ -86,7 +67,7 @@ input[type=checkbox] {
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-11">
-      <button type="button" class="btn btn-lg btn-success" id="agree" onClick="sendMsg();">更新</button>
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">更新</button>
     </div>
   </div>
 </div>
