@@ -23,7 +23,8 @@ window.onload = function (e) {
               .slice(4);
   if (key) {
     json = JSON.parse(window.atob(key));
-    $('textarea[name="memo"]').val(window.atob(json.memo));
+    memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
+    $('textarea[name="memo"]').val(window.atob(memo));
   }
   activation();
   $(":checkbox").change(function() {
