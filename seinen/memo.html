@@ -36,7 +36,7 @@ window.onload = function (e) {
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
   var memo = $('textarea[name="memo"]').val();
-  var text = $.format('%s:%s', id, memo);
+  var text = $.format('%s %s', id, memo);
   liff.sendMessages([
     {
       'type': 'text',
