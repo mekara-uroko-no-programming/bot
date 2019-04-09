@@ -30,9 +30,13 @@ window.onload = function (e) {
               .replace('%3D', '=')
               .slice(4);
   if (key) {
+    try {
     json = JSON.parse(Base64.decode(key));
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
     $('textarea[name="memo"]').val(Base64.decode(memo));
+    } catch (ex) {
+      alert(ex);
+    }
   }
 };
 function sendMsg() {
