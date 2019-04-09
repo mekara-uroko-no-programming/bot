@@ -23,18 +23,14 @@ var WebSafeBase64 = {
     return decodeURIComponent(escape(atob(s)));
   }
 };
-
 window.onload = function (e) {
   liff.init(function (data) {
   });
   var key = location.search.substring(1).slice(4);
   if (key) {
-    try {
     json = JSON.parse(WebSafeBase64.decode(key));
     $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
-    } catch (ex) {
-      alert(ex);
-    }
+    $('input:hidden[name="dateid"]').val(json.id);
   }
 };
 function sendMsg() {
@@ -61,7 +57,7 @@ function sendMsg() {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="5"><b>備考</b></font></div>
+    <div class="col-sm-1"><font size="5">備考</font></div>
     <div class="col-sm-11">
       <textarea name="memo" rows="5" cols="50"></textarea>
     </div>
@@ -74,6 +70,9 @@ function sendMsg() {
     <div class="col-sm-11">
       <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">更新</button>
     </div>
+  </div>
+  <div class="row">
+    <input type="hidden" name="dateid">
   </div>
 </div>
 </body>
