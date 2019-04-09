@@ -16,26 +16,15 @@
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  var arr  = toObject();
-  var key  = arr['key'].replace(/\//g, '_').replace(/\+/g, '-');
+  var key = location.search.substring(1).replace(/\//g, '_').replace(/\+/g, '-');
   if (key) {
-    alert(window.atob(key));
+    alert(key);
     $('textarea[name="memo"]').val(window.atob(key));
   }
   activation();
   $(":checkbox").change(function() {
     activation();
   });
-};
-function toObject(str) {
-  str = str || location.search.replace(/\//g, '_').replace(/\+/g, '-');
-  var result = {}, hash;
-  var param = str.substring(str.indexOf('?')+1).split('&');
-  for (var i=0; i<param.length; i++) {
-    hash = param[i].split('=');
-    result[hash[0]] = hash[1];
-  }
-  return result;
 };
 function sendMsg() {
   var text = '利用規約並びに個人情報保護方針の両方に同意しました。';
