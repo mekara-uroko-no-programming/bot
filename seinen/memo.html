@@ -17,10 +17,9 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var arr  = toObject();
-  var id   = arr['id'];
-  var memo = arr['memo'];
-  if (memo) {
-    $('textarea[name="memo"]').val(memo);
+  var key  = arr['key'].replace(/\//g, '_').replace(/\+/g, '-');
+  if (key) {
+    $('textarea[name="memo"]').val(key);
   }
   activation();
   $(":checkbox").change(function() {
