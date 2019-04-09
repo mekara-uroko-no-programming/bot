@@ -28,7 +28,7 @@ window.onload = function (e) {
   });
 };
 function toObject(str) {
-  str = str || location.search;
+  str = str || location.search.replace(/_/g, '/').replace(/-/g, '+'));
   var result = {}, hash;
   var param = str.substring(str.indexOf('?')+1).split('&');
   for (var i=0; i<param.length; i++) {
