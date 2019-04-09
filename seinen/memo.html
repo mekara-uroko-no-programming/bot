@@ -47,11 +47,24 @@ function sendMsg() {
           'contents': [
             {
               'type': 'text',
-              'text': 'hello'
-            },
+              'wrap': true,
+              'text': text
+            }
+          ]
+        },
+        'footer': {
+          'type': 'box',
+          'layout': 'vertical',
+          'contents': [
             {
-              'type': 'text',
-              'text': 'world'
+              'type': 'button',
+              'style': 'primary',
+              'action': {
+                'type': 'postback',
+                'label': '更新',
+                'displayText': text,
+                'data': 'action=test&rel='
+              }
             }
           ]
         }
