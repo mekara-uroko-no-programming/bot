@@ -22,10 +22,10 @@ window.onload = function (e) {
               .replace('%3D', '=')
               .slice(4);
   if (key) {
-    json = JSON.parse(window.atob(key));
+    json = JSON.parse(decodeURIComponent(escape(atob(key))));
     memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
-    alert(window.atob(memo));
-    $('textarea[name="memo"]').val(window.atob(memo));
+    alert(decodeURIComponent(escape(atob(memo))));
+    $('textarea[name="memo"]').val(decodeURIComponent(escape(atob(memo))));
   }
   activation();
   $(":checkbox").change(function() {
