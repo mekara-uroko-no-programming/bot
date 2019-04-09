@@ -27,11 +27,12 @@ window.onload = function (e) {
   var key = location.search.substring(1)
               .replace(/\//g, '_')
               .replace(/\+/g, '-')
+              .replace('%3D', '=')
               .slice(4);
   if (key) {
     try {
     json = JSON.parse(Base64.decode(key));
-    memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-');
+    memo = json.memo.replace(/\//g, '_').replace(/\+/g, '-').replace('%3D', '=');
     $('textarea[name="memo"]').val(Base64.decode(memo));
     } catch (ex) {
       alert(ex);
