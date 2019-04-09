@@ -19,7 +19,7 @@ window.onload = function (e) {
   var arr  = toObject();
   var key  = arr['key'].replace(/\//g, '_').replace(/\+/g, '-');
   if (key) {
-    $('textarea[name="memo"]').val(key);
+    $('textarea[name="memo"]').val(window.atob(key));
   }
   activation();
   $(":checkbox").change(function() {
