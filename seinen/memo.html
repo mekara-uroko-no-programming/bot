@@ -19,7 +19,7 @@ var WebSafeBase64 = {
     return btoa(unescape(encodeURIComponent(s)));
   },
   decode: function(str) {
-    var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace('%3D', '=');
+    var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace(/%3D/g, '=');
     alert(s);
     return decodeURIComponent(escape(atob(s)));
   }
