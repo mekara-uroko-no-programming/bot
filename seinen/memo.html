@@ -29,6 +29,7 @@ window.onload = function (e) {
   });
   var key = location.search.substring(1).slice(4);
   if (key) {
+    alert(key);
     json = JSON.parse(WebSafeBase64.decode(key));
     $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
     $('input:hidden[name="dateid"]').val(json.id);
