@@ -20,23 +20,17 @@ var WebSafeBase64 = {
   },
   decode: function(str) {
     var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace(/%3D/g, '=');
-    alert(s);
     return decodeURIComponent(escape(atob(s)));
   }
 };
 window.onload = function (e) {
-  try {
   liff.init(function (data) {
   });
   var key = location.search.substring(1).slice(4);
   if (key) {
-    alert(key);
     json = JSON.parse(WebSafeBase64.decode(key));
     $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
     $('input:hidden[name="dateid"]').val(json.id);
-  }
-  } catch (ex) {
-    alert(ex);
   }
 };
 function sendMsg() {
