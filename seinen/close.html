@@ -32,8 +32,8 @@ window.onload = function (e) {
     $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
     $('input:hidden[name="dateid"]').val(json.id);
   }
-  countG($('textarea[name="gakuto"]').val());
-  countE($('textarea[name="ensho" ]').val());
+  countG($('textarea[name="gakuto"]'));
+  countE($('textarea[name="ensho" ]'));
 };
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
