@@ -57,7 +57,7 @@ function countG(obj) {
 }
 function getCount(text) {
   var ret = 0;
-  var str = obj.value.split(/\r\n|\n/g);
+  var str = text.split(/\r\n|\n/g);
   for (var i = 0; i < str.length; i++) {
     if (str[i] != '') {
       ret++;
