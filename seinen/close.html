@@ -31,6 +31,7 @@ window.onload = function (e) {
     json = JSON.parse(WebSafeBase64.decode(key));
     $('textarea[name="report"]').val(WebSafeBase64.decode(json.report));
     $('input:hidden[name="dateid"]').val(json.id);
+    getReport(json.id);
   }
   countG();
   countE();
@@ -51,6 +52,15 @@ function sendMsg() {
   .catch((err) => {
     alert(err);
     liff.closeWindow();
+  });
+}
+function getReport(id) {
+  var url = ''
+  url += 'https://script.google.com/macros/s/';
+  url += 'AKfycbz-C0xZRWriMWNeWKwknkegY8kVwo8N73mxMY9wY-YHzZI2NFc/exec';
+  $.get(url, { action: "getReport", id: id },
+  function(data){
+    alert("Data Loaded: " + data);
   });
 }
 function countG(obj) {
