@@ -58,9 +58,21 @@ function getReport(id) {
   var url = ''
   url += 'https://script.google.com/macros/s/';
   url += 'AKfycbz-C0xZRWriMWNeWKwknkegY8kVwo8N73mxMY9wY-YHzZI2NFc/exec';
-  $.get(url, { action: "getReport", id: id },
-  function(data){
-    alert("Data Loaded: " + data);
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: { action: "getReport", id: id },
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    $('.msg').append('<p>NAME: ' + data + '</p>');
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    console.log("failed...");
+    console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+    console.log("textStatus     : " + textStatus);
+    console.log("errorThrown    : " + errorThrown.message);
   });
 }
 function countG(obj) {
@@ -91,6 +103,22 @@ function getCount(text) {
 <style type="text/css">
 .big { font-size:13pt; }
 .normal { font-size:10pt; }
+.hide {
+  display: none;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  background-image: url(../img/712-88.gif);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: 150px 150px;
+}
 </style>
 <title>活動報告</title>
 </head>
@@ -126,7 +154,7 @@ function getCount(text) {
   <div class="row">
     <div class="col-sm-1"><font size="3">報告事項</font></div>
     <div class="col-sm-11">
-      <textarea name="report" rows="5" cols="40" class="big"></textarea>
+      <textarea name="report" rows="5" cols="40" class="big loading"></textarea>
     </div>
   </div>
   <div class="row">
