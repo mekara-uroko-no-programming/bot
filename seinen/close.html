@@ -40,7 +40,7 @@ window.onload = function (e) {
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
   var report = $('textarea[name="report"]').val();
-  var text = id + '^\n報告事項^\n' + report;
+  var text = id + '^\nクローズ^\n' + report;
   liff.sendMessages([
     {
       'type': 'text',
