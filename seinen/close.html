@@ -71,6 +71,8 @@ function getReport(id) {
     $('textarea[name="gakuto"]').val(data.gakuto);
     $('textarea[name="ensho" ]').val(data.ensho);
     $('textarea[name="report"]').val(data.report);
+    countG();
+    countE();
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
