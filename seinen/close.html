@@ -52,8 +52,12 @@ function sendMsg() {
   });
 }
 function countG(obj) {
-  var cnt = getCount(obj.value);
+  var cnt = getCount(obj.value | '');
   $('#gcnt').text(cnt);
+}
+function countE(obj) {
+  var cnt = getCount(obj.value | '');
+  $('#ecnt').text(cnt);
 }
 function getCount(text) {
   var ret = 0;
@@ -78,15 +82,15 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="3">学徒</font><span id=gcnt></span></div>
+    <div class="col-sm-1"><font size="3">学徒</font> <span id=gcnt></span> 名</div>
     <div class="col-sm-11">
       <textarea name="gakuto" rows="5" cols="20" class="big" onKeyUp="countG(this);"></textarea>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="3">縁正</font></div>
+    <div class="col-sm-1"><font size="3">縁正</font> <span id=ecnt></span> 名</div>
     <div class="col-sm-11">
-      <textarea name="ensho" rows="5" cols="20" class="big"></textarea>
+      <textarea name="ensho" rows="5" cols="20" class="big" onKeyUp="countE(this);"></textarea>
     </div>
   </div>
   <div class="row">
