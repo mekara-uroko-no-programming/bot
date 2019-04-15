@@ -30,7 +30,9 @@ window.onload = function (e) {
   if (key) {
     json = JSON.parse(WebSafeBase64.decode(key));
     $('input:hidden[name="dateid"]').val(json.id);
-    getReport(json.id);
+    if (json.report == 'TRUE') {
+      getReport(json.id);
+    }
   }
   countG();
   countE();
