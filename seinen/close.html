@@ -72,6 +72,7 @@ function getReport(id) {
     $('textarea[name="ensho" ]').val(data.ensho);
     $('textarea[name="report"]').val(data.report);
     $('textarea[name="gakuto"]').trigger('keyup');
+    $('textarea[name="ensho" ]').trigger('keyup');
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
