@@ -29,7 +29,6 @@ window.onload = function (e) {
   var key = location.search.substring(1).slice(4);
   if (key) {
     json = JSON.parse(WebSafeBase64.decode(key));
-    $('textarea[name="report"]').val(WebSafeBase64.decode(json.report));
     $('input:hidden[name="dateid"]').val(json.id);
     getReport(json.id);
   }
@@ -67,7 +66,7 @@ function getReport(id) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    $('.msg').append('<p>NAME: ' + data + '</p>');
+    $('textarea[name="report"]').val(data.report);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
