@@ -52,7 +52,18 @@ function sendMsg() {
   });
 }
 function countG(obj) {
-  $('#gcnt').text(obj.value);
+  var cnt = getCount(obj.value);
+  $('#gcnt').text(cnt);
+}
+function getCount(text) {
+  var ret = 0;
+  var str = obj.value.split(/\r\n|\n/g);
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] != '') {
+      ret++;
+    }
+  }
+  return ret;
 }
 </script>
 <style type="text/css">
