@@ -54,11 +54,17 @@ function sendMsg() {
   });
 }
 function countG(obj) {
-  var cnt = getCount(obj.value);
+  var cnt = 0;
+  if (obj) {
+    cnt = getCount(obj.value);
+  }
   $('#gcnt').text(cnt);
 }
 function countE(obj) {
-  var cnt = getCount(obj.value);
+  var cnt = 0;
+  if (obj) {
+    cnt = getCount(obj.value);
+  }
   $('#ecnt').text(cnt);
 }
 function getCount(text) {
