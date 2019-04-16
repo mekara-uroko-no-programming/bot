@@ -41,9 +41,9 @@ function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
   var gcnt = $('#gcnt').text();
   var ecnt = $('#ecnt').text();
-  var gakuto = $('textarea[name="gakuto"]').val();
-  var ensho  = $('textarea[name="ensho" ]').val();
-  var report = $('textarea[name="report"]').val();
+  var gakuto = $('textarea[name="gakuto"]').val().replace(/^\s+|\s+$/g,'');
+  var ensho  = $('textarea[name="ensho" ]').val().replace(/^\s+|\s+$/g,'');
+  var report = $('textarea[name="report"]').val().replace(/^\s+|\s+$/g,'');
   var text = id + '^\nクローズ^\n'
            + '学徒:' + gcnt + '\n[\n' + gakuto + '\n]\n'
            + '縁正:' + ecnt + '\n[\n' + ensho  + '\n]\n'
