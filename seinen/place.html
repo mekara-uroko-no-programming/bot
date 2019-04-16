@@ -29,8 +29,8 @@ window.onload = function (e) {
   var key = location.search.substring(1).slice(4);
   if (key) {
     json = JSON.parse(WebSafeBase64.decode(key));
-    $('input:text[name="lecturer"]').val(json.lecturer);
-    $('input:text[name="place"   ]').val(json.place);
+    $('input:text[name="lecturer"]').val(WebSafeBase64.decode(json.lecturer));
+    $('input:text[name="place"   ]').val(WebSafeBase64.decode(json.place));
     $('input:hidden[name="dateid"]').val(json.id);
   }
 };
