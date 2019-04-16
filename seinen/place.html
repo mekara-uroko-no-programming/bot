@@ -38,7 +38,7 @@ function sendMsg() {
   var id = $('input:hidden[name="dateid"]').val();
   var lect  = $('input:text[name="lecturer"]').val();
   var place = $('input:text[name="place"   ]').val();
-  var text = id + '^\n講師^\n' + lect + '^\n場所^\n' + place;
+  var text = id + '^\n講師・場所^\n' + '講師:' + lect + '\n場所:' + place;
   liff.sendMessages([
     {
       'type': 'text',
