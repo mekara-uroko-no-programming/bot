@@ -56,10 +56,10 @@ function getCondition() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    $.each(data.lecturer, function(value) {
+    $.each(data.lecturer, function(value, name) {
       $option = $('<option>')
-        .val(value)
-        .text(value);
+        .val(name)
+        .text(name);
       $('#lecturer').append($option);
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
