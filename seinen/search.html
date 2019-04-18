@@ -56,7 +56,12 @@ function getCondition() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    $('textarea[name="lecturer"]').val(data.lecturer);
+    $.each(data.lecturer, function(value) {
+      $option = $('<option>')
+        .val(value)
+        .text(value);
+      $('#lecturer').append($option);
+    });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
@@ -97,7 +102,8 @@ function getCondition() {
       <font size="3">講師 / 主催者</font>
     </div>
     <div class="col-sm-11">
-      <textarea name="lecturer" rows="4" class="big"></textarea>
+      <select id="lecturer" class="big">
+      </select>
     </div>
   </div>
   <div class="row">
