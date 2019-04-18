@@ -9,12 +9,21 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.1/themes/base/jquery-ui.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
 window.onload = function (e) {
   liff.init(function (data) {
+  });
+  $("#targetdate").datepicker({
+    changeYear: true,
+    changeMonth: true,
+    dateFormat: 'yy/mm/dd',
+    yearRange: '-5:+5'
   });
   getCondition();
 };
@@ -108,6 +117,14 @@ function getCondition() {
   </div>
   <div class="row">
     &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">実施日</font>
+    </div>
+    <div class="col-sm-11">
+      <input type="text" id="targetdate" class="date-picker">
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
