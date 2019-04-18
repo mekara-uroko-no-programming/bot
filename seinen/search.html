@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+window.onload = function (e) {
+  liff.init(function (data) {
+  });
+  getCondition();
+};
+function sendMsg() {
+  var id   = $('input:hidden[name="dateid"]').val();
+  var gcnt = $('#gcnt').text();
+  var ecnt = $('#ecnt').text();
+  var gakuto = $('textarea[name="gakuto"]').val().replace(/^\s+|\s+$/g,'');
+  var ensho  = $('textarea[name="ensho" ]').val().replace(/^\s+|\s+$/g,'');
+  var report = $('textarea[name="report"]').val().replace(/^\s+|\s+$/g,'');
+  var text = id + '^\nクローズ^\n'
+           + '学徒:' + gcnt + '\n[\n' + gakuto + '\n]\n'
+           + '縁正:' + ecnt + '\n[\n' + ensho  + '\n]\n'
+           + report;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+function getCondition() {
+  var url = ''
+  url += 'https://script.google.com/macros/s/';
+  url += 'AKfycbz-C0xZRWriMWNeWKwknkegY8kVwo8N73mxMY9wY-YHzZI2NFc/exec';
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: { action: "getCondition" },
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    $('textarea[name="lecturer"]').val(data.lecturer);
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    console.log("failed...");
+    console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+    console.log("textStatus     : " + textStatus);
+    console.log("errorThrown    : " + errorThrown.message);
+  });
+}
+</script>
+<style type="text/css">
+.big { font-size:13pt; }
+.normal { font-size:10pt; }
+.hide {
+  display: none;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  background-image: url(./img/loading.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 20%;
+  background-size: 150px 150px;
+}
+</style>
+<title>検索</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">講師 / 主催者</font>
+    </div>
+    <div class="col-sm-11">
+      <textarea name="lecturer" rows="4" class="big"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">検索</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
