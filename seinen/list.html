@@ -21,8 +21,8 @@ window.onload = function (e) {
   });
 };
 function sendMsg() {
-  var year  = $('[name=year]' ).val();
-  var month = $('[name=month]').val();
+  var year  = $('#year' ).val();
+  var month = $('#month').val();
   var text = 'リスト^' + year + '年' + month + '月';
   liff.sendMessages([
     {
@@ -50,7 +50,7 @@ function sendMsg() {
   <div class="row">
     &nbsp;
   </div>
-  <div class="row" style="float:left;">
+  <div class="row">
     <div class="col-sm-1">
       <font size="3">対象年</font>
     </div>
@@ -62,7 +62,10 @@ function sendMsg() {
       </select>
     </div>
   </div>
-  <div class="row" style="float:right;>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
     <div class="col-sm-1">
       <font size="3">対象月</font>
     </div>
@@ -83,7 +86,7 @@ function sendMsg() {
       </select>
     </div>
   </div>
-  <div class="row" style="clear:both;>
+  <div class="row">
     &nbsp;
   </div>
   <div class="row">
