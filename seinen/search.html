@@ -30,11 +30,13 @@ window.onload = function (e) {
 function sendMsg() {
   var lecturer    = $('#lecturer').val();
   var targetdate  = $('#targetdate').val();
-  var participant = $('#participant').val();
+  var gakuto      = $('#gakuto').val();
+  var ensho       = $('#ensho').val();
   var text = '検索^\n'
            + '主催者:' + lecturer    + '\n'
            + '実施日:' + targetdate  + '\n'
-           + '参加者:' + participant;
+           + '学徒参加者:' + gakuto  + '\n'
+           + '縁正参加者:' + ensho;
   liff.sendMessages([
     {
       'type': 'text',
@@ -128,10 +130,21 @@ function getCondition() {
   </div>
   <div class="row">
     <div class="col-sm-1">
-      <font size="3">参加者</font>
+      <font size="3">学徒参加者</font>
     </div>
     <div class="col-sm-11">
-      <input type="text" id="participant">
+      <input type="text" id="gakuto">
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">縁正参加者</font>
+    </div>
+    <div class="col-sm-11">
+      <input type="text" id="ensho">
     </div>
   </div>
   <div class="row">
