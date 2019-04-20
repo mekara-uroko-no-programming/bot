@@ -28,11 +28,13 @@ window.onload = function (e) {
   getCondition();
 };
 function sendMsg() {
-  var lecturer   = $('#lecturer').val();
-  var targetdate = $('#targetdate').val();
+  var lecturer    = $('#lecturer').val();
+  var targetdate  = $('#targetdate').val();
+  var participant = $('#participant').val();
   var text = '検索^\n'
-           + '主催者:' + lecturer + '\n'
-           + '実施日:' + targetdate;
+           + '主催者:' + lecturer    + '\n'
+           + '実施日:' + targetdate  + '\n'
+           + '参加者:' + participant;
   liff.sendMessages([
     {
       'type': 'text',
@@ -119,6 +121,17 @@ function getCondition() {
     </div>
     <div class="col-sm-11">
       <input type="text" id="targetdate" class="date-picker">
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">参加者</font>
+    </div>
+    <div class="col-sm-11">
+      <input type="text" id="participant">
     </div>
   </div>
   <div class="row">
