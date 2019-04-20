@@ -29,7 +29,7 @@ window.onload = function (e) {
 };
 function sendMsg() {
   var lecturer   = $('#lecturer').val();
-  var targetdate = $('#targetdate').text();
+  var targetdate = $('#targetdate').val();
   var text = '検索^\n'
            + '主催者:' + lecturer + '\n'
            + '実施日:' + targetdate;
