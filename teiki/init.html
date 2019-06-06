@@ -67,8 +67,8 @@ function getUsers() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    res = JSON.parse(data);
-    alert(res);
+    //res = JSON.parse(data);
+    alert(data);
     $('#btn-area').append('<button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>');
     $('#btn-area').append('<button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>');
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
