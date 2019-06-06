@@ -69,10 +69,10 @@ function getUsers() {
     $('.loading').addClass('hide');
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(@ID);">@NAME</button>';
-        var num = data[i].id.substring(1, 1);
+        var num = data[i].id.substring(2, 2);
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
-        button = button.replace('@COLOR', num == '0' ? 'btn-success' : 'btn-info');
+        button = button.replace('@COLOR', num == '01' ? 'btn-success' : 'btn-info');
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
         if ((i + 1) % 5 == 0) {
