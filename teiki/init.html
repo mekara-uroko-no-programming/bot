@@ -70,21 +70,13 @@ function getUsers() {
     var cnt = 0;
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(@ID);">@NAME</button>';
-        var num0 = data[i].id.substring(0, 1);
-        var num1 = data[i].id.substring(1, 2);
-        var num2 = data[i].id.substring(2, 4);
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
-        if (num0 == 'X') {
+        button = button.replace('@COLOR', getColor(data[i].id));
+        if (data[i].id.substring(0, 1) == 'X') {
             continue;
-        } else if (num1 == '0' && num2 == '01') {
-            button = button.replace('@COLOR', 'color-orange');
-        } else if (num2 == '01') {
-            button = button.replace('@COLOR', 'btn-info');
-        } else {
-            button = button.replace('@COLOR', 'color-white');
         }
-        if (num2 == '01') {
+        if (data[i].id.substring(2, 4) == '01') {
             $('#btn-area').append('<br><br>');
             cnt = 0;
         }
@@ -102,6 +94,22 @@ function getUsers() {
     console.log("textStatus     : " + textStatus);
     console.log("errorThrown    : " + errorThrown.message);
   });
+}
+function getColor(id) {
+    var color = 'color-white';
+    var num0 = id.substring(0, 1);
+    var num1 = id.substring(1, 2);
+    var num2 = id.substring(2, 4);
+    if (num0 == 'X') {
+        color = 'color-pink';
+    } else if (num0 == 'A' && num1 == '0' && num2 == '01') {
+        color = 'btn-success';
+    } else if (num1 == '0' && num2 == '01') {
+        color = 'color-orange';
+    } else if (num2 == '01') {
+        color = 'btn-info';
+    }
+    return color;
 }
 </script>
 <style type="text/css">
