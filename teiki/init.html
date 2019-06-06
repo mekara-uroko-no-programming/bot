@@ -53,14 +53,16 @@ function getUsers() {
     $('.loading').addClass('hide');
     var cnt = 0;
     for (var i =0; i < data.length; i++) {
+        var id = data[i].id;
+        var name = data[i].name.replace(/[\x20\u3000]/g, '');
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(&quot;@ID&quot;, &quot;@NAME&quot;);">@NAME</button>';
-        button = button.replace(/@ID/g, data[i].id);
-        button = button.replace(/@NAME/g, data[i].name);
-        button = button.replace(/@COLOR/g, getColor(data[i].id));
-        if (data[i].id.substring(0, 1) == 'X') {
+        button = button.replace(/@ID/g, id);
+        button = button.replace(/@NAME/g, name);
+        button = button.replace(/@COLOR/g, getColor(id));
+        if (id.substring(0, 1) == 'X') {
             continue;
         }
-        if (data[i].id.substring(2, 4) == '01') {
+        if (id.substring(2, 4) == '01') {
             $('#btn-area').append('<br><br>');
             cnt = 0;
         }
