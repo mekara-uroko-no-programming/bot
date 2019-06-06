@@ -72,6 +72,7 @@ function getUsers() {
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
         $('#btn-area').append(button);
+        $('#btn-area').append('&nbsp;');
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
