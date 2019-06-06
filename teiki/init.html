@@ -13,23 +13,16 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
-var WebSafeBase64 = {
-  encode: function(str) {
-    var s = str.replace(/\+/g, '-').replace(/\//g, '_');
-    return btoa(unescape(encodeURIComponent(s)));
-  },
-  decode: function(str) {
-    var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace(/%3D/g, '=');
-    return decodeURIComponent(escape(atob(s)));
-  }
-};
 window.onload = function (e) {
   liff.init(function (data) {
   });
   getUsers();
 };
 function sendMsg(id, name) {
-  var text = 'ID:' + id + '\n名前:' + name;
+  var text = '';
+  text += '報告者登録\n';
+  text += 'ID:' + id + '\n';
+  text += '名前:' + name;
   liff.sendMessages([
     {
       'type': 'text',
