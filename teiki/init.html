@@ -82,6 +82,9 @@ function getUsers() {
         }
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
+        if (cnt == 0) {
+            $('#btn-area').append('<br>');
+        }
         cnt++;
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
