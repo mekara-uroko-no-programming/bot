@@ -67,6 +67,7 @@ function getUsers() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
+    var cnt = 0;
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(@ID);">@NAME</button>';
         var num0 = data[i].id.substring(0, 1);
@@ -85,12 +86,15 @@ function getUsers() {
         }
         if (num0 != 'X' && num2 == '01') {
             $('#btn-area').append('<br><br>');
+            cnt = 0;
         }
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
-        if ((i + 1) % 5 == 0) {
+        if (cnt % 5 == 0) {
             $('#btn-area').append('<br>');
+            cnt = 0;
         }
+        cnt++;
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
