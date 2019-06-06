@@ -67,12 +67,14 @@ function getUsers() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    var parent = $('div').addClass('row');
+    var parent = $('div');
+    parent.addClass('row');
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg btn-success" onClick="sendMsg(@ID);">@NAME</button>';
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
-        var child = $('div').addClass('col-sm-1');
+        var child = $('div');
+        child.addClass('col-sm-1');
         child.append(button);
         parent.append(child);
     }
