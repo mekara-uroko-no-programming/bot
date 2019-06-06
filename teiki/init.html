@@ -67,19 +67,14 @@ function getUsers() {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    var parent = $('div');
-    parent.addClass('row');
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg btn-success" onClick="sendMsg(@ID);">@NAME</button>';
-        button = button.replace('@ID', data[i].id);
-        button = button.replace('@NAME', data[i].name);
-        var child = $('div');
-        child.addClass('col-sm-1');
-        child.append(button);
-        parent.append(child);
+        $('#btn-area').append(button);
+        $('#btn-area').append('&nbsp;');
+        if (i > 0 && i % 5 == 0) {
+            $('#btn-area').append('<br>');
+        }
     }
-    console.log(parent);
-    $('#btn-area').append(parent);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
