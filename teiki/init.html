@@ -29,7 +29,7 @@ window.onload = function (e) {
   getUsers();
 };
 function sendMsg(id, name) {
-  var text = 'ID[' + id + ']\n名前[' + name + ']';
+  var text = 'ID:' + id + '\n名前:' + name;
   liff.sendMessages([
     {
       'type': 'text',
