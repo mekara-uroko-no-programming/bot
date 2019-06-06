@@ -76,7 +76,7 @@ function getUsers() {
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
         if (num0 == 'X') {
-            button = button.replace('@COLOR', 'color-pink');
+            continue;
         } else if (num1 == '0' && num2 == '01') {
             button = button.replace('@COLOR', 'color-orange');
         } else if (num2 == '01') {
@@ -86,9 +86,7 @@ function getUsers() {
         }
         if (num2 == '01') {
             $('#btn-area').append('<br><br>');
-            if (num0 != 'X') {
-              cnt = 0;
-            }
+            cnt = 0;
         }
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
