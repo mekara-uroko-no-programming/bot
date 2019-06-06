@@ -26,17 +26,19 @@ var WebSafeBase64 = {
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  var key = location.search.substring(1).slice(4);
-  if (key) {
-    json = JSON.parse(WebSafeBase64.decode(key));
-    $('textarea[name="memo"]').val(WebSafeBase64.decode(json.memo));
-    $('input:hidden[name="dateid"]').val(json.id);
-  }
+  getUsers();
 };
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
-  var memo = $('textarea[name="memo"]').val();
-  var text = id + '^\n備考^\n' + memo;
+  var gcnt = $('#gcnt').text();
+  var ecnt = $('#ecnt').text();
+  var gakuto = $('textarea[name="gakuto"]').val().replace(/^\s+|\s+$/g,'');
+  var ensho  = $('textarea[name="ensho" ]').val().replace(/^\s+|\s+$/g,'');
+  var report = $('textarea[name="report"]').val().replace(/^\s+|\s+$/g,'');
+  var text = id + '^\nクローズ^\n'
+           + '学徒:' + gcnt + '\n[\n' + gakuto + '\n]\n'
+           + '縁正:' + ecnt + '\n[\n' + ensho  + '\n]\n'
+           + report;
   liff.sendMessages([
     {
       'type': 'text',
@@ -51,11 +53,51 @@ function sendMsg() {
     liff.closeWindow();
   });
 }
+function getUsers() {
+  var url = ''
+  url += 'https://script.google.com/macros/s/';
+  url += 'AKfycbxuf2Nyd9KcJ0FszedF2rAMpNOAkOzUv8XgVZ33klfGSMdSEDQ';
+  url += '/exec';
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: { action: "getUsers" },
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    $('#btn-area').append('<button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>');
+    $('#btn-area').append('<button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>');
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    console.log("failed...");
+    console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+    console.log("textStatus     : " + textStatus);
+    console.log("errorThrown    : " + errorThrown.message);
+  });
+}
 </script>
 <style type="text/css">
-.big { font-size:15pt; }
+.big { font-size:13pt; }
+.normal { font-size:10pt; }
+.hide {
+  display: none;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  background-image: url(./img/loading.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 20%;
+  background-size: 150px 150px;
+}
 </style>
-<title>項目の修正</title>
+<title>報告者をタップしてください</title>
 </head>
 <body>
 <div class="container">
@@ -63,18 +105,8 @@ function sendMsg() {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="5">備考</font></div>
-    <div class="col-sm-11">
-      <textarea name="memo" rows="5" cols="40" class="big"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    &nbsp;
-  </div>
-  <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-11">
-      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">更新</button>
+    <div id="btn-area" class="col-sm-11">
     </div>
   </div>
   <div class="row">
