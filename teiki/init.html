@@ -78,6 +78,7 @@ function getUsers() {
         child.append(button);
         parent.append(child);
     }
+    console.log(parent);
     $('#btn-area').append(parent);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
