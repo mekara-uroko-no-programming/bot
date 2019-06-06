@@ -76,12 +76,15 @@ function getUsers() {
         button = button.replace('@NAME', data[i].name);
         if (num0 == 'X') {
             button = button.replace('@COLOR', 'color-pink');
-        } else if (num1 == '0') {
+        } else if (num1 == '0' && num2 == '01') {
             button = button.replace('@COLOR', 'color-orange');
         } else if (num2 == '01') {
             button = button.replace('@COLOR', 'btn-info');
         } else {
             button = button.replace('@COLOR', 'color-white');
+        }
+        if (num0 != 'X' && num2 == '01') {
+            $('#btn-area').append('<br><br>');
         }
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
