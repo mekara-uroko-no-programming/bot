@@ -69,10 +69,20 @@ function getUsers() {
     $('.loading').addClass('hide');
     for (var i =0; i < data.length; i++) {
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(@ID);">@NAME</button>';
-        var num = data[i].id.substring(2, 4);
+        var num0 = data[i].id.substring(0, 1);
+        var num1 = data[i].id.substring(1, 2);
+        var num2 = data[i].id.substring(2, 4);
         button = button.replace('@ID', data[i].id);
         button = button.replace('@NAME', data[i].name);
-        button = button.replace('@COLOR', num == '01' ? 'btn-success' : 'btn-info');
+        if (num0 == 'X') {
+            button = button.replace('@COLOR', 'color-pink');
+        } else if (num1 == '0') {
+            button = button.replace('@COLOR', 'color-orange');
+        } else if (num2 == '01') {
+            button = button.replace('@COLOR', 'btn-info');
+        } else {
+            button = button.replace('@COLOR', 'color-white');
+        }
         $('#btn-area').append(button);
         $('#btn-area').append('&nbsp;');
         if ((i + 1) % 5 == 0) {
@@ -105,6 +115,21 @@ function getUsers() {
   background-attachment: fixed;
   background-position: center 20%;
   background-size: 150px 150px;
+}
+.color-orange {
+  color: #fff;
+  background-color: orange;
+  border-color: darkorange;
+}
+.color-white {
+  color: gray;
+  background-color: ghostwhite;
+  border-color: silver;
+}
+.color-pink {
+  color: #fff;
+  background-color: hotpink;
+  border-color: mediumvioletred;
 }
 </style>
 <title>報告者をタップしてください</title>
