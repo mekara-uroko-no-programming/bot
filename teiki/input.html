@@ -59,7 +59,7 @@ function getUsers(key) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        $('#text-area').append(name + '<br>');
+        $('#text-area').append('<p>' + name + '</p>');
         $('#text-area').append('<div class="btn-group" data-toggle="buttons">');
         $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> (空白)');
