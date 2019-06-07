@@ -62,7 +62,7 @@ function getUsers(key) {
         $('#text-area').append('<div class="member"><p class="big">' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-default"><input type="radio" autocomplete="off">(空白)</label><label class="btn btn-success"><input type="radio" autocomplete="off">◯</label><label class="btn btn-default"><input type="radio" autocomplete="off">ー</label><label class="btn btn-warning"><input type="radio" autocomplete="off">△</label><label class="btn btn-danger"><input type="radio" autocomplete="off">未</label></div></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
-        alert(this);
+        alert(this.value);
         $(this).parents('.member').css('background-color', 'grey');
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
