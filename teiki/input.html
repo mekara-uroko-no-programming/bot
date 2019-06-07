@@ -52,10 +52,9 @@ function getUsers(key) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    var cnt = 0;
+    var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
-        var target = key.substring(0, 2);
         if (key.substring(0, 2) != target) {
             continue;
         }
