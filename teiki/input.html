@@ -59,7 +59,7 @@ function getUsers(key) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        $('#text-area').append('<div class="member"><p class="big">' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-default"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-success"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-default gray"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div></div>');
+        $('#text-area').append('<div class="member"><p class="big">' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-default"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-success"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
         var color = '#ffffff';
@@ -129,11 +129,9 @@ function getUsers(key) {
   color: #b8860b;
   background-color: #ffcc99;
 }
-.gray {
+.btn-info {
+  color: #7f7fff;
   background-color: #ccccff;
-}
-.btn .gray:active {
-  background-color: #7f7fff;
 }
 </style>
 <title>入力してください</title>
