@@ -55,7 +55,7 @@ function getUsers(key) {
     var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
-        if (key.substring(0, 2) != target) {
+        if (id.substring(0, 2) != target) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
