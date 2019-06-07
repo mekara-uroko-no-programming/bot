@@ -59,8 +59,7 @@ function getUsers(key) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        $('#text-area').append('<p>' + name + '</p>');
-        $('#text-area').append('<div class="btn-group" data-toggle="buttons"><label class="btn btn-default"><input type="radio" autocomplete="off"> (空白)</label><label class="btn btn-success"><input type="radio" autocomplete="off"> ◯</label><label class="btn btn-default"><input type="radio" autocomplete="off"> ー</label><label class="btn btn-default"><input type="radio" autocomplete="off"> △</label><label class="btn btn-danger"><input type="radio" autocomplete="off"> 未</label></div>');
+        $('#text-area').append('<div><p>' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-default"><input type="radio" autocomplete="off"> (空白)</label><label class="btn btn-success"><input type="radio" autocomplete="off">◯</label><label class="btn btn-default"><input type="radio" autocomplete="off">ー</label><label class="btn btn-warning"><input type="radio" autocomplete="off">△</label><label class="btn btn-danger"><input type="radio" autocomplete="off">未</label></div></div>');
         $('#text-area').append('<hr>');
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
@@ -97,6 +96,10 @@ function getUsers(key) {
 .btn-danger {
   color: #c9302c;
   background-color: #ffb6c1;
+}
+.btn-warning {
+  color: #b8860b;
+  background-color: #ffcc99;
 }
 </style>
 <title>入力してください</title>
