@@ -17,8 +17,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var key = location.search.substring(1).slice(3);
-  alert(key);
-  getUsers();
+  getUsers(key);
 };
 function sendMsg(id, name) {
   var text = '';
@@ -39,7 +38,7 @@ function sendMsg(id, name) {
     liff.closeWindow();
   });
 }
-function getUsers() {
+function getUsers(key) {
   var url = '';
   url += 'https://script.google.com/macros/s/';
   url += 'AKfycbxuf2Nyd9KcJ0FszedF2rAMpNOAkOzUv8XgVZ33klfGSMdSEDQ';
@@ -56,24 +55,12 @@ function getUsers() {
     var cnt = 0;
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
-        var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(&quot;@ID&quot;, &quot;@NAME&quot;);">@NAME</button>';
-        button = button.replace(/@ID/g, id);
-        button = button.replace(/@NAME/g, name);
-        button = button.replace(/@COLOR/g, getColor(id));
-        if (id.substring(0, 1) == 'X') {
+        var target = key.substring(0, 2);
+        if (key.substring(0, 2) != target) {
             continue;
         }
-        if (id.substring(2, 4) == '01') {
-            $('#btn-area').append('<br><br>');
-            cnt = 0;
-        }
-        $('#btn-area').append(button);
-        $('#btn-area').append('&nbsp;');
-        if (cnt == 0) {
-            $('#btn-area').append('<br>');
-        }
-        cnt++;
+        var name = data[i].name.replace(/[\x20\u3000]/g, '');
+        $('#text-area').append(name + '<br>');
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -81,22 +68,6 @@ function getUsers() {
     console.log("textStatus     : " + textStatus);
     console.log("errorThrown    : " + errorThrown.message);
   });
-}
-function getColor(id) {
-    var color = 'color-white';
-    var num0 = id.substring(0, 1);
-    var num1 = id.substring(1, 2);
-    var num2 = id.substring(2, 4);
-    if (num0 == 'X') {
-        color = 'color-pink';
-    } else if (num0 == 'A' && num1 == '0' && num2 == '01') {
-        color = 'btn-success';
-    } else if (num1 == '0' && num2 == '01') {
-        color = 'color-orange';
-    } else if (num2 == '01') {
-        color = 'btn-info';
-    }
-    return color;
 }
 </script>
 <style type="text/css">
@@ -118,23 +89,8 @@ function getColor(id) {
   background-position: center 20%;
   background-size: 150px 150px;
 }
-.color-orange {
-  color: #fff;
-  background-color: orange;
-  border-color: darkorange;
-}
-.color-white {
-  color: gray;
-  background-color: ghostwhite;
-  border-color: silver;
-}
-.color-pink {
-  color: #fff;
-  background-color: hotpink;
-  border-color: mediumvioletred;
-}
 </style>
-<title>報告者をタップしてください</title>
+<title>入力してください</title>
 </head>
 <body>
 <div class="container">
@@ -143,7 +99,7 @@ function getColor(id) {
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div id="btn-area" class="col-sm-11">
+    <div id="text-area" class="col-sm-11">
     </div>
   </div>
   <div class="row">
