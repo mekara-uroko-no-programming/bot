@@ -61,22 +61,23 @@ function getUsers(key) {
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
         $('#text-area').append(name + '<br>');
         $('#text-area').append('<div class="btn-group" data-toggle="buttons">');
-        $('#text-area').append('<label class="btn btn-default active">');
+        $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> (空白)');
         $('#text-area').append('</label>');
-        $('#text-area').append('<label class="btn btn-default active">');
+        $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> ◯');
         $('#text-area').append('</label>');
-        $('#text-area').append('<label class="btn btn-default active">');
+        $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> ー');
         $('#text-area').append('</label>');
-        $('#text-area').append('<label class="btn btn-default active">');
+        $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> △');
         $('#text-area').append('</label>');
-        $('#text-area').append('<label class="btn btn-default active">');
+        $('#text-area').append('<label class="btn btn-default">');
         $('#text-area').append('<input type="radio" autocomplete="off"> 未');
         $('#text-area').append('</label>');
         $('#text-area').append('</div>');
+        $('#text-area').append('<hr>');
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
