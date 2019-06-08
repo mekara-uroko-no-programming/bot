@@ -39,7 +39,6 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var param = getUrlVars();
-  alert(param['key']);
   var json = JSON.parse(WebSafeBase64.decode(param['key']));
   var title = WebSafeBase64.decode(json.title);
   $('title').html(title);
