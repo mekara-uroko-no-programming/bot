@@ -42,17 +42,10 @@ window.onload = function (e) {
   var json = JSON.parse(WebSafeBase64.decode(param['key']));
   var title = WebSafeBase64.decode(json.title);
   $('title').html(title);
-  try {
-    getUsers(param['id']);
-  } catch (ex) {
-    alert(ex);
-  }
+  getUsers(param['id']);
 };
 function sendMsg() {
-  var text = '';
-  text += '報告者登録\n';
-  text += 'ID:' + id + '\n';
-  text += '名前:' + name;
+  var text = '登録';
   liff.sendMessages([
     {
       'type': 'text',
