@@ -42,7 +42,7 @@ window.onload = function (e) {
   alert(param['key']);
   var json = JSON.parse(WebSafeBase64.decode(param['key']));
   var title = WebSafeBase64.decode(json.title);
-  $('title').html('title');
+  $('title').html(title);
   try {
     getUsers(param['id']);
   } catch (ex) {
