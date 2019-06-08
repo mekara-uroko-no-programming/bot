@@ -13,11 +13,36 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
+var WebSafeBase64 = {
+  encode: function(str) {
+    var s = str.replace(/\+/g, '-').replace(/\//g, '_');
+    return btoa(unescape(encodeURIComponent(s)));
+  },
+  decode: function(str) {
+    var s = str.replace(/\-/g, '+').replace(/_/g , '/').replace(/%3D/g, '=');
+    return decodeURIComponent(escape(atob(s)));
+  }
+};
+var getUrlVars = function(){
+  var vars = {};
+  var param = location.search.substring(1).split('&');
+  for(var i = 0; i < param.length; i++) {
+    var keySearch = param[i].search(/=/);
+    var key = '';
+    if(keySearch != -1) key = param[i].slice(0, keySearch);
+    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    if(key != '') vars[key] = decodeURI(val);
+  }
+  return vars;
+}
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  var key = location.search.substring(1).slice(3);
-  getUsers(key);
+  var param = getUrlVars();
+  var json = JSON.parse(WebSafeBase64.decode(param['key']));
+  var title = WebSafeBase64.decode(json.title);
+  $('title').html('title');
+  getUsers(param(id));
 };
 function sendMsg(id, name) {
   var text = '';
