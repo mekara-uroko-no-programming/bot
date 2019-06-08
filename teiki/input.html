@@ -81,7 +81,7 @@ function getUsers(key) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください"></div>');
+        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-md  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-md btn-success"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-md btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-md btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-md btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください"></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
         var color = '#ffffff';
@@ -162,9 +162,10 @@ function getUsers(key) {
  position: fixed;
  bottom: 10px;
  right: 10px;
- width: 50px
- height: 20px
- 
+ width: 50px;
+ height: 20px;
+ color: #ffffff;
+ background-color: #ea553a;
 }
 </style>
 <title>入力してください</title>
