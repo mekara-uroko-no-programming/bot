@@ -165,6 +165,23 @@ function getUsers(key) {
   color: #7f7fff;
   background-color: #d6d6ff;
 }
+.back {
+ position: fixed;
+ bottom: 10px;
+ right: 10px;
+ border:1px solid #888888;
+ padding:2pt;
+ background-color: #ffffff;
+ filter:alpha(opacity=85);
+ -moz-opacity:0.85;
+ -khtml-opacity: 0.85;
+ opacity:0.85;
+ text-shadow: 0 -1px 1px #FFF, -1px 0 1px #FFF, 1px 0 1px #aaa; 
+ -webkit-box-shadow: 1px 1px 2px #E7E7E7;
+ -moz-box-shadow: 1px 1px 2px #E7E7E7; 
+ -webkit-border-radius: 3px; 
+ -moz-border-radius: 3px;
+}
 </style>
 <title>入力してください</title>
 </head>
@@ -182,13 +199,8 @@ function getUsers(key) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-11">
-      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>
-    </div>
-  </div>
-  <div class="row">
     <input type="hidden" name="dateid">
+    <button type="button" class="back" onClick="sendMsg();">登録</button>
   </div>
 </div>
 <div class="loading hide"></div>
