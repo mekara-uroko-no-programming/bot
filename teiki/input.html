@@ -48,7 +48,7 @@ window.onload = function (e) {
     alert(ex);
   }
 };
-function sendMsg(id, name) {
+function sendMsg() {
   var text = '';
   text += '報告者登録\n';
   text += 'ID:' + id + '\n';
@@ -179,12 +179,14 @@ function getUsers(key) {
     </div>
   </div>
   <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-11">
       <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">登録</button>
     </div>
   </div>
-  <div class="row">
   <div class="row">
     <input type="hidden" name="dateid">
   </div>
