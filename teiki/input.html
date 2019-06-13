@@ -36,13 +36,17 @@ var getUrlVars = function(){
   return vars;
 }
 window.onload = function (e) {
-  liff.init(function (data) {
-  });
-  var param = getUrlVars();
-  var json = JSON.parse(WebSafeBase64.decode(param['key']));
-  var title = WebSafeBase64.decode(json.title);
-  $('title').html(title);
-  getUsers(param['id']);
+  try {
+    liff.init(function (data) {
+    });
+    var param = getUrlVars();
+    var json = JSON.parse(WebSafeBase64.decode(param['key']));
+    var title = WebSafeBase64.decode(json.title);
+    $('title').html(title);
+    getUsers(param['id']);
+  } catch(ex) {
+    alert(ex);
+  }
 };
 function sendMsg() {
   var text = '登録';
