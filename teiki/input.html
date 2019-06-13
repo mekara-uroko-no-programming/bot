@@ -43,7 +43,7 @@ window.onload = function (e) {
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
-    getUsers(param['id']);
+    getUsers(param['id'], json.hashkey);
   } catch(ex) {
     alert(ex);
   }
@@ -64,7 +64,7 @@ function sendMsg() {
     liff.closeWindow();
   });
 }
-function getUsers(key) {
+function getUsers(key, hashkey) {
   var url = '';
   url += 'https://script.google.com/macros/s/';
   url += 'AKfycbxuf2Nyd9KcJ0FszedF2rAMpNOAkOzUv8XgVZ33klfGSMdSEDQ';
@@ -78,8 +78,6 @@ function getUsers(key) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    var title = $('title').html();
-    alert(title);
     var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
@@ -87,7 +85,9 @@ function getUsers(key) {
             continue;
         }
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
-        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください"></div>');
+        var plan = data[i][hashkey].pln;
+        var comment = data[i][hashkey].cmt;
+        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください" value="' + comment + '"></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
         var color = '#ffffff';
@@ -192,7 +192,6 @@ function getUsers(key) {
     &nbsp;
   </div>
   <div class="row">
-    <input type="hidden" name="dateid">
     <button type="button" class="btn btn-lg btn-success back" onClick="sendMsg();">登録</button>
   </div>
 </div>
