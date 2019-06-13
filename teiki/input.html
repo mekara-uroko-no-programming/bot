@@ -88,8 +88,7 @@ function getUsers(key, hashkey) {
         var name = data[i].nm.replace(/[\x20\u3000]/g, '');
         var plan = data[i][hashkey].pln;
         var comment = data[i][hashkey].cmt;
-        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください"></div>');
-         $('#InputText').val(comment);
+        $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください" value=&quot;' + comment + '&quot;></div>');
     }
     } catch(ex) {
       alert(ex);
