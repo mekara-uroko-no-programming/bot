@@ -78,6 +78,8 @@ function getUsers(key) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
+    var title = $('title').html();
+    alert(title);
     var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
