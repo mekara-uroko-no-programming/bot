@@ -46,10 +46,11 @@ window.onload = function (e) {
 };
 function sendMsg() {
   var text = '登録';
+  var selected =  $('.btn-group button.btn.active').val();
   liff.sendMessages([
     {
       'type': 'text',
-      'text':  text
+      'text':  selected
     }
   ])
   .then(() => {
@@ -77,9 +78,9 @@ function getUsers(key) {
     var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
-        if (id.substring(0, 2) != target) {
             continue;
         }
+        if (id.substring(0, 2) != target) {
         var name = data[i].name.replace(/[\x20\u3000]/g, '');
         $('#text-area').append('<div class="member"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default active"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" id="InputText" placeholder="コメントがあればお書きください"></div>');
     }
