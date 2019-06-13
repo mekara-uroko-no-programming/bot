@@ -40,7 +40,6 @@ window.onload = function (e) {
     liff.init(function (data) {
     });
     var param = getUrlVars();
-    alert(param['key']);
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
@@ -54,7 +53,7 @@ function sendMsg() {
   liff.sendMessages([
     {
       'type': 'text',
-      'text':  selected
+      'text':  text
     }
   ])
   .then(() => {
@@ -80,6 +79,7 @@ function getUsers(key) {
   }).done(function(data){
     $('.loading').addClass('hide');
     var target = key.substring(0, 2);
+    alert(target);
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
             continue;
