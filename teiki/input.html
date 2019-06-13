@@ -114,6 +114,7 @@ function getUsers(key, hashkey) {
         }
         $(this).parents('.member').css('background-color', color);
     });
+    $('input[value="◯"]').prop('checked', true);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
