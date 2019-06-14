@@ -52,9 +52,9 @@ function sendMsg() {
   var text = '登録\n';
   var mem = $('.member').map(function (index, el) {
     return {
-      name: $(this).children('nm').text(),
+      name: $(this).children('nm').val(),
       plan  : $(this).children('.btn-group input[type=radio]').value,
-      cmt   : $(this).children('comment').text()
+      cmt   : $(this).children('comment').val()
     };
   });
   for (var i = 0; i < mem.length; i++) {
