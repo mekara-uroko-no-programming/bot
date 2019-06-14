@@ -74,6 +74,7 @@ function getUsers() {
         cnt++;
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    alert(textStatus);
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
