@@ -110,7 +110,7 @@ function getUsers(key, hashkey) {
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getUsers" },
+    data: { action: "getPlans" },
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
