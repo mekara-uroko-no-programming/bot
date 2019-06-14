@@ -50,12 +50,11 @@ function getUsers() {
       $('.loading').removeClass('hide');
     }
   }).done(function(data){
-  try {
     $('.loading').addClass('hide');
     var cnt = 0;
     for (var i =0; i < data.length; i++) {
         var id = data[i].id;
-        var name = data[i].name.replace(/[\x20\u3000]/g, '');
+        var name = data[i].nm.replace(/[\x20\u3000]/g, '');
         var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(&quot;@ID&quot;, &quot;@NAME&quot;);">@NAME</button>';
         button = button.replace(/@ID/g, id);
         button = button.replace(/@NAME/g, name);
@@ -74,9 +73,6 @@ function getUsers() {
         }
         cnt++;
     }
-} catch(ex) {
-alert(ex);
-}
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
     console.log("failed...");
