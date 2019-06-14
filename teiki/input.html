@@ -52,7 +52,7 @@ function sendMsg() {
   var text = '登録\n';
   var mem = $('.member').map(function (index, el) {
     return {
-      name: $(this).children('p[name=nm]').val(),
+      name: $(this).children('p[name=nm]').text(),
       plan  : $(this).children('.btn-group input[type=radio]').value,
       cmt   : $(this).children('input[name=comment]').val()
     };
