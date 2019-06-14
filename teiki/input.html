@@ -52,6 +52,7 @@ function sendMsg() {
   try {
   var text = '登録';
   var input = $('.member').map(function (index, el) {
+    alert(this);
     var name = $(el).child('name').text();
   });
   alert(input);
