@@ -54,7 +54,7 @@ function sendMsg() {
     return {
       name: $(this).children('p[name=nm]').text(),
       plan  : $(this).children('input[name=selected]').val(),
-      cmt   : $(this).children('input[name=comment]').val()
+      cmt   : $(this).children('input[name=comment]').val().replace(/[\|\[\]]/g, '')
     };
   });
   for (var i = 0; i < mem.length; i++) {
@@ -125,7 +125,7 @@ function getUsers(key, hashkey) {
       var name = data[i].nm.replace(/[\x20\u3000]/g, '');
       var plan = data[i][hashkey].pln;
       var comment = data[i][hashkey].cmt;
-      $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p name="nm" class="big bold" >' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" name="comment" placeholder="コメントがあればお書きください"  pattern="[^\|]" value=' + comment + '><input type="hidden" name="selected" value="' + plan + '" /></div>');
+      $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p name="nm" class="big bold" >' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" name="comment" placeholder="コメントがあればお書きください"  value=' + comment + '><input type="hidden" name="selected" value="' + plan + '" /></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
       var color = getColor(this.value);
