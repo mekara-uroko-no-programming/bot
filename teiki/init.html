@@ -50,6 +50,7 @@ function getUsers() {
       $('.loading').removeClass('hide');
     }
   }).done(function(data){
+  try {
     $('.loading').addClass('hide');
     var cnt = 0;
     for (var i =0; i < data.length; i++) {
@@ -73,6 +74,9 @@ function getUsers() {
         }
         cnt++;
     }
+} catch(ex) {
+alert(ex);
+}
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
     console.log("failed...");
