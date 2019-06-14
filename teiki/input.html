@@ -106,41 +106,20 @@ function getUsers(key, hashkey) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    try {
     var target = key.substring(0, 2);
     for (var i =0; i < data.length; i++) {
-        var id = data[i].id;
-        if (id.substring(0, 2) != target) {
-            continue;
-        }
-        var name = data[i].nm.replace(/[\x20\u3000]/g, '');
-        var plan = data[i][hashkey].pln;
-        var comment = data[i][hashkey].cmt;
-        $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" placeholder="コメントがあればお書きください" value=' + comment + '></div>');
-    }
-    } catch(ex) {
-      alert(ex);
+      var id = data[i].id;
+      if (id.substring(0, 2) != target) {
+        continue;
+      }
+      var name = data[i].nm.replace(/[\x20\u3000]/g, '');
+      var plan = data[i][hashkey].pln;
+      var comment = data[i][hashkey].cmt;
+      $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p class="big"><b>' + name + '</b></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" placeholder="コメントがあればお書きください" value=' + comment + '></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
-        var color = '#ffffff';
-        switch(this.value) {
-            case '':
-                color = '#ffffff';
-                break;
-            case '◯':
-                color = '#e8ffd1';
-                break;
-            case 'ー':
-                color = '#e5e5ff';
-                break;
-            case '△':
-                color = '#ffe8d1';
-                break;
-            case '未':
-                color = '#ffdbff';
-                break;
-        }
-        $(this).parents('.member').css('background-color', color);
+      var color = getColor(this.value);
+      $(this).parents('.member').css('background-color', color);
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
