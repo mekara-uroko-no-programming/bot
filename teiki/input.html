@@ -53,12 +53,12 @@ function sendMsg() {
   var mem = $('.member').map(function (index, el) {
     return {
       name: $(this).children('p[name=nm]').text(),
-      plan  : $(this).children('.btn-group input[type=radio]').value,
+      plan  : $(this).children('.btn-group input[type=radio]:checked').val(),
       cmt   : $(this).children('input[name=comment]').val()
     };
   });
   for (var i = 0; i < mem.length; i++) {
-    text += '[' + mem[i].name + ',' + mem[i].plan + ',' + mem[i].cmt + ']\n';
+    text += '[' + mem[i].name + '|' + mem[i].plan + '|' + mem[i].cmt + ']\n';
   }
   liff.sendMessages([
     {
