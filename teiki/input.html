@@ -53,7 +53,7 @@ function sendMsg() {
   var text = '登録';
   var input = $('.member').map(function (index, el) {
     var name = $(this).children('name').text();
-    var plan   = $(this).children('.btn-group input[type=radio]').value();
+    var plan   = $(this).children('.btn-group input[type=radio]').value;
     var comment = $(this).children('comment').text();
     return {
       name: name,
