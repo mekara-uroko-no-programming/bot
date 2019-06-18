@@ -103,6 +103,27 @@ function getColor(plan) {
     }
     return color;
 }
+function getStatus(plan) {
+  var status = ' [無記入]';
+  switch(plan) {
+    case '':
+      status = ' [無記入]';
+      break;
+    case '◯':
+      status = ' [参加]';
+      break;
+    case 'ー':
+      status = ' [不参加]';
+      break;
+    case '△':
+      status = ' [確認中]';
+      break;
+    case '未':
+      status = ' [未確認]';
+      break;
+    }
+    return color;
+}
 function getUsers(key, hashkey) {
   var url = '';
   url += 'https://script.google.com/macros/s/';
@@ -126,12 +147,14 @@ function getUsers(key, hashkey) {
       var name = data[i].nm.replace(/[\x20\u3000]/g, '');
       var plan = data[i][hashkey].pln;
       var comment = data[i][hashkey].cmt;
-      $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p name="nm" class="big bold" >' + name + '</p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" name="comment" placeholder="コメントがあればお書きください"  value=' + comment + '><input type="hidden" name="selected" value="' + plan + '" /><input type="hidden" name="id" value="' + id + '" /></div>');
+      $('#text-area').append('<div class="member" style="background-color: ' + getColor(plan) + ';"><p name="nm" class="big bold" >' + name + '</p><p name="status"></p><div class="btn-group" data-toggle="buttons"><label class="btn btn-lg  btn-default ' + getActive('', plan) + '"><input type="radio" autocomplete="off" value="">(空白)</label><label class="btn btn-lg btn-success btn-green ' + getActive('◯', plan) + '"><input type="radio" autocomplete="off" value="◯">◯</label><label class="btn btn-lg btn-info ' + getActive('ー', plan) + '"><input type="radio" autocomplete="off" value="ー">ー</label><label class="btn btn-lg btn-warning ' + getActive('△', plan) + '"><input type="radio" autocomplete="off" value="△">△</label><label class="btn btn-lg btn-danger ' + getActive('未', plan) + '"><input type="radio" autocomplete="off" value="未">未</label></div><input type="text" class="form-control bottom" name="comment" placeholder="コメントがあればお書きください"  value=' + comment + '><input type="hidden" name="selected" value="' + plan + '" /><input type="hidden" name="id" value="' + id + '" /></div>');
     }
     $('.btn-group input[type=radio]').on('change', function(){
       var color = getColor(this.value);
+      var status = getStatus(this.value);
       $(this).parents('.member').css('background-color', color);
       $(this).parents('.member').children('input[name=selected]').val(this.value);
+      $(this).parents('.member').children('input[name=status]').text(status);
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
