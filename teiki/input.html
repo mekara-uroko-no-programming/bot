@@ -49,7 +49,7 @@ window.onload = function (e) {
   }
 };
 function sendMsg() {
-  var text = '定期報告' + $('title').html() + '\n';
+  var text = '定期報告[' + $('title').html() + ']\n';
   var mem = $('.member').map(function (index, el) {
     return {
       id      : $(this).children('input[name=id]').val(),
