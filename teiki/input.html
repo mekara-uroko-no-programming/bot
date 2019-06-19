@@ -117,11 +117,14 @@ function getUsers(key, hashkey) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    var target = key.substring(0, 2);
+    var isLeader = key.substring(2, 4) == '01';
+    var target = isLeader ? key.substring(0, 2) : key;
     for (var i =0; i < data.length; i++) {
       var id = data[i].id;
-      if (id.substring(0, 2) != target) {
-        continue;
+      if (isLeader) {
+        if (id.substring(0, 2) != target) continue;
+      } else {
+        if (id != target) continue;
       }
       var name = data[i].nm.replace(/[\x20\u3000]/g, '');
       var plan = data[i][hashkey].pln;
