@@ -60,6 +60,9 @@ function getUsers() {
         button = button.replace(/@ID/g, id);
         button = button.replace(/@NAME/g, name);
         button = button.replace(/@COLOR/g, getColor(id));
+        if (id == '' || id == 'X999' || name == '') {
+            continue;
+        }
         if (id.substring(0, 1) == 'X') {
             xbtn.push(button);
             continue;
@@ -75,6 +78,7 @@ function getUsers() {
         }
         cnt++;
     }
+    $('#btn-area').append('<br><br>');
     for (var i = 0; i < xbtn.length; i++) {
         $('#btn-area').append(xbtn[i]);
         $('#btn-area').append('&nbsp;');
