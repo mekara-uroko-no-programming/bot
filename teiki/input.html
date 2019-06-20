@@ -43,7 +43,6 @@ window.onload = function (e) {
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
-    alert(param['sid']);
     getPlans(param['sid'], param['id'], json.hashkey);
   } catch(ex) {
     alert(ex);
