@@ -13,10 +13,23 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
+var getUrlVars = function(){
+  var vars = {};
+  var param = location.search.substring(1).split('&');
+  for(var i = 0; i < param.length; i++) {
+    var keySearch = param[i].search(/=/);
+    var key = '';
+    if(keySearch != -1) key = param[i].slice(0, keySearch);
+    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    if(key != '') vars[key] = decodeURI(val);
+  }
+  return vars;
+}
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  getUsers();
+  var param = getUrlVars();
+  getUsers(param['sid']);
 };
 function sendMsg(id, name) {
   var text = '';
@@ -37,11 +50,8 @@ function sendMsg(id, name) {
     liff.closeWindow();
   });
 }
-function getUsers() {
-  var url = '';
-  url += 'https://script.google.com/macros/s/';
-  url += 'AKfycbxuf2Nyd9KcJ0FszedF2rAMpNOAkOzUv8XgVZ33klfGSMdSEDQ';
-  url += '/exec';
+function getUsers(sid) {
+  var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',
