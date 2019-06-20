@@ -43,7 +43,7 @@ window.onload = function (e) {
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
-    getUsers(param['id'], json.hashkey);
+    getPlans(param['sid'], param['id'], json.hashkey);
   } catch(ex) {
     alert(ex);
   }
@@ -103,11 +103,9 @@ function getColor(plan) {
     }
     return color;
 }
-function getUsers(key, hashkey) {
-  var url = '';
-  url += 'https://script.google.com/macros/s/';
-  url += 'AKfycbxuf2Nyd9KcJ0FszedF2rAMpNOAkOzUv8XgVZ33klfGSMdSEDQ';
-  url += '/exec';
+function getPlans(sid, key, hashkey) {
+  var url = 'https://script.google.com/macros/s/@SID/exec';
+  url = url.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',

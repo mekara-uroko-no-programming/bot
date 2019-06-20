@@ -51,7 +51,8 @@ function sendMsg(id, name) {
   });
 }
 function getUsers(sid) {
-  var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
+  var url = 'https://script.google.com/macros/s/@SID/exec';
+  url = url.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',
