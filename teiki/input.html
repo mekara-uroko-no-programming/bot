@@ -116,18 +116,15 @@ function getPlans(sid, key, member, hashkey) {
     $('.loading').addClass('hide');
     var isLeader = key.substring(2, 4) == '01';
     var target1 = isLeader ? key.substring(0, 2) : key;
-    var target2 = member.split('-');
     for (var i =0; i < data.length; i++) {
       var id = data[i].id;
-      if (target2.indexOf(id) >= 0) {
-        // 追加メンバー
-      } else {
+
         if (isLeader) {
           if (id.substring(0, 2) != target1) continue;
         } else {
           if (id != target1) continue;
         }
-      }
+
       var name = data[i].nm.replace(/[\x20\u3000]/g, '');
       var plan = data[i][hashkey].pln;
       var comment = data[i][hashkey].cmt;
