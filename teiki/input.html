@@ -43,7 +43,6 @@ window.onload = function (e) {
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
-    alert(param['member']);
     getPlans(param['sid'], param['id'], param['member'], json.hashkey);
   } catch(ex) {
     alert(ex);
@@ -105,7 +104,6 @@ function getColor(plan) {
     return color;
 }
 function getPlans(sid, key, member, hashkey) {
-  alert(member);
   var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
     url: url,
@@ -118,15 +116,18 @@ function getPlans(sid, key, member, hashkey) {
     $('.loading').addClass('hide');
     var isLeader = key.substring(2, 4) == '01';
     var target1 = isLeader ? key.substring(0, 2) : key;
+    var target2 = member.split('-');
     for (var i =0; i < data.length; i++) {
       var id = data[i].id;
-
+      if (target2 && target2.indexOf(id) >= 0) {
+        // 追加メンバー
+      } else {
         if (isLeader) {
           if (id.substring(0, 2) != target1) continue;
         } else {
           if (id != target1) continue;
         }
-
+      }
       var name = data[i].nm.replace(/[\x20\u3000]/g, '');
       var plan = data[i][hashkey].pln;
       var comment = data[i][hashkey].cmt;
