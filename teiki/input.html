@@ -43,6 +43,7 @@ window.onload = function (e) {
     var json = JSON.parse(WebSafeBase64.decode(param['key']));
     var title = WebSafeBase64.decode(json.title);
     $('title').html(title);
+    alert(param['member']);
     getPlans(param['sid'], param['id'], param['member'], json.hashkey);
   } catch(ex) {
     alert(ex);
@@ -137,7 +138,6 @@ function getPlans(sid, key, member, hashkey) {
       $(this).parents('.member').children('input[name=selected]').val(this.value);
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-      alert(textStatus);
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
