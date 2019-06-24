@@ -104,6 +104,7 @@ function getColor(plan) {
     return color;
 }
 function getPlans(sid, key, member, hashkey) {
+  alert(member);
   var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
     url: url,
