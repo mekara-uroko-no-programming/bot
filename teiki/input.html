@@ -117,7 +117,7 @@ function getPlans(sid, key, member, hashkey) {
     var isLeader = key.substring(2, 4) == '01';
     var target1 = isLeader ? key.substring(0, 2) : key;
     var target2 = member.split('-');
-    alert(target2[0]);
+    alert(target2);
     for (var i =0; i < data.length; i++) {
       var id = data[i].id;
       if (target2.indexOf(id) >= 0) {
