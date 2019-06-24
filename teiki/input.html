@@ -140,7 +140,7 @@ function getPlans(sid, key, member, hashkey) {
       $(this).parents('.member').children('input[name=selected]').val(this.value);
     });
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-      alert(errorThrown.message);
+      alert('error');
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
