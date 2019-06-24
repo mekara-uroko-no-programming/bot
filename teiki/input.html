@@ -113,7 +113,6 @@ function getPlans(sid, key, member, hashkey) {
       $('.loading').removeClass('hide');
     }
   }).done(function(data){
-    try {
     $('.loading').addClass('hide');
     var isLeader = key.substring(2, 4) == '01';
     var target1 = isLeader ? key.substring(0, 2) : key;
@@ -140,10 +139,8 @@ function getPlans(sid, key, member, hashkey) {
       $(this).parents('.member').css('background-color', color);
       $(this).parents('.member').children('input[name=selected]').val(this.value);
     });
-    } catch (ex) {
-        alert(ex);
-    }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+      alert(errorThrown.message);
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
