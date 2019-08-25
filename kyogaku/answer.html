@@ -56,7 +56,9 @@ function getQuestion(sid, gou, no) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    alert(data);
+    if (data.length > 0) {
+      $('textarea[name="answer"]').val(data[0]['A']);
+    }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
@@ -86,9 +88,7 @@ function getQuestion(sid, gou, no) {
   <div class="row">
     &nbsp;
   </div>
-  <div class="row">
-    <input type="hidden" name="dateid">
-  </div>
 </div>
+<div class="loading hide"></div>
 </body>
 </html>
