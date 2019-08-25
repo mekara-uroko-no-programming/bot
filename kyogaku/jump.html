@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+window.onload = function (e) {
+  liff.init(function (data) {
+  });
+};
+function sendMsg() {
+  var gou  = $('#gou' ).val();
+  var no    = $('#no').val();
+  var text  = 'Q' + gou + '-' + no;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+</script>
+<style type="text/css">
+.big { font-size:13pt; }
+.normal { font-size:10pt; }
+</style>
+<title>問題番号を指定してください</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">号数</font>
+    </div>
+    <div class="col-sm-11">
+      <select id="gou" style="width:100px">
+        <option value='1'>1号</option>
+        <option value='2'>2号</option>
+        <option value='3'>3号</option>
+        <option value='4'>4号</option>
+        <option value='5'>5号</option>
+        <option value='6'>6号</option>
+        <option value='7'>7号</option>
+        <option value='8'>8号</option>
+        <option value='9'>9号</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">番号</font>
+    </div>
+    <div class="col-sm-11">
+      <select id="no" style="width:50px">
+        <option value='1'>01</option>
+        <option value='2'>02</option>
+        <option value='3'>03</option>
+        <option value='4'>04</option>
+        <option value='5'>05</option>
+        <option value='6'>06</option>
+        <option value='7'>07</option>
+        <option value='8'>08</option>
+        <option value='9'>09</option>
+        <option value='10'>10</option>
+        <option value='11'>11</option>
+        <option value='12'>12</option>
+        <option value='13'>13</option>
+        <option value='14'>14</option>
+        <option value='15'>15</option>
+        <option value='16'>16</option>
+        <option value='17'>17</option>
+        <option value='18'>18</option>
+        <option value='19'>19</option>
+        <option value='20'>20</option>
+        <option value='21'>21</option>
+        <option value='22'>22</option>
+        <option value='23'>23</option>
+        <option value='24'>24</option>
+        <option value='25'>25</option>
+        <option value='26'>26</option>
+        <option value='27'>27</option>
+        <option value='28'>28</option>
+        <option value='29'>29</option>
+        <option value='30'>30</option>
+        <option value='31'>31</option>
+        <option value='32'>32</option>
+        <option value='33'>33</option>
+        <option value='34'>34</option>
+        <option value='35'>35</option>
+        <option value='36'>36</option>
+        <option value='37'>37</option>
+        <option value='38'>38</option>
+        <option value='39'>39</option>
+        <option value='40'>40</option>
+        <option value='41'>41</option>
+        <option value='42'>42</option>
+        <option value='43'>43</option>
+        <option value='44'>44</option>
+        <option value='45'>45</option>
+        <option value='46'>46</option>
+        <option value='47'>47</option>
+        <option value='48'>48</option>
+        <option value='49'>49</option>
+        <option value='50'>50</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">ジャンプ</button>
+    </div>
+  </div>
+  <div class="loading hide"></div>
+</div>
+</body>
+</html>
