@@ -58,6 +58,7 @@ function getQuestion(sid, gou, no) {
     $('.loading').addClass('hide');
     if (data.length > 0) {
       $("#answer").text(data[0]['A']);
+      $("#ref").text(data[0]['REF']);
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -104,6 +105,12 @@ function getQuestion(sid, gou, no) {
   </div>
   <div class="row">
     &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"><font size="4">参考</font></div>
+    <div class="col-sm-11">
+      <span id="ref" class="mid"></span>
+    </div>
   </div>
 </div>
 <div class="loading hide"></div>
