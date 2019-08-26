@@ -57,8 +57,12 @@ function getQuestion(sid, gou, no) {
   }).done(function(data){
     $('.loading').addClass('hide');
     if (data.length > 0) {
+      var ref = data[0]['REF'];
       $("#answer").text(data[0]['A']);
-      $("#ref").text(data[0]['REF']);
+      if (ref) {
+        $("#ref0").text('参考');
+        $("#ref1").text(ref);
+      }
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -107,9 +111,9 @@ function getQuestion(sid, gou, no) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">参考</font></div>
+    <div class="col-sm-1"><font size="4"><span id="ref0"></span></font></div>
     <div class="col-sm-11">
-      <span id="ref" class="mid"></span>
+      <span id="ref1" class="mid"></span>
     </div>
   </div>
 </div>
