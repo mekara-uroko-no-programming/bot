@@ -40,12 +40,12 @@ window.onload = function (e) {
     liff.init(function (data) {
     });
     var param = getUrlVars();
-    getQuestion(param['sid'], param['gou'], param['no']);
+    getQuestion(param['sid'], param['gou'], param['no'], param['ref']);
   } catch(ex) {
     alert(ex);
   }
 };
-function getQuestion(sid, gou, no) {
+function getQuestion(sid, gou, no, ref) {
   var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
     url: url,
@@ -57,7 +57,6 @@ function getQuestion(sid, gou, no) {
   }).done(function(data){
     $('.loading').addClass('hide');
     if (data.length > 0) {
-      var ref = data[0]['REF'];
       $("#answer").text(data[0]['A']);
       if (ref) {
         $("#ref0").text('参考');
