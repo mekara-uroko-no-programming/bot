@@ -59,7 +59,7 @@ function getQuestion(sid, gou, no, ref) {
     if (data.length > 0) {
       $("#answer").text(data[0]['A']);
       if (ref) {
-        var r = ref.replace('_', ' ')
+        var r = ref.replace(/_/g, ' ')
         $("#ref0").text('参考');
         $("#ref1").text(r);
       }
