@@ -43,7 +43,7 @@ window.onload = function (e) {
     getQuestion(param['sid'], param['gou'], param['no'], param['ref']);
     // 音声読み上げ
     document.getElementById('play').addEventListener('click', function(){
-      var text = document.getElementById('answer').textContent;
+      var text = document.getElementById('kana').value;
       speak(text);
     });
   } catch(ex) {
@@ -68,6 +68,7 @@ function getQuestion(sid, gou, no, ref) {
         $("#ref0").text('参考');
         $("#ref1").text(r);
       }
+      $('input:hidden[name="kana"]').val(data[0]['KANA']);
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -126,6 +127,7 @@ function speak(text) {
     </div>
   </div>
   <div class="row">
+    <input type="hidden" id="kana">
     <button id="play">▶️</button>
   </div>
   <div class="row">
