@@ -39,6 +39,7 @@ window.onload = function (e) {
   try {
     liff.init(function (data) {
     });
+    $("#play").hide();
     var param = getUrlVars();
     getQuestion(param['sid'], param['gou'], param['no'], param['ref']);
     // 音声読み上げ
@@ -70,8 +71,8 @@ function getQuestion(sid, gou, no, ref) {
       }
       var kana = data[0]['KANA'];
       $('input:hidden[name="kana"]').val(kana);
-      if (!kana) {
-        $("#play").hide();
+      if (kana) {
+        $("#play").show();
       }
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
