@@ -71,6 +71,24 @@ function getQuestion(sid, gou, no, ref) {
     console.log("errorThrown    : " + errorThrown.message);
   });
 }
+
+// 音声読み上げ
+document.getElementById('play').addEventListener('click', function(){
+  var text = document.getElementById('answer').textContent;
+  speak(text);
+});
+var tmp;
+function speak(text) {
+  // 再生中の音声をキャンセル
+  speechSynthesis.cancel(tmp);
+  // 日本語音声で読み上げ
+  var speech = new SpeechSynthesisUtterance();
+  speech.lang = 'ja-JP';
+  speech.text = text;
+  speechSynthesis.speak(speech);            
+  tmp = speech
+}
+
 </script>
 <style type="text/css">
 .mid {
@@ -108,7 +126,7 @@ function getQuestion(sid, gou, no, ref) {
     </div>
   </div>
   <div class="row">
-    &nbsp;
+    <button id="play">▶️</button>
   </div>
   <div class="row">
     <div class="col-sm-1"><font size="4"><span id="ref0"></span></font></div>
