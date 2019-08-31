@@ -44,6 +44,7 @@ window.onload = function (e) {
     // 音声読み上げ
     document.getElementById('play').addEventListener('click', function(){
       var text = $('input:hidden[name="kana"]').val();
+      alert(text);
       speak(text);
     });
   } catch(ex) {
