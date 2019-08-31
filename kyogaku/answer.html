@@ -43,7 +43,7 @@ window.onload = function (e) {
     getQuestion(param['sid'], param['gou'], param['no'], param['ref']);
     // 音声読み上げ
     document.getElementById('play').addEventListener('click', function(){
-      var text = document.getElementById('kana').value;
+      var text = $('input:hidden[name="kana"]').val();
       speak(text);
     });
   } catch(ex) {
