@@ -74,6 +74,20 @@ function getQuestion(sid, gou, no, ref) {
       if (kana) {
         $("#play").show();
       }
+      var tags = [];
+      data[0]['TAG'].split(/\,/g).forEach(function(val){
+        if (/^[DK]/.test(key)) continue;
+        var color = getColor(key);
+        var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);" class="@COLOR">@KEY</a>';
+        tag = tag.replace(/@KEY/g, key);
+        tag = tag.replace(/@COLOR/g, color);
+        tags.push(tag);
+      });
+      $('#btn-area').append('<br><br>');
+      for (var i = 0; i < tags.length; i++) {
+        $('#btn-area').append(tags[i]);
+        $('#btn-area').append('&nbsp;');
+      }
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -81,6 +95,18 @@ function getQuestion(sid, gou, no, ref) {
     console.log("textStatus     : " + textStatus);
     console.log("errorThrown    : " + errorThrown.message);
   });
+}
+
+function getColor(name) {
+  var ARR1 = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号'];
+  var ARR2 = ['釈尊', '善導大師', '存覚上人', '曇鸞大師', '聖徳太子', '覚如上人', '蓮如上人', '親鸞聖人'];
+  if (ARR1.indexOf(name) >= 0) {
+    return 'color-blue';
+  } else if (ARR2.indexOf(name) >= 0) {
+    return 'color-orange';
+  } else {
+    return 'color-yellow';
+  }
 }
 
 var tmp;
@@ -117,6 +143,51 @@ function speak(text) {
   background-position: center 20%;
   background-size: 150px 150px;
 }
+/*タグクラウドのデザイン*/
+.widget_tag_cloud .tagcloud a{
+  position:relative;
+  background:#93c9ff;
+  display:inline-block;
+  height:36px;
+  color:#fff;
+  line-height:35px;
+  margin:5px 10px;
+  padding:0 5px;
+  text-decoration:none;
+  font-size:12px;
+}
+/*タグクラウド角を尖らせる*/
+.tagcloud a:before {
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-right: 15px solid #93c9ff;
+  content: '';
+  display: block;
+  margin-left: -15px;
+  position: absolute;
+  left: 0;
+}
+.color-blue {
+  background:#93c9ff !important;
+  color:#fff !important;
+}
+.color-blue:before {
+  border-right: 15px solid #93c9ff !important;
+}
+.color-orange {
+  background:#ff8c00 !important;
+  color:#fff !important;
+}
+.color-orange:before {
+  border-right: 15px solid #ff8c00 !important;
+}
+.color-yellow {
+  background:#fcc800 !important;
+  color:#fff !important;
+}
+.color-yellow:before {
+  border-right: 15px solid #fcc800 !important;
+}
 </style>
 <title>答え</title>
 </head>
@@ -144,6 +215,16 @@ function speak(text) {
     <div class="col-sm-1"><font size="4"><span id="ref0"></span></font></div>
     <div class="col-sm-11">
       <span id="ref1" class="mid"></span>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="widget_tag_cloud">
+      <div id="btn-area" class="tagcloud col-sm-11">
+      </div>
     </div>
   </div>
 </div>
