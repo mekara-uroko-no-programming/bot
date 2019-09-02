@@ -60,44 +60,20 @@ function getTagList(sid) {
   }).done(function(data){
     $('.loading').addClass('hide');
     var cnt = 0;
-    var xbtn = [];
-    alert(data.map(function(rec){
-        return rec['KEY'] + '-' + rec['COUNT'];
-    }));
+    var tags = [];
     for (var i =0; i < data.length; i++) {
-/*
-        var id = data[i].id;
-        var name = data[i].nm.replace(/[\x20\u3000]/g, '');
-        var button = '<button type="button" class="btn btn-lg @COLOR" onClick="sendMsg(&quot;@ID&quot;, &quot;@NAME&quot;);">@NAME</button>';
-        button = button.replace(/@ID/g, id);
-        button = button.replace(/@NAME/g, name);
-        button = button.replace(/@COLOR/g, getColor(id));
-        if (id == '' || id == 'X999' || name == '') {
-            continue;
-        }
-        if (id.substring(0, 1) == 'X') {
-            xbtn.push(button);
-            continue;
-        }
-        if (id.substring(2, 4) == '01') {
-            $('#btn-area').append('<br><br>');
-            cnt = 0;
-        }
-        $('#btn-area').append(button);
-        $('#btn-area').append('&nbsp;');
-        if (cnt == 0) {
-            $('#btn-area').append('<br>');
-        }
-        cnt++;
-*/
+        var key = data[i]['KEY'];
+        var cnt = data[i]['COUNT'];
+        var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);">@KEY (@COUNT)</a>';
+        tag = tag.replace(/@KEY/g, key);
+        tag = tag.replace(/@COUNT/g, cnt);
+        tags.push(tag);
     }
     $('#btn-area').append('<br><br>');
-/*
     for (var i = 0; i < xbtn.length; i++) {
         $('#btn-area').append(xbtn[i]);
         $('#btn-area').append('&nbsp;');
     }
-*/
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
     console.log("failed...");
@@ -142,20 +118,29 @@ function getColor(id) {
   background-position: center 20%;
   background-size: 150px 150px;
 }
-.color-orange {
-  color: #fff;
-  background-color: orange;
-  border-color: darkorange;
+/*タグクラウドのデザイン*/
+.widget_tag_cloud .tagcloud a{
+ position:relative;
+ background:#93c9ff;
+ display:inline-block;
+ height:36px;
+ color:#fff;
+ line-height:35px;
+ margin:5px 10px;
+ padding:0 5px;
+ text-decoration:none;
+ font-size:12px;
 }
-.color-white {
-  color: gray;
-  background-color: ghostwhite;
-  border-color: silver;
-}
-.color-pink {
-  color: #fff;
-  background-color: hotpink;
-  border-color: mediumvioletred;
+/*タグクラウド角を尖らせる*/
+.tagcloud a:before {
+ border-top: 18px solid transparent;
+ border-bottom: 18px solid transparent;
+ border-right: 15px solid #93c9ff;
+ content: '';
+ display: block;
+ margin-left: -15px;
+ position: absolute;
+ left: 0;
 }
 </style>
 <title>表示したいタグをタップしてください</title>
@@ -164,6 +149,11 @@ function getColor(id) {
 <div class="container">
   <div class="row">
     &nbsp;
+    <div class="widget_tag_cloud">
+      <div class="tagcloud">
+        <a href="#" onclick="alert('test');">test (1)</a>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
