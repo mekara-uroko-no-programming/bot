@@ -62,7 +62,7 @@ function getTagList(sid) {
     var cnt = 0;
     var tags = [];
     for (var i =0; i < data.length; i++) {
-        if (/^[DK]/.test()) continue;
+        if (/^[DK]/.test(data[i]['KEY'])) continue;
         var key = data[i]['KEY'];
         var cnt = data[i]['COUNT'];
         var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);">@KEY (@COUNT)</a>';
