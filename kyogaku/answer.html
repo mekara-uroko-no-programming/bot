@@ -87,22 +87,22 @@ function getQuestion(sid, gou, no, ref) {
       if (kana) {
         $("#play").show();
       }
-/*
       var tags = [];
-      data[0]['TAG'].split(',').forEach(function(val){
+      var values = data[0]['TAG'].split(',');
+      for (var i = 0; i < values.length; i++) {
+        var key = values[i];
         if (/^[DK]/.test(key)) continue;
         var color = getColor(key);
         var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);" class="@COLOR">@KEY</a>';
         tag = tag.replace(/@KEY/g, key);
         tag = tag.replace(/@COLOR/g, color);
         tags.push(tag);
-      });
+      }
       $('#btn-area').append('<br><br>');
       for (var i = 0; i < tags.length; i++) {
         $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
       }
-*/
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert('error');
