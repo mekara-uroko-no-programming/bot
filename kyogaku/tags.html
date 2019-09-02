@@ -61,7 +61,9 @@ function getTagList(sid) {
     $('.loading').addClass('hide');
     var cnt = 0;
     var xbtn = [];
-    alert(data);
+    alert(data.map(function(rec){
+        return rec['KEY'] + '-' + rec['COUNT'];
+    }));
     for (var i =0; i < data.length; i++) {
 /*
         var id = data[i].id;
