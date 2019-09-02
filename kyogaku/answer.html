@@ -75,7 +75,7 @@ function getQuestion(sid, gou, no, ref) {
         $("#play").show();
       }
       var tags = [];
-      data[0]['TAG'].split(/\,/g).forEach(function(val){
+      data[0]['TAG'].split(',').forEach(function(val){
         if (/^[DK]/.test(key)) continue;
         var color = getColor(key);
         var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);" class="@COLOR">@KEY</a>';
