@@ -74,6 +74,7 @@ function getQuestion(sid, gou, no, ref) {
       if (kana) {
         $("#play").show();
       }
+/*
       var tags = [];
       data[0]['TAG'].split(',').forEach(function(val){
         if (/^[DK]/.test(key)) continue;
@@ -88,6 +89,7 @@ function getQuestion(sid, gou, no, ref) {
         $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
       }
+*/
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert('error');
