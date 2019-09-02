@@ -90,6 +90,7 @@ function getQuestion(sid, gou, no, ref) {
       }
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    alert('error');
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
