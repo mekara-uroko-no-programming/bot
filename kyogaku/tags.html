@@ -71,7 +71,7 @@ function getTagList(sid) {
     }
     $('#btn-area').append('<br><br>');
     for (var i = 0; i < xbtn.length; i++) {
-        $('#btn-area').append(xbtn[i]);
+        $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
