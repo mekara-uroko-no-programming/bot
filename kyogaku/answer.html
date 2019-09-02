@@ -64,6 +64,22 @@ window.onload = function (e) {
     alert(ex);
   }
 };
+function sendMsg(key) {
+  var text = 'タグ:' + key;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
 function getQuestion(sid, gou, no, ref) {
   var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
@@ -98,7 +114,6 @@ function getQuestion(sid, gou, no, ref) {
         tag = tag.replace(/@COLOR/g, color);
         tags.push(tag);
       }
-      $('#btn-area').append('<br><br>');
       for (var i = 0; i < tags.length; i++) {
         $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
