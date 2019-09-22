@@ -16,7 +16,6 @@
 
 var ARR1 = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号'];
 var ARR2 = ['釈尊', '善導大師', '存覚上人', '曇鸞大師', '聖徳太子', '覚如上人', '蓮如上人', '親鸞聖人'];
-var userId = '';
 
 var getColor = function(name) {
   if (ARR1.indexOf(name) >= 0) {
@@ -52,12 +51,13 @@ var getUrlVars = function(){
 }
 window.onload = function (e) {
   try {
+    var userId = '';
     liff.init(function (data) {
         userId = data.context.userId;
     });
     $("#play").hide();
     var param = getUrlVars();
-    getQuestion(param['sid'], param['gou'], param['no'], param['ref']);
+    getQuestion(param['sid'], param['gou'], param['no'], param['ref'], userId);
     // 音声読み上げ
     document.getElementById('play').addEventListener('click', function(){
       var text = $('input:hidden[name="kana"]').val();
@@ -83,7 +83,7 @@ function sendMsg(key) {
     liff.closeWindow();
   });
 }
-function getQuestion(sid, gou, no, ref) {
+function getQuestion(sid, gou, no, ref, userId) {
   var url = 'https://script.google.com/macros/s/@SID/exec'.replace('@SID', sid);
   $.ajax({
     url: url,
