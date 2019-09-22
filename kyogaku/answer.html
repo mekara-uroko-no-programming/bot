@@ -51,17 +51,16 @@ var getUrlVars = function(){
 }
 window.onload = function (e) {
   try {
-    var userId = '';
     liff.init(function (data) {
-        userId = data.context.userId;
-    });
-    $("#play").hide();
-    var param = getUrlVars();
-    getQuestion(param['sid'], param['gou'], param['no'], param['ref'], userId);
-    // 音声読み上げ
-    document.getElementById('play').addEventListener('click', function(){
-      var text = $('input:hidden[name="kana"]').val();
-      speak(text);
+      var userId = data.context.userId;
+      $("#play").hide();
+      var param = getUrlVars();
+      getQuestion(param['sid'], param['gou'], param['no'], param['ref'], userId);
+      // 音声読み上げ
+      document.getElementById('play').addEventListener('click', function(){
+        var text = $('input:hidden[name="kana"]').val();
+        speak(text);
+      });
     });
   } catch(ex) {
     alert(ex);
