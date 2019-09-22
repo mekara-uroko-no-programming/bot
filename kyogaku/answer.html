@@ -16,6 +16,7 @@
 
 var ARR1 = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号'];
 var ARR2 = ['釈尊', '善導大師', '存覚上人', '曇鸞大師', '聖徳太子', '覚如上人', '蓮如上人', '親鸞聖人'];
+var userId = '';
 
 var getColor = function(name) {
   if (ARR1.indexOf(name) >= 0) {
@@ -52,6 +53,7 @@ var getUrlVars = function(){
 window.onload = function (e) {
   try {
     liff.init(function (data) {
+        userId = data.context.userId;
     });
     $("#play").hide();
     var param = getUrlVars();
@@ -86,7 +88,7 @@ function getQuestion(sid, gou, no, ref) {
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getQuestion", gou: gou, no: no },
+    data: { action: "getQuestion", gou: gou, no: no, userId: userId},
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
