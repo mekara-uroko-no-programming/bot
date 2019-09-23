@@ -96,7 +96,12 @@ function getQuestion(sid, gou, no, ref, userId) {
     if (data.length > 0) {
       $("#answer").text(data[0]['A']);
       if (ref) {
-        var r = ref.replace(/S/g, '真宗聖典').replace(/N/g, 'なぜ生きる').replace(/_/g, ' ')
+        var r = ref
+          .replace(/SS/g, '真宗聖典')
+          .replace(/N/g, 'なぜ生きる')
+          .replace(/HS/g, '花びら(桜)')
+          .replace(/HS/g, '花びら(藤)')
+          .replace(/_/g, ' ')
         $("#ref0").text('参考');
         $("#ref1").text(r);
       }
