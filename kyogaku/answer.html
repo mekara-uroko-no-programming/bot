@@ -101,7 +101,7 @@ function getQuestion(sid, gou, no, ref, userId) {
           .replace(/N/g, 'なぜ生きる')
           .replace(/HS/g, '花びら(桜)')
           .replace(/HS/g, '花びら(藤)')
-          .replace(/_/g, ' ')
+          .replace(/_/g, '<br>')
         $("#ref0").text('参考');
         $("#ref1").text(r);
       }
