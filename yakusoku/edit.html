@@ -22,31 +22,26 @@ var pickerOpt = {
   dateFormat: 'yyyy/mm/dd',
   yearRange: '-1:+1'
 }
-var WebSafeBase64 = {
-  encode: function(str) {
-    var s = str.replace(/\+/g, "-").replace(/\//g, "_");
-    return btoa(unescape(encodeURIComponent(s)));
-  },
-  decode: function(str) {
-    var s = str.replace(/\-/g, "+").replace(/_/g , "/").replace(/%3D/g, "=");
-    return decodeURIComponent(escape(atob(s)));
+var getUrlVars = function(){
+  var vars = {};
+  var param = location.search.substring(1).split('&');
+  for(var i = 0; i < param.length; i++) {
+    var keySearch = param[i].search(/=/);
+    var key = '';
+    if(keySearch != -1) key = param[i].slice(0, keySearch);
+    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    if(key != '') vars[key] = decodeURI(val);
   }
-};
+  return vars;
+}
 window.onload = function (e) {
   liff.init(function (data) {
   });
   $("#appointdate").datepicker(pickerOpt);
   $("#implementdate").datepicker(pickerOpt);
-  var key = location.search.substring(1).slice(4);
-  if (key) {
-    json = JSON.parse(WebSafeBase64.decode(key));
-    $('input:hidden[name="dateid"]').val(json.id);
-    if (json.done == "TRUE") {
-      getReport(json.sid, json.id);
-    }
-  }
-  countG();
-  countE();
+  var param = getUrlVars();
+  $('input:hidden[name="dateid"]').val(param['id']);
+  getReport(param['sid'], param['id']);
 };
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
