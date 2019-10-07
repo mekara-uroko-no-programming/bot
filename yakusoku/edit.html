@@ -79,16 +79,17 @@ function getReport(sid, id) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    alert(data[0]);
-    $("#appointdate").val(data.appointdate);
-    $("#lecturer").val(data.lecturer);
-    $("#opponent").val(data.opponent);
-    $("#overview").val(data.overview);
-    $("#nextdate").val(data.nextdate);
-    $("#nextplace").val(data.nextplace);
-    $("#correspond").val(data.correspond);
-    $('textarea[name="situation"]').val(data.situation);
-    $("#implementdate").val(data.implementdate);
+    if (data[0]) {
+      $("#appointdate").val(data[0].appointdate);
+      $("#lecturer").val(data[0].lecturer);
+      $("#opponent").val(data[0].opponent);
+      $("#overview").val(data[0].overview);
+      $("#nextdate").val(data[0].nextdate);
+      $("#nextplace").val(data[0].nextplace);
+      $("#correspond").val(data[0].correspond);
+      $('textarea[name="situation"]').val(data[0].situation);
+      $("#implementdate").val(data[0].implementdate);
+    }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert('エラー:' + textStatus);
     console.log("failed...");
