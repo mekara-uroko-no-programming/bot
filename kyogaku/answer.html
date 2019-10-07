@@ -54,6 +54,7 @@ window.onload = function (e) {
     liff.init(function (data) {
       var userId = data.context.userId;
       $("#play").hide();
+      $("#ref-area").hide();
       var param = getUrlVars();
       getQuestion(param['sid'], param['gou'], param['no'], param['ref'], userId);
       // 音声読み上げ
@@ -104,9 +105,7 @@ function getQuestion(sid, gou, no, ref, userId) {
           .replace(/_/g, '\n');
         $("#ref0").text('参考');
         $("#ref1").text(r);
-      } else {
-        $("#ref0").hide();
-        $("#ref0").hide();
+        $("#ref-area").show();
       }
       var kana = data[0]['KANA'];
       $('input:hidden[name="kana"]').val(kana);
@@ -265,7 +264,7 @@ function speak(text) {
   <div class="row">
     &nbsp;
   </div>
-  <div class="row">
+  <div class="row" id="ref-area">
     <div class="col-sm-1"><font size="4"><span id="ref0"></span></font></div>
     <div class="col-sm-11">
       <pre id="ref1" class="mid"></pre>
