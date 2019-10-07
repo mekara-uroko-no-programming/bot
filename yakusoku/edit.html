@@ -45,16 +45,17 @@ window.onload = function (e) {
 };
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
-  var appointdate = $('#appointdate').text();
-  var lecturer = $('#lecturer').text();
-  var opponent = $('#opponent').text();
-  var overview = $('#overview').text();
-  var nextdate = $('#nextdate').text();
-  var nextplace = $('#nextplace').text();
-  var correspond = $('#correspond').text();
-  var implementdate = $('#implementdate').text();
+  var appointdate = $('#appointdate').val();
+  var lecturer = $('#lecturer').val();
+  var opponent = $('#opponent').val();
+  var overview = $('#overview').val();
+  var nextdate = $('#nextdate').val();
+  var nextplace = $('#nextplace').val();
+  var correspond = $('#correspond').val();
+  var implementdate = $('#implementdate').val();
   var situation = $('textarea[name="situation"]').val().replace(/^\s+|\s+$/g,'');
   var text = "";
+  text += "ID:" + id + "\n";
   text += "アポ日付:" + appointdate + "\n";
   text += "法施をした人:" + lecturer + "\n";
   text += "相手の名前:" + opponent + "\n";
