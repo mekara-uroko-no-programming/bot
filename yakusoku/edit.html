@@ -79,6 +79,7 @@ function getReport(sid, id) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
+    alert(data[0]);
     $("#appointdate").val(data.appointdate);
     $("#lecturer").val(data.lecturer);
     $("#opponent").val(data.opponent);
