@@ -89,6 +89,7 @@ function getReport(sid, id) {
     $('textarea[name="situation"]').val(data.situation);
     $('textarea[name="implementdate"]').val(data.implementdate);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    alert('エラー:' + textStatus);
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
