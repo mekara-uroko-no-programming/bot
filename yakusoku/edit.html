@@ -79,15 +79,15 @@ function getReport(sid, id) {
     }
   }).done(function(data){
     $('.loading').addClass('hide');
-    $('textarea[name="appointdate"]').val(data.appointdate);
-    $('textarea[name="lecturer" ]').val(data.lecturer);
-    $('textarea[name="opponent" ]').val(data.opponent);
-    $('textarea[name="overview" ]').val(data.overview);
-    $('textarea[name="nextdate" ]').val(data.nextdate);
-    $('textarea[name="nextplace"]').val(data.nextplace);
-    $('textarea[name="correspond"]').val(data.correspond);
+    $("#appointdate").val(data.appointdate);
+    $("#lecturer").val(data.lecturer);
+    $("#opponent").val(data.opponent);
+    $("#overview").val(data.overview);
+    $("#nextdate").val(data.nextdate);
+    $("#nextplace").val(data.nextplace);
+    $("#correspond").val(data.correspond);
     $('textarea[name="situation"]').val(data.situation);
-    $('textarea[name="implementdate"]').val(data.implementdate);
+    $("#implementdate").val(data.implementdate);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert('エラー:' + textStatus);
     console.log("failed...");
@@ -214,7 +214,7 @@ function getCount(text) {
   <div class="row">
     <div class="col-sm-1"><font size="5">状況</font></div>
     <div class="col-sm-11">
-      <input type="text" id="situation" name="situation" class="big" size="40">
+      <textarea name="situation" rows="5" cols="40" class="big"></textarea>
     </div>
   </div>
   <div class="row">
