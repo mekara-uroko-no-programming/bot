@@ -45,15 +45,25 @@ window.onload = function (e) {
 };
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
-  var gcnt = $('#gcnt').text();
-  var ecnt = $('#ecnt').text();
-  var gakuto = $('textarea[name="gakuto"]').val().replace(/^\s+|\s+$/g,'');
-  var ensho  = $('textarea[name="ensho" ]').val().replace(/^\s+|\s+$/g,'');
-  var report = $('textarea[name="report"]').val().replace(/^\s+|\s+$/g,'');
-  var text = id + '^\nクローズ^\n'
-           + '学徒:' + gcnt + '\n[\n' + gakuto + '\n]\n'
-           + '縁正:' + ecnt + '\n[\n' + ensho  + '\n]\n'
-           + report;
+  var appointdate = $('#appointdate').text();
+  var lecturer = $('#lecturer').text();
+  var opponent = $('#opponent').text();
+  var overview = $('#overview').text();
+  var nextdate = $('#nextdate').text();
+  var nextplace = $('#nextplace').text();
+  var correspond = $('#correspond').text();
+  var implementdate = $('#implementdate').text();
+  var situation = $('textarea[name="situation"]').val().replace(/^\s+|\s+$/g,'');
+  var text = "";
+  text += "アポ日付:" + appointdate + "\n";
+  text += "法施をした人:" + lecturer + "\n";
+  text += "相手の名前:" + opponent + "\n";
+  text += "法施の内容:" + overview + "\n";
+  text += "次回のアポ時間:" + nextdate + "\n";
+  text += "次回のアポの場所:" + nextplace + "\n";
+  text += "次回対応者:" + correspond + "\n";
+  text += "法施した日付:" + implementdate + "\n";
+  text += "状況:" + situation + "\n";
   liff.sendMessages([
     {
       'type': 'text',
@@ -150,7 +160,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">アポ日付</font></div>
+    <div class="col-sm-1"><font size="5">アポ日付</font></div>
     <div class="col-sm-11">
       <input type="text" id="appointdate" name="appointdate" class="date-picker big">
     </div>
@@ -159,7 +169,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">法施をした人</font></div>
+    <div class="col-sm-1"><font size="5">法施をした人</font></div>
     <div class="col-sm-11">
       <input type="text" id="lecturer" name="lecturer" class="big" size="40">
     </div>
@@ -168,7 +178,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">相手の名前</font></div>
+    <div class="col-sm-1"><font size="5">相手の名前</font></div>
     <div class="col-sm-11">
       <input type="text" id="opponent" name="opponent" class="big" size="40">
     </div>
@@ -177,7 +187,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">法施の内容</font></div>
+    <div class="col-sm-1"><font size="5">法施の内容</font></div>
     <div class="col-sm-11">
       <input type="text" id="overview" name="overview" class="big" size="40">
     </div>
@@ -186,7 +196,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">次回のアポ時間</font></div>
+    <div class="col-sm-1"><font size="5">次回のアポ時間</font></div>
     <div class="col-sm-11">
       <input type="text" id="nextdate" name="nextdate" class="big" size="40">
     </div>
@@ -195,7 +205,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">次回のアポの場所</font></div>
+    <div class="col-sm-1"><font size="5">次回のアポの場所</font></div>
     <div class="col-sm-11">
       <input type="text" id="nextplace" name="nextplace" class="big" size="40">
     </div>
@@ -204,7 +214,7 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">次回対応者</font></div>
+    <div class="col-sm-1"><font size="5">次回対応者</font></div>
     <div class="col-sm-11">
       <input type="text" id="correspond" name="correspond" class="big" size="40">
     </div>
@@ -213,16 +223,16 @@ function getCount(text) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">状況</font></div>
+    <div class="col-sm-1"><font size="5">状況</font></div>
     <div class="col-sm-11">
-      <textarea name="situation" rows="8" cols="40" class="big"></textarea>
+      <textarea name="situation" rows="5" cols="40" class="big"></textarea>
     </div>
   </div>
   <div class="row">
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="4">法施した日付</font></div>
+    <div class="col-sm-1"><font size="5">法施した日付</font></div>
     <div class="col-sm-11">
       <input type="text" id="implementdate" name="implementdate" class="big" size="40">
     </div>
