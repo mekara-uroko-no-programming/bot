@@ -91,7 +91,6 @@ function getReport(sid, id) {
       $("#implementdate").val(data[0].implementdate);
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-    alert('エラー:' + textStatus);
     console.log("failed...");
     console.log("XMLHttpRequest : " + XMLHttpRequest.status);
     console.log("textStatus     : " + textStatus);
