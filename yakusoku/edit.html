@@ -38,7 +38,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   $("#appointdate").datepicker(pickerOpt);
-  $("#implementdate").datepicker(pickerOpt);
+//$("#implementdate").datepicker(pickerOpt);
   var param = getUrlVars();
   $('input:hidden[name="dateid"]').val(param['id']);
   getReport(param['sid'], param['id']);
@@ -46,25 +46,26 @@ window.onload = function (e) {
 function sendMsg() {
   var id   = $('input:hidden[name="dateid"]').val();
   var appointdate = $('#appointdate').val();
-  var lecturer = $('#lecturer').val();
-  var opponent = $('#opponent').val();
-  var overview = $('#overview').val();
-  var nextdate = $('#nextdate').val();
+//var lecturer = $('#lecturer').val();
+//var opponent = $('#opponent').val();
+//var overview = $('#overview').val();
+//var nextdate = $('#nextdate').val();
   var nextplace = $('#nextplace').val();
   var correspond = $('#correspond').val();
-  var implementdate = $('#implementdate').val();
-  var situation = $('textarea[name="situation"]').val().replace(/^\s+|\s+$/g,'');
+//var implementdate = $('#implementdate').val();
+//var situation = $('textarea[name="situation"]').val().replace(/^\s+|\s+$/g,'');
   var text = "";
   text += "ID:" + id + "\n";
   text += "アポ日付:" + appointdate + "\n";
-  text += "法施をした人:" + lecturer + "\n";
-  text += "相手の名前:" + opponent + "\n";
-  text += "法施の内容:" + overview + "\n";
-  text += "次回のアポ時間:" + nextdate + "\n";
+//text += "法施をした人:" + lecturer + "\n";
+//text += "相手の名前:" + opponent + "\n";
+//text += "法施の内容:" + overview + "\n";
+//text += "次回のアポ時間:" + nextdate + "\n";
   text += "次回のアポの場所:" + nextplace + "\n";
   text += "次回対応者:" + correspond + "\n";
-  text += "法施した日付:" + implementdate + "\n";
-  text += "状況:\n" + situation + "\n";
+//text += "法施した日付:" + implementdate + "\n";
+//text += "状況:\n" + situation + "\n";
+
   liff.sendMessages([
     {
       'type': 'text',
@@ -92,14 +93,14 @@ function getReport(sid, id) {
     $('.loading').addClass('hide');
     if (data[0]) {
       $("#appointdate").val(data[0].appointdate);
-      $("#lecturer").val(data[0].lecturer);
-      $("#opponent").val(data[0].opponent);
-      $("#overview").val(data[0].overview);
-      $("#nextdate").val(data[0].nextdate);
+    //$("#lecturer").val(data[0].lecturer);
+    //$("#opponent").val(data[0].opponent);
+    //$("#overview").val(data[0].overview);
+    //$("#nextdate").val(data[0].nextdate);
       $("#nextplace").val(data[0].nextplace);
       $("#correspond").val(data[0].correspond);
-      $('textarea[name="situation"]').val(data[0].situation);
-      $("#implementdate").val(data[0].implementdate);
+    //$('textarea[name="situation"]').val(data[0].situation);
+    //$("#implementdate").val(data[0].implementdate);
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     console.log("failed...");
@@ -169,6 +170,7 @@ function getCount(text) {
   <div class="row">
     &nbsp;
   </div>
+<!--
   <div class="row">
     <div class="col-sm-1"><font size="5">法施をした人</font></div>
     <div class="col-sm-11">
@@ -205,6 +207,7 @@ function getCount(text) {
   <div class="row">
     &nbsp;
   </div>
+-->
   <div class="row">
     <div class="col-sm-1"><font size="5">次回のアポの場所</font></div>
     <div class="col-sm-11">
@@ -223,6 +226,7 @@ function getCount(text) {
   <div class="row">
     &nbsp;
   </div>
+<!--
   <div class="row">
     <div class="col-sm-1"><font size="5">状況</font></div>
     <div class="col-sm-11">
@@ -241,6 +245,7 @@ function getCount(text) {
   <div class="row">
     &nbsp;
   </div>
+-->
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-11">
