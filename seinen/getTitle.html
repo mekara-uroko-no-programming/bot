@@ -30,12 +30,23 @@ window.onload = function (e) {
   if (key) {
     var json = JSON.parse(WebSafeBase64.decode(key));
     var url = json.url;
-    document.write(url);
+    setTitle(url);
   }
 };
-function returnTitle(url) {
+function setTitle(url) {
+  $.ajax({
+    url: url,
+    type: 'GET',
+    headers: {
+      'user-agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36'
+    }
+  }).done(function(data){
+    $('#title').val(data);
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+  });
 }
 </script>
 <body>
+  <div id="title"></div>
 </body>
 </html>
