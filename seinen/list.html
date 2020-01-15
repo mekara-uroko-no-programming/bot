@@ -23,6 +23,8 @@ window.onload = function (e) {
 function sendMsg() {
   var year  = $('#year' ).val();
   var month = $('#month').val();
+  var posting = $('#posting:checked').val();
+  alert(posting);
   var text = 'リスト^' + year + '年' + month + '月';
   liff.sendMessages([
     {
@@ -93,7 +95,7 @@ function sendMsg() {
   <div class="row">
     <div class="col-sm-12">
       <div class="checkbox">
-        <label><input type="checkbox" value="">日程表転記用</label>
+        <label><input type="checkbox" id="posting" value="">日程表転記用</label>
       </div>
     </div>
   </div>
