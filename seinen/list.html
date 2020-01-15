@@ -23,9 +23,8 @@ window.onload = function (e) {
 function sendMsg() {
   var year  = $('#year' ).val();
   var month = $('#month').val();
-  var posting = $('#posting:checked').val();
-  alert(posting);
-  var text = 'リスト^' + year + '年' + month + '月';
+  var posting = $('#posting:checked').val() ? 'T' : 'F';
+  var text = 'リスト^' + year + '年' + month + '月' + posting;
   liff.sendMessages([
     {
       'type': 'text',
