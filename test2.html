@@ -15,14 +15,31 @@
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 
 <script>
-window.onload = function (e) {
-  liff.init(function (data) {
-    const key = data.context.key;
+function initializeLiff(myLiffId) {
+  liff.init({
+    liffId: myLiffId
+  })
+  .then(() => {
+    // start to use LIFF's api
+    initializeApp();
+  })
+  .catch((err) => {
+    document.getElementById("liffAppContent").classList.add('hidden');
+    document.getElementById("liffInitErrorMessage").classList.remove('hidden');
   });
+}
+
+function initializeApp() {
   activation();
   $(":checkbox").change(function() {
     activation();
   });
+}
+
+window.onload = function (e) {
+
+  initializeLiff('1560057746-A07J7qEG');
+
 };
 function sendMsg() {
   var text = '利用規約並びに個人情報保護方針の両方に同意しました。';
