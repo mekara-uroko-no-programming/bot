@@ -1,0 +1,49 @@
+<html>
+  <herad>
+    <title>ログインサンプル</title>
+  </head>
+  <body>
+    <h2>ログインサンプル画面</h2>
+    <h3>
+      こちらで作成したログイン画面から、<br>
+      daihi.netの環境にログインした状態でアクセスできます
+    </h3>
+    <table>
+      <tr>
+        <td>ユーザー名:</td>
+        <td><input type="text" id="user" name="user"></td>
+      </tr>
+      <tr>
+        <td>パスワード:</td>
+        <td><input type="text" id="pass" name="pass"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="ログイン" onclick="check();"></td>
+      </tr>
+    </table>
+    <script>
+      /* 項目チェック */
+      function check() {
+          // ユーザーの取得
+          const user = document.getElementById("user").value;
+          // パスワードの取得
+          const pass = document.getElementById("pass").value;
+          // 項目のチェック
+          let message = "";
+          if (user === "") {
+              message += "ユーザーは必須です!\n";
+          }
+          if (pass === "") {
+              message += "パスワードは必須です!\n";
+          }
+          if (message !== "") {
+              alert(message);
+              return false;
+          } else {
+              // ログイン後の画面に遷移
+              location.href = "https://daihi.net/login/authTest.php?username=" + user + "&password=" + pass ;
+          }
+      }
+    </script>
+  </body>
+</html>
