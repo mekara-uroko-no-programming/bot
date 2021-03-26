@@ -34,11 +34,12 @@ function sendMsg() {
     var r = $(this).val();
     books.push(r);
   });
+  var msg = "";
   if (!keyword) {
-    msg = "キーワードを入力してください\n"
+    msg += "キーワードを入力してください\n"
   }
   if (books.length == 0) {
-    msg = "ご著書をチェックしてください\n"
+    msg += "ご著書をチェックしてください\n"
   }
   if (msg) {
     alert(msg);
