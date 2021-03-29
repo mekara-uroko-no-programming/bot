@@ -65,6 +65,31 @@ function sendMsg() {
 </script>
 <style type="text/css">
 .big { font-size:15pt; }
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+/*** basic styles ***/
+
+body { margin: 30px; } 
+h1 { font-size: 1.5em; }
+label { font-size: 24px; }
+div { 
+  width: 175px; 
+  margin-left: 20px;
+}
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
 </style>
 <title>ご著書検索</title>
 </head>
@@ -85,9 +110,14 @@ function sendMsg() {
   <div class="row">
     <div class="col-sm-1"><font size="5">検索対象のご著書を選択してください</font></div>
     <div class="col-sm-11">
-      <input type="checkbox" name="books" value="花束" checked>１００の花束
-      <input type="checkbox" name="books" value="タネ" checked>１２３のこころのタネ
-      <input type="checkbox" name="books" value="果実" checked>心地よい果実
+      <div class="row">
+        <input id="box1" name="books" type="checkbox" value="花束" checked/>
+        <label for="box1">１００の花束</label>
+        <input id="box2" name="books" type="checkbox" value="タネ" checked/>
+        <label for="box2">１２３のこころのタネ</label>
+        <input id="box3" name="books" type="checkbox" value="タネ" checked/>
+        <label for="box3">心地よい果実</label>
+      </div>
     </div>
   </div>
   <div class="row">
