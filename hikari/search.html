@@ -29,7 +29,7 @@ window.onload = function (e) {
   });
 };
 function sendMsg() {
-  var keyword = $('textarea[name="keyword"]').val();
+  var keyword = $("#keyword").val();
   var books = [];
   $('input[name="books"]:checked').each(function() {
     var r = $(this).val();
@@ -97,7 +97,7 @@ input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow sp
   <div class="row">
     <div class="col-xs-12"><font size="5">キーワードを入力</font></div>
     <div class="col-xs-12">
-      <textarea name="keyword" rows="5" cols="40" class="big"></textarea>
+      <input type="text" id="keyword" class="form-control big"></textarea>
     </div>
   </div>
   <div class="row">
