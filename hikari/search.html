@@ -65,8 +65,13 @@ function sendMsg() {
 }
 </script>
 <style type="text/css">
-.big { font-size:15pt; }
-.box {font-size: larger;}
+.big {
+  font-size:15pt;
+}
+.box {
+  font-size: larger;
+  margin-left: 15px;
+}
 
 /*** custom checkboxes ***/
 
@@ -76,7 +81,7 @@ input[type=checkbox] + label:before {
   display: inline-block;
 }
 
-input[type=checkbox] + label:before { content: "&nbsp;\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
 input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
 
 input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
@@ -90,8 +95,8 @@ input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow sp
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="5">キーワードを入力</font></div>
-    <div class="col-sm-11">
+    <div class="col-xs-12"><font size="5">キーワードを入力</font></div>
+    <div class="col-xs-12">
       <textarea name="keyword" rows="5" cols="40" class="big"></textarea>
     </div>
   </div>
@@ -99,8 +104,8 @@ input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow sp
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-sm-1"><font size="5">検索対象のご著書を選択</font></div>
-    <div class="col-sm-11">
+    <div class="col-xs-12"><font size="5">検索対象のご著書を選択</font></div>
+    <div class="col-xs-12">
       <div class="row">
         <input id="box1" name="books" type="checkbox" value="花束" checked/>
         <label for="box1" class="box">１００の花束</label>
