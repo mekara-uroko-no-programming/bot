@@ -62,12 +62,11 @@ function getTagList(sid) {
     var cnt = 0;
     var tags = [];
     for (var i =0; i < data.length; i++) {
-        if (/^[DK]/.test(data[i]['KEY'])) continue;
-        var key = data[i]['KEY'];
+        var key = data[i]['TAG'];
         var cnt = data[i]['COUNT'];
         var color = getColor(key);
-        var tag = '<a href="#" onClick="sendMsg(&quot;@KEY&quot;);" class="@COLOR">@KEY (@COUNT)</a>';
-        tag = tag.replace(/@KEY/g, key);
+        var tag = '<a href="#" onClick="sendMsg(&quot;@TAG&quot;);" class="@COLOR">@TAG (@COUNT)</a>';
+        tag = tag.replace(/@TAG/g, key);
         tag = tag.replace(/@COUNT/g, cnt);
         tag = tag.replace(/@COLOR/g, color);
         tags.push(tag);
@@ -86,7 +85,7 @@ function getTagList(sid) {
   });
 }
 function getColor(name) {
-  var ARR1 = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号'];
+  var ARR1 = ['花束', 'タネ', '果実'];
   var ARR2 = ['釈尊', '善導大師', '存覚上人', '曇鸞大師', '聖徳太子', '覚如上人', '蓮如上人', '親鸞聖人'];
   if (ARR1.indexOf(name) >= 0) {
     return 'color-blue';
