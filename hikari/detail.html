@@ -29,7 +29,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var param = getUrlVars();
-  getTagList(param['sid']);
+  getDetail(param['sid']);
 };
 function sendMsg(key) {
   var text = 'タグ:' + key;
@@ -47,13 +47,13 @@ function sendMsg(key) {
     liff.closeWindow();
   });
 }
-function getTagList(sid) {
+function getDetail(sid) {
   var url = 'https://script.google.com/macros/s/@SID/exec';
   url = url.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getTagList" },
+    data: { action: "getDetail" },
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
@@ -61,6 +61,8 @@ function getTagList(sid) {
     $('.loading').addClass('hide');
     var cnt = 0;
     var tags = [];
+    console.log(data);
+    /*
     for (var i =0; i < data.length; i++) {
         var key = data[i]['TAG'];
         var cnt = data[i]['COUNT'];
@@ -76,6 +78,7 @@ function getTagList(sid) {
         $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
     }
+    */
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
     console.log("failed...");
@@ -158,10 +161,18 @@ function getColor(name) {
   border-right: 15px solid #fcc800 !important;
 }
 </style>
-<title>表示したいタグをタップしてください</title>
+<title>ご著書の詳細</title>
 </head>
 <body>
 <div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div id="detail-area" class="col-sm-11">
+    </div>
+  </div>
   <div class="row">
     &nbsp;
   </div>
