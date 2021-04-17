@@ -29,7 +29,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var param = getUrlVars();
-  getDetail(param['sid']);
+  getDetail(param['sid'], param['no']);
 };
 function sendMsg(key) {
   var text = 'タグ:' + key;
@@ -47,13 +47,13 @@ function sendMsg(key) {
     liff.closeWindow();
   });
 }
-function getDetail(sid) {
+function getDetail(sid, no) {
   var url = 'https://script.google.com/macros/s/@SID/exec';
   url = url.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getDetail" },
+    data: { action: "getDetail", no: no },
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
