@@ -37,12 +37,12 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   
-    console.log(window.location.href);
+    alert(window.location.href);
     var n_url = new URL(window.location.href);
     var n_ps = n_url.searchParams;
     var entries = n_ps.entries();
     for(var entry of entries) {
-	  console.log(entry[0] + " => " + entry[1]);
+	  alert(entry[0] + " => " + entry[1]);
     }
   
 //var param = getUrlVars();
