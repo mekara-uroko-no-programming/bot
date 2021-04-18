@@ -49,6 +49,8 @@ function sendMsg(key) {
 }
 function getDetail(sid, name, no) {
   var url = 'https://script.google.com/macros/s/@SID/exec';
+  alert(name);
+  alert(no);
   url = url.replace('@SID', sid);
   $.ajax({
     url: url,
