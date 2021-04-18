@@ -22,7 +22,13 @@ var getUrlVars = function(){
     if(keySearch != -1) key = param[i].slice(0, keySearch);
     var val = param[i].slice(param[i].indexOf('=', 0) + 1);
     if(key != '') vars[key] = decodeURIComponent(val);
-    alert(key);
+    
+    var n_url = new URL(window.location.href);
+    var n_ps = n_url.searchParams;
+    var entries = n_ps.entries();
+    for(var entry of entries) {
+	  console.log(entry[0] + " => " + entry[1]);
+    }
   }
   return vars;
 }
