@@ -15,6 +15,12 @@
 <script>
 var getUrlVars = function(){
   var vars = {};
+  var url = new URL(window.location.href);
+  var params = url.searchParams;
+  var entries = params.entries();
+  var state = entries["liff.state"];
+  
+  
   var param = location.search.substring(1).split('&');
   for(var i = 0; i < param.length; i++) {
     var keySearch = param[i].search(/=/);
@@ -41,6 +47,7 @@ window.onload = function (e) {
     var n_url = new URL(window.location.href);
     var n_ps = n_url.searchParams;
     var entries = n_ps.entries();
+    alert(entries["liff.state"]);
     for(var entry of entries) {
 	  alert(entry[0] + " => " + entry[1]);
     }
