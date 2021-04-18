@@ -21,7 +21,7 @@ var getUrlVars = function(){
     var key = '';
     if(keySearch != -1) key = param[i].slice(0, keySearch);
     var val = param[i].slice(param[i].indexOf('=', 0) + 1);
-    if(key != '') vars[key] = decodeURI(val);
+    if(key != '') vars[key] = decodeURIComponent(val);
   }
   return vars;
 }
@@ -29,7 +29,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var param = getUrlVars();
-  getDetail(param['sid'], param['no']);
+  getDetail(param['sid'], param['name'], param['no']);
 };
 function sendMsg(key) {
   var text = 'タグ:' + key;
@@ -47,13 +47,13 @@ function sendMsg(key) {
     liff.closeWindow();
   });
 }
-function getDetail(sid, no) {
+function getDetail(sid, name, no) {
   var url = 'https://script.google.com/macros/s/@SID/exec';
   url = url.replace('@SID', sid);
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getDetail", no: no },
+    data: { action: "getDetail", name: name, no: no},
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
