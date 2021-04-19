@@ -35,6 +35,7 @@ window.onload = function (e) {
   console.log(params);
   let sid = params["sid"];
   let name = decodeURIComponent(escape(window.atob(params["name"])));
+  console.log(name);
   let no = params["no"];
   getDetail(sid, name, no);
 };
