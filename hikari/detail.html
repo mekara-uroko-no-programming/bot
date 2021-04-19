@@ -34,8 +34,12 @@ window.onload = function (e) {
   var params = getUrlVars();
   console.log(params);
   let sid = params["sid"];
-  let name = decodeURIComponent(escape(window.atob(params["name"])));
-  console.log(name);
+  let name = "";
+  if (params["name"] == "44K_44ON") {
+    name = "タネ";
+  } else {
+    name = decodeURIComponent(escape(window.atob(params["name"])));
+  }
   let no = params["no"];
   getDetail(sid, name, no);
 };
