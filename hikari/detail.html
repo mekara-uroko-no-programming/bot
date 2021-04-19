@@ -19,7 +19,6 @@ var getUrlVars = function(){
   let params = url.searchParams;
   for (const [key, value] of params) {
     if (key == "liff.state") {
-      console.log(value.substr(5));
       var content = decodeURIComponent(escape(window.atob(value.substr(5))));
       let p = JSON.parse(content);
       Object.keys(p).forEach(k => {
@@ -57,8 +56,6 @@ function sendMsg(key) {
 }
 function getDetail(sid, name, no) {
   var url = 'https://script.google.com/macros/s/@SID/exec';
-  alert(name);
-  alert(no);
   url = url.replace('@SID', sid);
   $.ajax({
     url: url,
@@ -72,6 +69,7 @@ function getDetail(sid, name, no) {
     var cnt = 0;
     var tags = [];
     console.log(data);
+    $("#body-area").text(data["BODY"]);
     /*
     for (var i =0; i < data.length; i++) {
         var key = data[i]['TAG'];
@@ -180,7 +178,8 @@ function getColor(name) {
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div id="detail-area" class="col-sm-11">
+    <div class="col-sm-11">
+      <span id="body-area"></span>
     </div>
   </div>
   <div class="row">
