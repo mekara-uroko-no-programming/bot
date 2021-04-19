@@ -70,6 +70,11 @@ function getDetail(sid, name, no) {
     var tags = [];
     console.log(data);
     let content = data["content"];
+    $("#title-area").html(
+      content["TITLE"]
+        .replace(/\n/g, "<br>")
+        .replace(/…/g, "&#x22EE;")
+    );
     $("#body-area").html(
       content["BODY"]
         .replace(/\n/g, "<br>")
@@ -174,7 +179,7 @@ function getColor(name) {
 .color-yellow:before {
   border-right: 15px solid #fcc800 !important;
 }
-.body-container {
+.vertical-container {
   position: absolute;
 }
 .vertical {
@@ -192,7 +197,8 @@ function getColor(name) {
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-11 vertical">
-      <div id="body-container">
+      <div id="vertical-container">
+        <div id="title-area"></div>
         <div id="body-area"></div>
       </div>
     </div>
