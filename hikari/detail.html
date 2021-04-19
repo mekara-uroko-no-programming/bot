@@ -18,42 +18,24 @@ var getUrlVars = function(){
   var url = new URL(window.location.href);
   var params = url.searchParams;
   var entries = params.entries();
-  var state = entries["liff.state"];
-  
-  
-  var param = location.search.substring(1).split('&');
-  for(var i = 0; i < param.length; i++) {
-    var keySearch = param[i].search(/=/);
-    var key = '';
-    if(keySearch != -1) key = param[i].slice(0, keySearch);
-    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
-    if(key != '') vars[key] = decodeURIComponent(val);
-    
-    var n_url = new URL(window.location.href);
-    alert(window.location.href);
-    var n_ps = n_url.searchParams;
-    var entries = n_ps.entries();
-    for(var entry of entries) {
-	  alert(entry[0] + " => " + entry[1]);
+  var Object.keys(entries).forEach(e => {
+    if (e[0] == "liff.state") {
+      var arr = e[1].slice(1).split("&");
+      arr.forEach(obj => {
+        var state = obj.split("=");
+        vars[state[0]] = state[1];
+      })
     }
-  }
+  });
   return vars;
 }
 window.onload = function (e) {
   liff.init(function (data) {
   });
-  
-    alert(window.location.href);
-    var n_url = new URL(window.location.href);
-    var n_ps = n_url.searchParams;
-    var entries = n_ps.entries();
-    alert(entries["liff.state"]);
-    for(var entry of entries) {
-	  alert(entry[0] + " => " + entry[1]);
-    }
-  
-//var param = getUrlVars();
-//alert(param);
+var params = getUrlVars();
+alert(param["sid"]);
+alert(param["name"]);
+alert(param["no"]);
 //getDetail(param['sid'], param['name'], param['no']);
 };
 function sendMsg(key) {
