@@ -14,16 +14,17 @@
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
 var getUrlVars = function(){
-  var vars = {};
-  var url = new URL(decodeURIComponent(window.location.href));
-  console.log(url);
-  var params = url.searchParams;
-  console.log(params);
+  let vars = {};
+  let url = new URL(decodeURIComponent(window.location.href));
+  let params = url.searchParams;
   for (const [key, value] of params) {
     if (key == "liff.state") {
       console.log(value.substr(5));
       var content = decodeURIComponent(escape(window.atob(value.substr(5))));
-      console.log(content)
+      let p = JSON.parse(content);
+      Object.keys(p).forEach(k => {
+        vars[k] = p[k];
+      });
     }
   }
   return vars;
