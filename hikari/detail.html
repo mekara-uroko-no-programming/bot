@@ -20,10 +20,8 @@ var getUrlVars = function(){
   var params = url.searchParams;
   console.log(params);
   for (const [key, value] of params) {
-    alert(key);
-    console.log(value);
     if (key == "liff.state") {
-      var content = decodeURIComponent(escape(window.atob(value)));
+      var content = decodeURIComponent(escape(window.atob(value.substr(4))));
       console.log(content)
     }
   }
