@@ -35,7 +35,7 @@ window.onload = function (e) {
   var params = getUrlVars();
   console.log(params);
   alert(params["sid"]);
-  alert(window.atob(params["name"]));
+  alert(escape(window.atob(params["name"])));
   alert(params["no"]);
 //getDetail(param['sid'], param['name'], param['no']);
 };
