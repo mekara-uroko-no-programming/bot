@@ -24,6 +24,7 @@ var getUrlVars = function(){
     var state = obj.split("=");
     vars[state[0]] = state[1];
   });
+  console.log(vars);
   return vars;
 }
 window.onload = function (e) {
