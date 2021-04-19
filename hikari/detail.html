@@ -18,8 +18,8 @@ var getUrlVars = function(){
   var url = new URL(window.location.href);
   console.log(url);
   var params = url.search.split("=");
-  console.log(url);
-  var arr = e[1].slice(1).split("&");
+  console.log(params);
+  var arr = decodeURI(params).split("&");
   arr.forEach(obj => {
     var state = obj.split("=");
     vars[state[0]] = state[1];
