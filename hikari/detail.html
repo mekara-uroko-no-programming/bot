@@ -22,7 +22,7 @@ var getUrlVars = function(){
   for (const [key, value] of params) {
     alert(key);
     if (key == "liff.state") {
-      var content = decodeURIComponent(value.slice(4));
+      var content = decodeURIComponent(escape(atob(value.slice(4)));
       console.log(content)
     }
   }
