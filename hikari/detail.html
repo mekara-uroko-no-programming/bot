@@ -169,6 +169,9 @@ function getColor(name) {
 .color-yellow:before {
   border-right: 15px solid #fcc800 !important;
 }
+.body-container {
+  position: absolute;
+}
 .vertical {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -183,7 +186,10 @@ function getColor(name) {
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div id="body-area" class="col-sm-11 vertical">
+    <div class="col-sm-11 vertical">
+      <div id="body-container">
+        <div id="body-area"></div>
+      </div>
     </div>
   </div>
   <div class="row">
