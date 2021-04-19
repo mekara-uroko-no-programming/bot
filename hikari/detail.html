@@ -34,10 +34,10 @@ window.onload = function (e) {
   });
   var params = getUrlVars();
   console.log(params);
-  alert(params["sid"]);
-  alert(escape(window.atob(params["name"])));
-  alert(params["no"]);
-//getDetail(param['sid'], param['name'], param['no']);
+  let sid = params["sid"];
+  let name = decodeURIComponent(escape(window.atob(params["name"])));
+  let no = params["no"];
+  getDetail(sid, name, no);
 };
 function sendMsg(key) {
   var text = 'タグ:' + key;
