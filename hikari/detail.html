@@ -70,7 +70,7 @@ function getDetail(sid, name, no) {
     var tags = [];
     console.log(data);
     let content = data["content"];
-    $("#body-area").text(content["BODY"]);
+    $("#body-area").text(content["BODY"].replace(/\n/g, "<br>"));
     /*
     for (var i =0; i < data.length; i++) {
         var key = data[i]['TAG'];
