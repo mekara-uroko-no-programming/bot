@@ -33,6 +33,7 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var params = getUrlVars();
+  console.log(params);
   alert(params["sid"]);
   alert(window.atob(params["name"]));
   alert(params["no"]);
