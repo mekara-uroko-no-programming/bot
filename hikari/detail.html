@@ -21,6 +21,7 @@ var getUrlVars = function(){
   console.log(params);
   for (const [key, value] of params) {
     alert(key);
+    console.log(key);
     if (key == "liff.state") {
       var content = decodeURIComponent(escape(window.atob(value)));
       console.log(content)
