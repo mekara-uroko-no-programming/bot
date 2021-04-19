@@ -19,11 +19,9 @@ var getUrlVars = function(){
   console.log(url);
   var params = url.searchParams;
   console.log(params);
-  var arr = params[1].split("&");
-  arr.forEach(obj => {
-    var state = obj.split("=");
-    vars[state[0]] = state[1];
-  });
+  for (const [key, value] of params) {
+    vars[key] = value;
+  }
   console.log(vars);
   return vars;
 }
