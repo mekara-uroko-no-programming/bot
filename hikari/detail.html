@@ -16,7 +16,7 @@
 var getUrlVars = function(){
   var vars = {};
   var url = new URL(window.location.href);
-  var params = url.searchParams();
+  var params = url.searchParams;
   var entries = params.entries();
   console.log(params);
   console.log(entries);
