@@ -18,7 +18,7 @@ var getUrlVars = function(){
   var url = new URL(window.location.href);
   var params = url.searchParams;
   var entries = params.entries();
-  console.log(entries);
+  console.log(params);
   var Object.keys(entries).forEach(e => {
     if (e[0] == "liff.state") {
       var arr = e[1].slice(1).split("&");
