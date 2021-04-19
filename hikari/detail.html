@@ -15,11 +15,11 @@
 <script>
 var getUrlVars = function(){
   var vars = {};
-  var url = new URL(window.location.href);
+  var url = new URL(decodeURI(window.location.href));
   console.log(url);
   var params = url.search.split("=");
   console.log(params);
-  var arr = decodeURI(params[1]).split("&");
+  var arr = params[1].split("&");
   arr.forEach(obj => {
     var state = obj.split("=");
     vars[state[0]] = state[1];
