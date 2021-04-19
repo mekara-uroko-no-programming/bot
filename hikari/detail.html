@@ -29,9 +29,9 @@ window.onload = function (e) {
   liff.init(function (data) {
   });
   var params = getUrlVars();
-  alert(param["sid"]);
-  alert(param["name"]);
-  alert(param["no"]);
+  alert(params["sid"]);
+  alert(window.atob(params["name"]));
+  alert(params["no"]);
 //getDetail(param['sid'], param['name'], param['no']);
 };
 function sendMsg(key) {
