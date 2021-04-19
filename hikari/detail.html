@@ -17,7 +17,7 @@ var getUrlVars = function(){
   var vars = {};
   var url = new URL(decodeURIComponent(window.location.href));
   console.log(url);
-  var params = url.search.split("=");
+  var params = url.searchParams;
   console.log(params);
   var arr = params[1].split("&");
   arr.forEach(obj => {
