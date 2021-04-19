@@ -17,19 +17,13 @@ var getUrlVars = function(){
   var vars = {};
   var url = new URL(window.location.href);
   console.log(url);
-  var params = url.search.slice(1);
-  console.log(params);
-/*
-  var Object.keys(entries).forEach(e => {
-    if (e[0] == "liff.state") {
-      var arr = e[1].slice(1).split("&");
-      arr.forEach(obj => {
-        var state = obj.split("=");
-        vars[state[0]] = state[1];
-      })
-    }
+  var params = url.search.split("=");
+  console.log(url);
+  var arr = e[1].slice(1).split("&");
+  arr.forEach(obj => {
+    var state = obj.split("=");
+    vars[state[0]] = state[1];
   });
-*/
   return vars;
 }
 window.onload = function (e) {
