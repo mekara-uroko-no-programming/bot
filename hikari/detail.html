@@ -19,6 +19,8 @@ var getUrlVars = function(){
   var params = url.searchParams;
   var entries = params.entries();
   console.log(params);
+  console.log(entries);
+  /*
   var Object.keys(entries).forEach(e => {
     if (e[0] == "liff.state") {
       var arr = e[1].slice(1).split("&");
@@ -28,6 +30,7 @@ var getUrlVars = function(){
       })
     }
   });
+  */
   return vars;
 }
 window.onload = function (e) {
