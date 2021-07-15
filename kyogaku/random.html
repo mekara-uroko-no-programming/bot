@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+window.onload = function (e) {
+  liff.init(function (data) {
+  });
+};
+function sendMsg() {
+  var text  = 'ランダム範囲' + gou + '-' + no;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+</script>
+<style type="text/css">
+  .big { font-size:13pt; }
+  .normal { font-size:10pt; }
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+  input[type=checkbox] {
+    display:none;
+  }
+  input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+  }
+  input[type=checkbox] + label:before {
+    content: "\f096";
+  }
+  input[type=checkbox] + label:before { 
+    etter-spacing: 10px;
+  }
+  input[type=checkbox]:checked + label:before {
+    content: "\f046";
+    color: #15A04C;
+  }
+  input[type=checkbox]:checked + label:before {
+    letter-spacing: 5px;
+  }
+  .checklbl {
+    font-size: 20px;
+    color: #424242
+  }
+  .checkarea { 
+    //width: 175px; 
+    margin-left: 15px;
+  }
+</style>
+<title>ランダムの出題範囲を指定してください</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <font size="3">号数</font>
+    </div>
+    <div class="col-sm-11">
+      <div class="checkarea">
+        <input id="gou1" type="checkbox">
+        <label class="checklbl" for="gou1">&nbsp;１号</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">決定</button>
+    </div>
+  </div>
+  <div class="loading hide"></div>
+</div>
+</body>
+</html>
