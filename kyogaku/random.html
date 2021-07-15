@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,13 +8,13 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
 <script>
 window.onload = function (e) {
@@ -38,10 +38,10 @@ function sendMsg() {
   });
 }
 </script>
-<style type="text/css">
+<style>
+  @import url("https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
   .big { font-size:13pt; }
   .normal { font-size:10pt; }
-  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
   input[type=checkbox] {
     display:none;
   }
@@ -80,12 +80,77 @@ function sendMsg() {
   </div>
   <div class="row">
     <div class="col-sm-1">
-      <font size="3">号数</font>
     </div>
-    <div class="col-sm-11">
+    <div class="col-sm-11" style="font-size: 20px;">
+      ランダムの出題範囲を指定してください
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
       <div class="checkarea">
         <input id="gou1" type="checkbox">
         <label class="checklbl" for="gou1">&nbsp;１号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou2" type="checkbox">
+        <label class="checklbl" for="gou2">&nbsp;２号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou3" type="checkbox">
+        <label class="checklbl" for="gou3">&nbsp;３号</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou4" type="checkbox">
+        <label class="checklbl" for="gou4">&nbsp;４号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou5" type="checkbox">
+        <label class="checklbl" for="gou5">&nbsp;５号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou6" type="checkbox">
+        <label class="checklbl" for="gou6">&nbsp;６号</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou7" type="checkbox">
+        <label class="checklbl" for="gou7">&nbsp;７号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou8" type="checkbox">
+        <label class="checklbl" for="gou8">&nbsp;８号</label>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="checkarea">
+        <input id="gou9" type="checkbox">
+        <label class="checklbl" for="gou9">&nbsp;９号</label>
       </div>
     </div>
   </div>
