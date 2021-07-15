@@ -50,6 +50,9 @@ function sendMsg() {
   if ($('#gou9').prop('checked')) {
     hani += "9";
   }
+  if (!hani) {
+    hani = "1234567";
+  }
   var text  = 'ランダム出題範囲:' + hani;
   liff.sendMessages([
     {
