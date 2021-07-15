@@ -22,7 +22,35 @@ window.onload = function (e) {
   });
 };
 function sendMsg() {
-  var text  = 'ランダム範囲' + gou + '-' + no;
+  var hani = "";
+  if ($('#gou1').prop('checked')) {
+    hani += "1";
+  }
+  if ($('#gou2').prop('checked')) {
+    hani += "2";
+  }
+  if ($('#gou3').prop('checked')) {
+    hani += "3";
+  }
+  if ($('#gou4').prop('checked')) {
+    hani += "4";
+  }
+  if ($('#gou5').prop('checked')) {
+    hani += "5";
+  }
+  if ($('#gou6').prop('checked')) {
+    hani += "6";
+  }
+  if ($('#gou7').prop('checked')) {
+    hani += "7";
+  }
+  if ($('#gou8').prop('checked')) {
+    hani += "8";
+  }
+  if ($('#gou9').prop('checked')) {
+    hani += "9";
+  }
+  var text  = 'ランダム出題範囲:' + hani;
   liff.sendMessages([
     {
       'type': 'text',
@@ -82,7 +110,8 @@ function sendMsg() {
     <div class="col-sm-1">
     </div>
     <div class="col-sm-11" style="font-size: 20px;">
-      ランダムの出題範囲を指定してください
+      ランダムの出題範囲を指定してください<br>
+      (指定しない場合は１〜７号となります)
     </div>
   </div>
   <div class="row">
