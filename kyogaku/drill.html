@@ -72,7 +72,9 @@ function getDrill(sid) {
     $('.loading').addClass('hide');
     var maps = [];
     for (var i =0; i < data.length; i++) {
-      maps.push(data[i]);
+      if (data[i]["GOU"] in [1, 2, 3, 4, 5, 6, 7]) {
+        maps.push(data[i]);
+      }
     }
     $("#maps").val(JSON.stringify(maps));
     [1, 2, 3, 4, 5, 6].forEach(v => {
@@ -159,7 +161,7 @@ function showAnswer(num) {
   </div>
   <div class="row">
     <div class="col-xs-6" style="font-size: 20px;">
-      和讃ドリル
+      和讃ドリル(1〜7号)
     </div>
     <div id="result" class="col-xs-6" style="font-size: 20px;"></div>
   </div>
