@@ -114,12 +114,23 @@ function showAnswer(num) {
     if (/御文章[一二三四五]帖/.test(ANS[num])) {
       reg = new RegExp(ANS[num].replace("御文章", ""));
     }
-    if (reg.test($("#A").text())) {
-      $("#result").text("正解!");
-      $("#result").css("color", "red");
+    if (/御文章[一二三四五]帖/.test($("#A").text())) {
+      var test = $("#A").text().replace("御文章", "");
+      if (reg.test(test)) {
+        $("#result").text("正解!");
+        $("#result").css("color", "red");
+      } else {
+        $("#result").text("不正解!");
+        $("#result").css("color", "blue");
+      }
     } else {
-      $("#result").text("不正解!");
-      $("#result").css("color", "blue");
+      if (reg.test($("#A").text())) {
+        $("#result").text("正解!");
+        $("#result").css("color", "red");
+      } else {
+        $("#result").text("不正解!");
+        $("#result").css("color", "blue");
+      }
     }
     $("#result").show();
     $("#Y").text("あなたの答え：" + ANS[num]);
