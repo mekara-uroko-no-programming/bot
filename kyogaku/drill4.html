@@ -111,7 +111,7 @@ function showAnswer(num) {
   $("#result").hide();
   if(num) {
     var reg = new RegExp(ANS[num]);
-    if (/御文章[一二三四五]帖/.test(ANS[v])) {
+    if (/御文章[一二三四五]帖/.test(ANS[num])) {
       reg = new RegExp(ANS[num].replace("御文章", ""));
     }
     if (reg.test($("#A").text())) {
