@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+const ANS = {
+  1: "執持鈔",
+  2: "改邪鈔",
+  3: "口伝鈔",
+  4: "御伝鈔"
+}
+var getUrlVars = function(){
+  var vars = {};
+  var param = location.search.substring(1).split('&');
+  for(var i = 0; i < param.length; i++) {
+    var keySearch = param[i].search(/=/);
+    var key = '';
+    if(keySearch != -1) key = param[i].slice(0, keySearch);
+    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    if(key != '') vars[key] = decodeURI(val);
+  }
+  return vars;
+}
+window.onload = function (e) {
+  var param = getUrlVars();
+  getDrill(param['sid']);
+};
+function sendMsg() {
+  var result = "";
+  var text  = 'ドリル結果:' + result;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+function getDrill(sid) {
+  var url = 'https://script.google.com/macros/s/@SID/exec';
+  url = url.replace('@SID', sid);
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: { action: "getDrill3" },
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    var maps = [];
+    for (var i = 0; i < data.length; i++) {
+      if ([1, 2, 3, 4, 5, 6, 7].includes(data[i]["GOU"])) {
+        maps.push(data[i]);
+      }
+    }
+    $("#maps").val(JSON.stringify(maps));
+    [1, 2, 3, 4].forEach(v => {
+      $("#ans" + v).text(ANS[v]);
+    });
+    showQuestion();
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    alert(textStatus);
+    console.log("failed...");
+    console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+    console.log("textStatus     : " + textStatus);
+    console.log("errorThrown    : " + errorThrown.message);
+  });
+}
+function showQuestion() {
+  $("#result").hide();
+  $("#A").hide();
+  $("#Y").hide();
+  var maps = JSON.parse($("#maps").val());
+  var num  = Math.floor(Math.random() * maps.length);
+  $("#Q").html(maps[num]["Q"].replace(/\n/g, "<br>"));
+  $("#A").html("（" + maps[num]["A"] + "）");
+}
+function showAnswer(num) {
+  $("#Y").hide();
+  $("#result").hide();
+  if(num) {
+    var reg = new RegExp(ANS[num]);
+    if (reg.test($("#A").text())) {
+      $("#result").text("正解!");
+      $("#result").css("color", "red");
+    } else {
+      $("#result").text("不正解!");
+      $("#result").css("color", "blue");
+    }
+    $("#result").show();
+    $("#Y").text("あなたの答え：" + ANS[num]);
+    $("#Y").show();
+  }
+  $("#A").show();
+}
+</script>
+<style>
+.answer {
+  display: table;
+  height: 3em;
+  color: white;
+  background-color: grey;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+}
+.answer-inner {
+  vertical-align: middle;
+  display: table-cell;
+}
+#A {
+  color: red;
+  font-weight: bold;
+}
+.hide {
+  display: none;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  background-image: url(./img/loading.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 20%;
+  background-size: 150px 150px;
+}
+</style>
+<title>覚如上人ドリル(1〜7号)</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-xs-6" style="font-size: 20px;">
+      覚如上人ドリル
+    </div>
+    <div id="result" class="col-xs-6" style="font-size: 20px;"></div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <h5 id="Q"></h5>
+  <h5 id="A"></h5>
+  <div class="row">
+    &nbsp;
+  </div>
+  <h5 id="Y"></h5>
+  <div class="row">
+    <div class="col-xs-6 answer">
+      <div id="ans1" class="answer-inner" onclick="showAnswer(1);">1</div>
+    </div>
+    <div class="col-xs-6 answer">
+      <div id="ans2" class="answer-inner" onclick="showAnswer(2);">2</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 answer">
+      <div id="ans3" class="answer-inner" onclick="showAnswer(3);">3</div>
+    </div>
+    <div class="col-xs-6 answer">
+      <div id="ans4" class="answer-inner" onclick="showAnswer(4);">4</div>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-lg btn-block btn-danger" onclick="showAnswer();">答えを表示</button>
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-lg btn-block btn-success" onclick="showQuestion();">次の問題</button>
+    </div>
+  </div>
+  <input type="hidden" id="maps">
+  <div class="loading hide"></div>
+</div>
+</body>
+</html>
