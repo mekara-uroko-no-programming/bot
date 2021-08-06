@@ -24,8 +24,10 @@ const ANS = {
   4: "証巻",
   5: "仮土巻",
   6: "真仏土巻",
-  7: "教行信証",
-  8: "記述なし"
+  7: "総序",
+  8: "後序",
+  9: "教行信証",
+ 10: "記述なし"
 }
 var getUrlVars = function(){
   var vars = {};
@@ -79,7 +81,7 @@ function getDrill(sid) {
       }
     }
     $("#maps").val(JSON.stringify(maps));
-    [1, 2, 3, 4, 5, 6, 7, 8].forEach(v => {
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(v => {
       $("#ans" + v).text(ANS[v]);
     });
     showQuestion();
@@ -204,6 +206,14 @@ function showAnswer(num) {
     </div>
     <div class="col-xs-4 answer">
       <div id="ans8" class="answer-inner" onclick="showAnswer(8);">8</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 answer">
+      <div id="ans9" class="answer-inner" onclick="showAnswer(9);">9</div>
+    </div>
+    <div class="col-xs-4 answer">
+      <div id="ans10" class="answer-inner" onclick="showAnswer(10);">10</div>
     </div>
   </div>
   <div class="row">
