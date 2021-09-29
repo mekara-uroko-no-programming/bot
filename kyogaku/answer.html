@@ -55,7 +55,8 @@ window.onload = function (e) {
     liff.init({
       liffId: "1656474352-l11BzKkY"
     }, function (data) {
-      alert(liff.state);
+      var param = location.search.substring(1).split('&');
+      alert(param);
       var userId = data.context.userId;
       $("#play").hide();
       $("#ref-area").hide();
