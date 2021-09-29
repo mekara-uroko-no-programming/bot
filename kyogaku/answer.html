@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<!--script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script-->
+<script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 <script>
 
 var ARR1 = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号'];
@@ -51,7 +52,9 @@ var getUrlVars = function(){
 }
 window.onload = function (e) {
   try {
-    liff.init(function (data) {
+    liff.init({
+      liffId: "1656474352-l11BzKkY"
+    }, function (data) {
       var userId = data.context.userId;
       $("#play").hide();
       $("#ref-area").hide();
