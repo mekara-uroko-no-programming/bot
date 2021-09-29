@@ -29,9 +29,10 @@ var getUrlVars = function(){
 window.onload = function (e) {
   liff.init({
     liffId: "1656474352-r3lENAz7"
+  }, function(){
+    var param = getUrlVars();
+    getTagList(param['sid']);
   });
-  var param = getUrlVars();
-  getTagList(param['sid']);
 };
 function sendMsg(key) {
   var text = 'タグ:' + key;
