@@ -55,12 +55,10 @@ window.onload = function (e) {
     liff.init({
       liffId: "1656474352-l11BzKkY"
     }, function (data) {
-      var param = location.search.substring(1).split('&');
-      alert(param);
-      var userId = data.context.userId;
       $("#play").hide();
       $("#ref-area").hide();
       var param = getUrlVars();
+      var userId = liff.getProfile()["userId"];      
       getQuestion(param['sid'], param['gou'], param['no'], param['ref'], userId);
       // 音声読み上げ
       document.getElementById('play').addEventListener('click', function(){
