@@ -113,15 +113,15 @@
             if( result.url ){
               var img_url = result.url;
               var img_url0 = img_url;
-              //var data = {
-              //  type: "image",
-              //  originalContentUrl: img_url,
-              //  previewImageUrl: img_url0
-              //};
               var data = {
-                type: "text",
-                text: img_url
+                type: "image",
+                originalContentUrl: img_url,
+                previewImageUrl: "https://mekara-uroko-no-programming.github.io/bot/seinen/img/pencil.png"
               };
+              //var data = {
+              //  type: "text",
+              //  text: img_url
+              //};
               liff.sendMessages([
                 data
               ]).then( () => {
