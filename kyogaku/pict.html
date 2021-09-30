@@ -54,6 +54,8 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script type="text/javascript">
+      var canvas = null;
+      var c = null;
       const BASE_URL = 'https://script.google.com/macros/s/@SID/exec';
       var getUrlVars = function(){
         var vars = {};
@@ -81,11 +83,11 @@
       };
       function post(){
         try {
-          var canvas = document.getElementById('myCanvas');
+          //var canvas = document.getElementById('myCanvas');
           if( !canvas || !canvas.getContext ){
             return false;
           }
-          var ctx = canvas.getContext( '2d' );
+          //var ctx = canvas.getContext( '2d' );
           //. 画像データ
           var png = canvas.toDataURL( 'image/png' );
           png = png.replace( /^.*,/, '' );
@@ -134,14 +136,14 @@
         });
       }
       function clear() {
-        var canvas = document.getElementById("myCanvas");
-        var c = canvas.getContext("2d");
+        //var canvas = document.getElementById("myCanvas");
+        //var c = canvas.getContext("2d");
         c.clearRect(0, 0, canvas.width, canvas.height);
       }
       window.addEventListener("load", function () {
         // 必要な変数を宣言しておく
-        var canvas = document.getElementById("myCanvas");
-        var c = canvas.getContext("2d");
+        canvas = document.getElementById("myCanvas");
+        c = canvas.getContext("2d");
         var w = 380;
         var h = 620;
         var drawing = false;
