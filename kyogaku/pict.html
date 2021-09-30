@@ -109,7 +109,6 @@
           },
           success: function( result, dataType ){
             $('.loading').addClass('hide');
-            alert(JSON.stringify(result));
             if( result.url ){
               var img_url = result.url;
               var img_url0 = img_url;
@@ -118,16 +117,11 @@
                 originalContentUrl: img_url,
                 previewImageUrl: img_url0
               };
-              //var data = {
-              //  type: "text",
-              //  text: img_url
-              //};
               liff.sendMessages([
                 data
               ]).then( () => {
                 liff.closeWindow();
               }).catch( ( err ) => {
-                alert(err);
                 liff.closeWindow();
               });
             }
@@ -203,7 +197,7 @@
     </div>
     <div class="sub">
       <input id="post_button"  type="button" value="post"  onclick="post();"/>
-      <input id="clear_button" type="button" value="clear" onclick="clear();"/>
+      <!--input id="clear_button" type="button" value="clear" onclick="clear();"/-->
       <input type="hidden" name="sid"/>
     </div>
     <div class="loading hide"></div>
