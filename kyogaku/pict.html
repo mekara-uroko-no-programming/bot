@@ -113,10 +113,14 @@
             if( result.url ){
               var img_url = result.url;
               var img_url0 = img_url;
+              //var data = {
+              //  type: "image",
+              //  originalContentUrl: img_url,
+              //  previewImageUrl: img_url0
+              //};
               var data = {
-                type: "image",
-                originalContentUrl: img_url,
-                previewImageUrl: img_url0
+                type: "text",
+                text: img_url
               };
               liff.sendMessages([
                 data
