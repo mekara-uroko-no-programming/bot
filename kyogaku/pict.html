@@ -83,11 +83,9 @@
       };
       function post(){
         try {
-          //var canvas = document.getElementById('myCanvas');
           if( !canvas || !canvas.getContext ){
             return false;
           }
-          //var ctx = canvas.getContext( '2d' );
           //. 画像データ
           var png = canvas.toDataURL( 'image/png' );
           png = png.replace( /^.*,/, '' );
@@ -96,7 +94,6 @@
           formData.append( 'action', 'postImage' );
           var sid = $('input:hidden[name="sid"]').val();
           var url = BASE_URL.replace('@SID', sid);
-          alert(url);
         } catch (ex) {
           alert(ex);
         }
