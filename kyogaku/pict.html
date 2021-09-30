@@ -109,6 +109,7 @@
           },
           success: function( result, dataType ){
             $('.loading').addClass('hide');
+            alert(result);
             if( result.url ){
               var img_url = result.url;
               var img_url0 = img_url;
