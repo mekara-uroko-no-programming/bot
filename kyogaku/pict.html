@@ -134,6 +134,11 @@
           }
         });
       }
+      function clear() {
+        var canvas = document.getElementById("myCanvas");
+        var c = canvas.getContext("2d");
+        c.clearRect(0, 0, canvas.width, canvas.height);
+      }
       window.addEventListener("load", function () {
         // 必要な変数を宣言しておく
         var canvas = document.getElementById("myCanvas");
@@ -193,7 +198,8 @@
       <div class="canvas"><canvas id="myCanvas"></canvas></div>
     </div>
     <div class="sub">
-      <input id="post_button" type="button" value="post" onclick="post();"/>
+      <input id="post_button"  type="button" value="post"  onclick="post();"/>
+      <input id="clear_button" type="button" value="clear" onclick="clear();"/>
       <input type="hidden" name="sid"/>
     </div>
     <div class="loading hide"></div>
