@@ -192,13 +192,13 @@
     </script>
   </head>
   <body>
-    <div class="main" ontouchmove="event.preventDefault()">
-      <div class="canvas"><canvas id="myCanvas"></canvas></div>
-    </div>
     <div class="sub">
-      <input id="post_button"  type="button" value="post"  onclick="post();"/>
+      <input id="post_button" type="button" value="投稿" onclick="post();"/>
       <!--input id="clear_button" type="button" value="clear" onclick="clear();"/-->
       <input type="hidden" name="sid"/>
+    </div>
+    <div class="main" ontouchmove="event.preventDefault()">
+      <div class="canvas"><canvas id="myCanvas"></canvas></div>
     </div>
     <div class="loading hide"></div>
   </body>
