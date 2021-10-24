@@ -55,7 +55,9 @@ function sendMsg() {
   if (!hani) {
     hani = "1234567";
   }
+  hani += $('input:radio[name="range"]:checked').val();
   var text  = 'ランダム出題範囲:' + hani;
+  alert(hani)
   liff.sendMessages([
     {
       'type': 'text',
@@ -179,6 +181,26 @@ function sendMsg() {
       <div class="checkarea">
         <input id="gou9" type="checkbox">
         <label class="checklbl" for="gou9">&nbsp;９号</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="checkarea">
+        <input id="all" name="range" type="radio" value="" checked>
+        <label class="checklbl" for="all">全て</label>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="checkarea">
+        <input id="zen" name="range" type="radio" value="A">
+        <label class="checklbl" for="zen">前半</label>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="checkarea">
+        <input id="kou" name="range" type="radio" value="B">
+        <label class="checklbl" for="kou">後半</label>
       </div>
     </div>
   </div>
