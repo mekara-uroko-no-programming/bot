@@ -16,6 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script>
+var count = 0;
 const ANS = {
   1: "浄土和讃",
   2: "高僧和讃",
@@ -103,9 +104,15 @@ function showAnswer(num) {
   if(num) {
     var reg = new RegExp(ANS[num]);
     if (reg.test($("#A").text())) {
-      $("#result").text("正解!");
+      count++;
+      if (count >= 2) {
+        $("#result").text(count + "問連続正解!");
+      } else {
+        $("#result").text("正解!");
+      }
       $("#result").css("color", "red");
     } else {
+      count = 0;
       $("#result").text("不正解!");
       $("#result").css("color", "blue");
     }
