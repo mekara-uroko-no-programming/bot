@@ -154,6 +154,11 @@ function getQuestion(sid, gou, no, ref, userId) {
         $('#btn-area').append(tags[i]);
         $('#btn-area').append('&nbsp;');
       }
+      var expl = data[0]['EXP'];
+      if (expl) {
+        $('#expl').text(expl);
+        $('#dispExpl').show();
+      }
     }
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert('error');
@@ -267,6 +272,19 @@ function speak(text) {
   </div>
   <div class="row">
     &nbsp;
+  </div>
+  <div id="dispExpl" style="display:none;">
+    <div class="row">
+      <div class="col-sm-12">
+        <details>
+          <summary><font size="3">解説</font></summary>
+          <p id="expl"></p>
+        </details>
+      </div>
+    </div>
+    <div class="row">
+      &nbsp;
+    </div>
   </div>
   <div class="row" id="ref-area">
     <div class="col-sm-1"><font size="4"><span id="ref0"></span></font></div>
