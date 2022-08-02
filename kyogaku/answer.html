@@ -257,26 +257,6 @@ details {
 details:not(:last-child) {
   margin-bottom: 20px;
 }
-
-/**
- * list-style: none; ←デフォルト三角削除（Chrome非対応）
- * cursor: pointer; ←カーソルをポインターに
-**/
-details summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 20px;
-  background: #e4e4e4;
-  color: #242323;
-  font-size: 2rem;
-  font-weight: bold;
-}
-/**
- * アコーディオンがオープン時はマイナスアイコンに変更
-**/
-details[open] summary::before {
-  content: '\f068';
-}
 details p {
   margin: 0;
   padding: 20px;
