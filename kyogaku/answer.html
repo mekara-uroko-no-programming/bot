@@ -248,9 +248,29 @@ function speak(text) {
 .color-yellow:before {
   border-right: 15px solid #fcc800 !important;
 }
-pre {
+details {
+  margin-bottom: 0.5rem;
+  outline: 1px solid #ccc;
+  border-radius: 3px;
+  transition: .5s;
+  height: 30px;
+}
+
+summary {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #efefef;
+}
+
+details pre {
+  padding: 1rem 0.5rem;
+  background-color: #fff;
   white-space: pre-wrap;
 }
+details[open] {
+  height: 100px;
+}
+
 </style>
 <title>答え</title>
 </head>
