@@ -156,7 +156,7 @@ function getQuestion(sid, gou, no, ref, userId) {
       }
       var expl = data[0]['EXP'];
       if (expl) {
-        $('#expl').text(expl);
+        $('#expl').html(expl.replace('\n', '<br>'));
         $('#dispExpl').show();
       }
     }
