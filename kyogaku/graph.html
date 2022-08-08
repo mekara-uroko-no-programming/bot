@@ -71,6 +71,7 @@ function getGraph(sid) {
       }
     }
     $("#maps").val(JSON.stringify(maps));
+    console.log(maps["1"]);
     //showGraph();
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
@@ -116,7 +117,7 @@ function getGraph(sid) {
   background-size: 150px 150px;
 }
 </style>
-<title>和讃ドリル(1〜7号)</title>
+<title>出題傾向</title>
 </head>
 <body>
 <div class="container">
@@ -125,39 +126,21 @@ function getGraph(sid) {
   </div>
   <div class="row">
     <div class="col-xs-6" style="font-size: 20px;">
-      和讃ドリル
+      出題傾向
     </div>
-    <div id="result" class="col-xs-6" style="font-size: 20px;"></div>
   </div>
   <div class="row">
     &nbsp;
   </div>
-  <h5 id="Q"></h5>
-  <h5 id="A"></h5>
-  <div class="row">
-    &nbsp;
-  </div>
-  <h5 id="Y"></h5>
   <div class="row">
     <div class="col-xs-4 answer">
-      <div id="ans1" class="answer-inner" onclick="showAnswer(1);">1</div>
+      項目１
     </div>
     <div class="col-xs-4 answer">
-      <div id="ans2" class="answer-inner" onclick="showAnswer(2);">2</div>
+      項目２
     </div>
     <div class="col-xs-4 answer">
-      <div id="ans3" class="answer-inner" onclick="showAnswer(3);">3</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-4 answer">
-      <div id="ans4" class="answer-inner" onclick="showAnswer(4);">4</div>
-    </div>
-    <div class="col-xs-4 answer">
-      <div id="ans5" class="answer-inner" onclick="showAnswer(5);">5</div>
-    </div>
-    <div class="col-xs-4 answer">
-      <div id="ans6" class="answer-inner" onclick="showAnswer(6);">6</div>
+      項目３
     </div>
   </div>
   <div class="row">
@@ -165,10 +148,7 @@ function getGraph(sid) {
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <button type="button" class="btn btn-lg btn-block btn-danger" onclick="showAnswer();">答えを表示</button>
-    </div>
-    <div class="col-xs-6">
-      <button type="button" class="btn btn-lg btn-block btn-success" onclick="showQuestion();">次の問題</button>
+      <button type="button" class="btn btn-lg btn-block btn-success" onclick="return false;">表示</button>
     </div>
   </div>
   <input type="hidden" id="maps">
