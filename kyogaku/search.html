@@ -31,14 +31,9 @@ window.onload = function (e) {
     liffId: "1656474352-bX8anMBY"
   });
 };
-function sendMsg(mode) {
+function sendMsg() {
   var keyword = $('textarea[name="keyword"]').val();
-  var text = "";
-  if (mode == 1) {
-    text = 'キーワード:' + keyword;
-  } else {
-    text = keyword + って何？;
-  }
+  var text = 'キーワード:' + keyword;
   liff.sendMessages([
     {
       'type': 'text',
@@ -53,6 +48,25 @@ function sendMsg(mode) {
     liff.closeWindow();
   });
 }
+
+function sendMsgWiki() {
+  var keyword = $('textarea[name="keyword"]').val();
+  var text = keyword + "って何？";
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+
 </script>
 <style type="text/css">
 .big { font-size:15pt; }
@@ -75,11 +89,11 @@ function sendMsg(mode) {
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-xs-5">
-      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg(1);">検索</button>
+    <div class="col-xs-2">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">検索</button>
     </div>
     <div class="col-xs-5">
-      <button type="button" class="btn btn-lg btn-danger" onClick="sendMsg(2);">WIKIで検索</button>
+      <button type="button" class="btn btn-lg btn-danger" onClick="sendMsgWiki();">WIKIで検索</button>
     </div>
   </div>
   <div class="row">
