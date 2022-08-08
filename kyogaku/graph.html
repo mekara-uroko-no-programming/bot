@@ -65,12 +65,13 @@ function getGraph(sid) {
     var maps = {};
     for (var i = 0; i < data.length; i++) {
       var gou = data[i]["GOU"];
-      if ([1, 2, 3, 4, 5, 6, 7].includes(gou)) {
+      if (["1", "2", "3", "4", "5", "6", "7"].includes(gou)) {
         if (!maps[gou]) maps[gou] = [];
         maps[gou].push(data[i]);
       }
     }
     $("#maps").val(JSON.stringify(maps));
+    console.log(maps.length);
     console.log(maps["1"]);
     //showGraph();
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
