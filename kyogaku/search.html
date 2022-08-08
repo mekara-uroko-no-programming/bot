@@ -31,9 +31,14 @@ window.onload = function (e) {
     liffId: "1656474352-bX8anMBY"
   });
 };
-function sendMsg() {
+function sendMsg(mode) {
   var keyword = $('textarea[name="keyword"]').val();
-  var text = 'キーワード:' + keyword;
+  var text = "";
+  if (mode == 1) {
+    text = 'キーワード:' + keyword;
+  } else {
+    text = keyword + って何？;
+  }
   liff.sendMessages([
     {
       'type': 'text',
@@ -70,8 +75,11 @@ function sendMsg() {
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-11">
-      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">検索</button>
+    <div class="col-sm-5">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg(1);">検索</button>
+    </div>
+    <div class="col-sm-5">
+      <button type="button" class="btn btn-lg btn-danger" onClick="sendMsg(2);">WIKIで検索</button>
     </div>
   </div>
   <div class="row">
