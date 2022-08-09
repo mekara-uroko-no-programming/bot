@@ -56,7 +56,7 @@ function getGraph(sid) {
   $.ajax({
     url: url,
     type: 'GET',
-    data: { action: "getTagKeyList" },
+    data: { action: "getTagKeyList", tag: "D" },
     beforeSend: function(){
       $('.loading').removeClass('hide');
     }
