@@ -16,8 +16,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script>
-var count = 0;
-var getUrlVars = function(){
+window.onload = function (e) {
+  var param = getUrlVars();
+  getInit(param['sid']);
+};
+var getUrlVars = function() {
   var vars = {};
   var param = location.search.substring(1).split('&');
   for(var i = 0; i < param.length; i++) {
@@ -29,40 +32,9 @@ var getUrlVars = function(){
   }
   return vars;
 }
-window.onload = function (e) {
-  var param = getUrlVars();
-  getGraph(param['sid']);
-};
-function sendMsg() {
-  var result = "";
-  var text  = 'グラフ結果:' + result;
-  liff.sendMessages([
-    {
-      'type': 'text',
-      'text':  text
-    }
-  ])
-  .then(() => {
-    liff.closeWindow();
-  })
-  .catch((err) => {
-    alert(err);
-    liff.closeWindow();
-  });
-}
-function getGraph(sid) {
-  var url = 'https://script.google.com/macros/s/@SID/exec';
-  url = url.replace('@SID', sid);
-  $.ajax({
-    url: url,
-    type: 'GET',
-    data: { action: "getTagKeyList", tag: "D" },
-    beforeSend: function(){
-      $('.loading').removeClass('hide');
-    }
-  }).done(function(data){
-    $('.loading').addClass('hide');
-    var maps = {};
+function getInit(sid) {
+  // タグ一覧取得
+  gasGetCall(sid, {action: "getTagList"}, function(data) {
     for (var i = 0; i < data.length; i++) {
       var gou = data[i]["GOU"];
       console.log(data[i]);
@@ -74,7 +46,22 @@ function getGraph(sid) {
     $("#maps").val(JSON.stringify(maps));
     console.log(maps.length);
     console.log(maps["1"]);
-    //showGraph();
+  });
+}
+/* GAS呼び出し(GET) */
+function gasGetCall(sid, param, callback) {
+  const BASE_URL = "https://script.google.com/macros/s/@SID/exec";
+  let url = BASE_URL.replace('@SID', sid) + param;
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: param,
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    callback(data);
   }).fail(function(XMLHttpRequest, textStatus, errorThrown){
     alert(textStatus);
     console.log("failed...");
