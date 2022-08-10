@@ -38,7 +38,7 @@ function getInit(sid) {
     let maps = [];
     for (var i = 0; i < data.length; i++) {
       var key = data[i]["KEY"];
-      if (["D", "K"].includes(key)) {
+      if (/^[DK].?/.test(key)) {
         maps.push(key);
       }
     }
