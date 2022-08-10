@@ -35,16 +35,16 @@ var getUrlVars = function() {
 function getInit(sid) {
   // タグ一覧取得
   gasGetCall(sid, {action: "getTagList"}, function(data) {
-    let maps = [];
+    let [d, k] = [[], []];
     for (var i = 0; i < data.length; i++) {
       var key = data[i]["KEY"];
-      if (/^[DK].?/.test(key)) {
-        maps.push(key);
-      }
+      if (/^[D].?/.test(key)) d.push(key);
+      if (/^[K].?/.test(key)) k.push(key);
     }
-    $("#maps").val(JSON.stringify(maps));
-    console.log(maps.length);
-    console.log(maps);
+    let dlist = d.map(v => {
+      return `20${v.substring(1, 3)}年${v.substring(3)}月`;
+    });
+    console.log(dlist);
   });
 }
 /* GAS呼び出し(GET) */
