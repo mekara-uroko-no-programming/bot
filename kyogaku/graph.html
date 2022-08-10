@@ -42,8 +42,8 @@ function getInit(sid) {
     }
     let dlist = d.map(v => {
       let ym = `20${v.substring(1, 3)}年${v.substring(3)}月`;
-      if /^[D].?/.test(v)) return {v: `${ym}大導師試験`};
-      if /^[K].?/.test(v)) return {v: `${ym}講師試験`};
+      if (/^[D].?/.test(v)) return {v: `${ym}大導師試験`};
+      if (/^[K].?/.test(v)) return {v: `${ym}講師試験`};
     });
     console.log(dlist);
   });
