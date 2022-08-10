@@ -33,7 +33,6 @@ var getUrlVars = function() {
   return vars;
 }
 function getInit(sid) {
-  console.log(sid);
   // タグ一覧取得
   gasGetCall(sid, {action: "getTagList"}, function(data) {
     for (var i = 0; i < data.length; i++) {
@@ -52,7 +51,10 @@ function getInit(sid) {
 /* GAS呼び出し(GET) */
 function gasGetCall(sid, param, callback) {
   const BASE_URL = "https://script.google.com/macros/s/@SID/exec";
-  let url = BASE_URL.replace('@SID', sid) + param;
+  let url = BASE_URL.replace('@SID', sid);
+  Object.keys(param).forEach((v, index) => {
+    url += (index == 0 ? "?" : "&") + param + "=" + param[v];
+  });
   $.ajax({
     url: url,
     type: 'GET',
