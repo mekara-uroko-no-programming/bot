@@ -33,6 +33,7 @@ var getUrlVars = function() {
   return vars;
 }
 function getInit(sid) {
+  console.log(sid);
   // タグ一覧取得
   gasGetCall(sid, {action: "getTagList"}, function(data) {
     for (var i = 0; i < data.length; i++) {
