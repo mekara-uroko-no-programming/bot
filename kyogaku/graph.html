@@ -109,8 +109,10 @@ function dispGraph() {
       };
       // グラフ線画
       let canvas = document.getElementById('stage');
-      CanvasRenderingContext2D.clearRect(0, 0, canvas.width, canvas.height);
-      let chart = new Chart(canvas, {
+      if (chart) {
+        chart.destroy();
+      }
+      window.chart = new Chart(canvas, {
         type: 'bar',     //グラフの種類
         data: mydata,    //表示するデータ
         options: options //オプション設定
