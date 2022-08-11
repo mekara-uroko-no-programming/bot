@@ -39,7 +39,7 @@ function getInit(sid) {
     let d = [];
     for (let i = 0; i < data.length; i++) {
       let key = data[i]["KEY"];
-      if (/^[DK].?/.test(key)) d.push(key);
+      if (/^[DK]\d{4}$/.test(key)) d.push(key);
     }
     let dlist = d.map(v => {
       let ym = `20${v.substring(1, 3)}年${v.substring(3)}月`;
