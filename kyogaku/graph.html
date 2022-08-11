@@ -75,7 +75,7 @@ function dispGraph() {
   // タグ情報取得
   let sid = $("#sid").val();
   let tag = $('#exam').val();
-  let txt = $('#exam').text();
+  let txt = $('#exam option:selected').text();
   if (tag) {
     gasGetCall(sid, {action: "getTagKeyList", tag: tag}, function(data) {
       console.log(data);
@@ -183,7 +183,7 @@ function gasGetCall(sid, param, callback) {
     &nbsp;
   </div>
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12">
       <canvas id="stage"></canvas>
     </div>
   </div>
