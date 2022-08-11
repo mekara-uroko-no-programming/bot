@@ -79,13 +79,25 @@ function dispGraph() {
   if (tag) {
     gasGetCall(sid, {action: "getTagKeyList", tag: tag}, function(data) {
       console.log(data);
+      let count = [0, 0, 0, 0, 0, 0, 0];
+      data.forEach(v => {
+        switch (v["GOU"]) {
+          case 1:  count[0]++; break;
+          case 2:  count[1]++; break;
+          case 3:  count[2]++; break;
+          case 4:  count[3]++; break;
+          case 5:  count[4]++; break;
+          case 6:  count[5]++; break;
+          case 7:  count[6]++; break;
+        }
+      });
       // データ
       let mydata = {
         labels: ["１号", "２号", "３号", "４号", "５号", "６号", "７号"],
         datasets: [{
           label: '出題数',
           hoverBackgroundColor: "rgba(255,99,132,0.3)",
-          data: [65, 59, 80, 81, 56, 55, 48],
+          data: count,
         }]
       };
       //「オプション設定」
