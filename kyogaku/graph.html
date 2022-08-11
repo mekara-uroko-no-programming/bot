@@ -35,6 +35,7 @@ let getUrlVars = function() {
 function getInit(sid) {
   // タグ一覧取得
   gasGetCall(sid, {action: "getTagList"}, function(data) {
+    // 取得したタグを加工
     let d = [];
     for (let i = 0; i < data.length; i++) {
       let key = data[i]["KEY"];
@@ -46,11 +47,12 @@ function getInit(sid) {
       if (/^[K].?/.test(v)) return {key: v, val: `${ym} 講師試験`};
     });
     dlist.sort((a, b) => {
-      if (a[key] > b[key]) return 1;
-      if (a[key] < b[key]) return -1;
+      if (a["key"] > b["key"]) return 1;
+      if (a["key"] < b["key"]) return -1;
       return 0;
     });
-    console.log(dlist);
+    // プルダウン作成
+    createSelect(dlist);
   });
 }
 // プルダウン作成
@@ -58,8 +60,8 @@ function createSelect(list) {
   let select = $('#exam');
   list.forEach(v => {
     let option = $('<option>')
-      .text(content['text'])
-      .val(content['value']);
+      .text(v["val"])
+      .val(v["key"]);
     select.append(option);
   });
 }
@@ -142,7 +144,7 @@ function gasGetCall(sid, param, callback) {
   <div class="row">
     <div class="col-xs-4 answer">
       <select id="exam">
-        <option selected disabled hidden>選択してください</option>
+        <option value="">選択してください</option>
       </select>
     </div>
   </div>
