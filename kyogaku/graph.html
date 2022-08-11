@@ -17,17 +17,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script>
 window.onload = function (e) {
-  var param = getUrlVars();
+  let param = getUrlVars();
   getInit(param['sid']);
 };
-var getUrlVars = function() {
-  var vars = {};
-  var param = location.search.substring(1).split('&');
-  for(var i = 0; i < param.length; i++) {
-    var keySearch = param[i].search(/=/);
-    var key = '';
+let getUrlVars = function() {
+  let vars = {};
+  let param = location.search.substring(1).split('&');
+  for(let i = 0; i < param.length; i++) {
+    let keySearch = param[i].search(/=/);
+    let key = '';
     if(keySearch != -1) key = param[i].slice(0, keySearch);
-    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    let val = param[i].slice(param[i].indexOf('=', 0) + 1);
     if(key != '') vars[key] = decodeURI(val);
   }
   return vars;
@@ -36,8 +36,8 @@ function getInit(sid) {
   // タグ一覧取得
   gasGetCall(sid, {action: "getTagList"}, function(data) {
     let d = [];
-    for (var i = 0; i < data.length; i++) {
-      var key = data[i]["KEY"];
+    for (let i = 0; i < data.length; i++) {
+      let key = data[i]["KEY"];
       if (/^[DK].?/.test(key)) d.push(key);
     }
     let dlist = d.map(v => {
@@ -51,6 +51,16 @@ function getInit(sid) {
       return 0;
     })
     console.log(dlist);
+  });
+}
+// プルダウン作成
+function createSelect(list) {
+  let select = $('#exam');
+  list.forEach(v => {
+    let option = $('<option>')
+      .text(content['text'])
+      .val(content['value']);
+    select.append(option);
   });
 }
 /* GAS呼び出し(GET) */
@@ -131,13 +141,9 @@ function gasGetCall(sid, param, callback) {
   </div>
   <div class="row">
     <div class="col-xs-4 answer">
-      項目１
-    </div>
-    <div class="col-xs-4 answer">
-      項目２
-    </div>
-    <div class="col-xs-4 answer">
-      項目３
+      <select id="exam">
+        <option selected disabled hidden>選択してください</option>
+      </select>
     </div>
   </div>
   <div class="row">
