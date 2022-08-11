@@ -18,7 +18,8 @@
 <script>
 window.onload = function (e) {
   let param = getUrlVars();
-  getInit(param['sid']);
+  $("#sid").val(param['sid']);
+  getInit();
 };
 let getUrlVars = function() {
   let vars = {};
@@ -32,8 +33,9 @@ let getUrlVars = function() {
   }
   return vars;
 }
-function getInit(sid) {
+function getInit() {
   // タグ一覧取得
+  let sid = $("#sid").val();
   gasGetCall(sid, {action: "getTagList"}, function(data) {
     // 取得したタグを加工
     let d = [];
@@ -69,6 +71,7 @@ function createSelect(list) {
 // グラフ表示
 function dispGraph() {
   // タグ情報取得
+  let sid = $("#sid").val();
   let tag = $('#exam').val();
   if (tag) {
     gasGetCall(sid, {action: "getTagKeyList", tag: tag}, function(data) {
@@ -150,7 +153,7 @@ function gasGetCall(sid, param, callback) {
       <button type="button" class="btn btn-lg btn-block btn-success" onclick="dispGraph();">表示</button>
     </div>
   </div>
-  <input type="hidden" id="maps">
+  <input type="hidden" id="sid">
   <div class="loading hide"></div>
 </div>
 </body>
