@@ -102,14 +102,14 @@ function dispGraph() {
       };
       //「オプション設定」
       let options = {
+        responsive: true,
         title: {
           display: true,
           text: txt
         },
         scales: {
           y: {
-            min: 0,
-            max: 10,
+            beginAtZero: true
           }
         }
       };
