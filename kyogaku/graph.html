@@ -59,7 +59,8 @@ function getInit() {
 }
 // プルダウン作成
 function createSelect(list) {
-  let select = $('#exam').removeChild();
+  let select = $('#exam');
+  select.empty();
   select.append('<option value="">選択してください<option>');
   list.forEach(v => {
     let option = $('<option>')
