@@ -62,12 +62,11 @@ function getInit() {
 function createSelect(list) {
   let select = $('#exam');
   select.empty();
-  select.append('<option value="">選択してください<option>');
+  select.append($('<option>').text("選択してください").val(""));
   list.forEach(v => {
-    let option = $('<option>')
-      .text(v["val"])
-      .val(v["key"]);
-    select.append(option);
+    if (v["val"] && v["key"]) {
+      select.append($('<option>').text(v["val"]).val(v["key"]));
+    }
   });
 }
 // グラフ表示
