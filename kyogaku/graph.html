@@ -69,7 +69,7 @@ function createSelect(list) {
 // グラフ表示
 function dispGraph() {
   // タグ情報取得
-  let tag = ('#exam').val();
+  let tag = $('#exam').val();
   if (tag) {
     gasGetCall(sid, {action: "getTagKeyList", tag: tag}, function(data) {
       console.log(data);
