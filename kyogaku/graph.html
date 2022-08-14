@@ -73,10 +73,13 @@ function createSelect(list) {
 function dispGraph1() {
   // タグ情報取得
   let sid = $("#sid").val();
-  let tag = $('#exam').val();
+  let tags = [];
+  $("#exam :selected").map(function(i, el) {
+    tags.push($(el).val());
+  }).get();
   let txt = $('#exam option:selected').text();
-  if (tag) {
-    gasGetCall(sid, {action: "getTagKeyList", tag: tag}, function(data) {
+  if (tags.length > 0) {
+    gasGetCall(sid, {action: "getTagKeyList", tag: tags.join(",")}, function(data) {
       console.log(data);
       let count = [0, 0, 0, 0, 0, 0, 0];
       data.forEach(v => {
