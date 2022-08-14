@@ -70,7 +70,7 @@ function createSelect(list) {
   });
 }
 // グラフ表示
-function dispGraph() {
+function dispGraph1() {
   // タグ情報取得
   let sid = $("#sid").val();
   let tag = $('#exam').val();
@@ -192,10 +192,10 @@ function gasGetCall(sid, param, callback) {
   </div>
   <div class="row">
     <div class="col-xs-6" style="text-align:right;">
-      <select id="exam"></select>
+      <select id="exam" multiple></select>
     </div>
     <div class="col-xs-6" style="text-align:left;">
-      <button type="button" class="btn btn-success" onclick="dispGraph();">表示</button>
+      <button type="button" class="btn btn-success" onclick="dispGraph1();">表示</button>
     </div>
   </div>
   <div class="row">
