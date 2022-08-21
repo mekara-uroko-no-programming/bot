@@ -93,6 +93,9 @@ function dispGraph1() {
           case 7:  count[6]++; break;
         }
       });
+      let max = count.reduce((acc, cur) => {
+        return acc < cur ? cur : acc;
+      }, 0);
       // データ
       let mydata = {
         labels: ["１号", "２号", "３号", "４号", "５号", "６号", "７号"],
@@ -114,7 +117,7 @@ function dispGraph1() {
           yAxes: [{
             ticks: {
               min: 0,
-              max: 10
+              max: max > 0 ? max : 5;
             }
           }]
         }
