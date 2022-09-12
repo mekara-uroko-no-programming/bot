@@ -95,9 +95,9 @@ function getGraphData() {
           case 7:  count[6]++; break;
         }
         let key = `${v["GOU"]}-${v["NO"]}`;
-        if (!single[key]) single[key] = {
-          GOU: v["GOU"], NO: v["NO"], TITLE: v["TITLE"], COUNT: 0
-        };
+        if (!single[key]) {
+          single[key] = {GOU: v["GOU"], NO: v["NO"], TITLE: v["TITLE"], COUNT: 0};
+        }
         single[key]["COUNT"]++;
       });
       //dispGraph1(count);
