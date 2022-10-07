@@ -41,6 +41,8 @@ function sendMsg() {
     return;
   }
   var text = 'お気に入り一括登録:' + out.join("/");
+  alert(text);
+  return;
   liff.sendMessages([
     {
       'type': 'text',
@@ -135,7 +137,7 @@ function sendMsg() {
   </div>
   <div class="row">
     <div class="col-sm-12" style="font-size: 20px;">
-      お気に入り追加する番号を指定してください
+      お気に入りの番号を指定
     </div>
   </div>
   <div class="row">
@@ -2418,9 +2420,6 @@ function sendMsg() {
       </div>
     </div>
 
-  </div>
-  <div class="row">
-    &nbsp;
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
