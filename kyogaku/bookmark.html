@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<!--script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script-->
+<script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+<script>
+window.onload = function (e) {
+  liff.init({
+    liffId: "1655544412-jnKXd7vW"
+  });
+};
+function sendMsg() {
+  let out = [];
+  [1, 2, 3, 4, 5, 6, 7].forEach(g => {
+    let buf = [];
+    for (let i = 1; i <= 50; i++) {
+      if ($(`#g${g}-${i}:checked`).val()) {
+        buf.push(i);
+      }
+    }
+    if (buf.length > 0) {
+      out.push(`${g}[${buf.join("|")}]`)
+    }
+  });
+  if (out.length == 0) {
+    alert("お気に入り追加する番号を指定してください")
+    return;
+  }
+  var text = 'お気に入り一括登録:' + out.join("/");
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+</script>
+<style>
+  @import url("https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+  .big { font-size:13pt; }
+  .normal { font-size:10pt; }
+  input[type=checkbox] {
+    display:none;
+  }
+  input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+  }
+  input[type=checkbox] + label:before {
+    content: "\f096";
+  }
+  input[type=checkbox] + label:before { 
+    letter-spacing: 10px;
+  }
+  input[type=checkbox]:checked + label:before {
+    content: "\f046";
+    color: #15A04C;
+  }
+  input[type=checkbox]:checked + label:before {
+    letter-spacing: 10px;
+  }
+  .checklbl {
+    font-size: 20px;
+    color: #424242
+  }
+  .checkarea { 
+    display: flex; 
+    margin-left: 15px;
+  }
+
+  .area {
+    margin: auto;
+    flex-wrap: wrap;
+    display: flex;
+  }
+ 
+  .tab_class {
+    width: calc(100%/7);
+    height: 30px;
+    background-color: lightgray;
+    line-height: 30px;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    float: left;
+    order: -1;
+  }
+ 
+  input[name="tab_name"] {
+    display: none;
+  }
+ 
+  input:checked + .tab_class {
+    background-color: steelblue;
+    color: white;
+  }
+ 
+  .content_class {
+    display: none;
+    width: 100%;
+  }
+ 
+  input:checked + .tab_class + .content_class {
+    display: block;
+  }
+
+</style>
+<title>お気に入り追加する番号を指定してください</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-12" style="font-size: 20px;">
+      お気に入り追加する番号を指定してください
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="area">
+
+    <input type="radio" name="tab_name" id="tab1" checked>
+    <label class="tab_class" for="tab1">１号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-1" type="checkbox">
+            <label class="checklbl" for="g1-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-2" type="checkbox">
+            <label class="checklbl" for="g1-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-3" type="checkbox">
+            <label class="checklbl" for="g1-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-4" type="checkbox">
+            <label class="checklbl" for="g1-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-5" type="checkbox">
+            <label class="checklbl" for="g1-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-6" type="checkbox">
+            <label class="checklbl" for="g1-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-7" type="checkbox">
+            <label class="checklbl" for="g1-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-8" type="checkbox">
+            <label class="checklbl" for="g1-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-9" type="checkbox">
+            <label class="checklbl" for="g1-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-10" type="checkbox">
+            <label class="checklbl" for="g1-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-11" type="checkbox">
+            <label class="checklbl" for="g1-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-12" type="checkbox">
+            <label class="checklbl" for="g1-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-13" type="checkbox">
+            <label class="checklbl" for="g1-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-14" type="checkbox">
+            <label class="checklbl" for="g1-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-15" type="checkbox">
+            <label class="checklbl" for="g1-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-16" type="checkbox">
+            <label class="checklbl" for="g1-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-17" type="checkbox">
+            <label class="checklbl" for="g1-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-18" type="checkbox">
+            <label class="checklbl" for="g1-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-19" type="checkbox">
+            <label class="checklbl" for="g1-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-20" type="checkbox">
+            <label class="checklbl" for="g1-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-21" type="checkbox">
+            <label class="checklbl" for="g1-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-22" type="checkbox">
+            <label class="checklbl" for="g1-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-23" type="checkbox">
+            <label class="checklbl" for="g1-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-24" type="checkbox">
+            <label class="checklbl" for="g1-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-25" type="checkbox">
+            <label class="checklbl" for="g1-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-26" type="checkbox">
+            <label class="checklbl" for="g1-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-27" type="checkbox">
+            <label class="checklbl" for="g1-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-28" type="checkbox">
+            <label class="checklbl" for="g1-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-29" type="checkbox">
+            <label class="checklbl" for="g1-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-30" type="checkbox">
+            <label class="checklbl" for="g1-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-31" type="checkbox">
+            <label class="checklbl" for="g1-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-32" type="checkbox">
+            <label class="checklbl" for="g1-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-33" type="checkbox">
+            <label class="checklbl" for="g1-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-34" type="checkbox">
+            <label class="checklbl" for="g1-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-35" type="checkbox">
+            <label class="checklbl" for="g1-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-36" type="checkbox">
+            <label class="checklbl" for="g1-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-37" type="checkbox">
+            <label class="checklbl" for="g1-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-38" type="checkbox">
+            <label class="checklbl" for="g1-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-39" type="checkbox">
+            <label class="checklbl" for="g1-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-40" type="checkbox">
+            <label class="checklbl" for="g1-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-41" type="checkbox">
+            <label class="checklbl" for="g1-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-42" type="checkbox">
+            <label class="checklbl" for="g1-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-43" type="checkbox">
+            <label class="checklbl" for="g1-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-44" type="checkbox">
+            <label class="checklbl" for="g1-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-45" type="checkbox">
+            <label class="checklbl" for="g1-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-46" type="checkbox">
+            <label class="checklbl" for="g1-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-47" type="checkbox">
+            <label class="checklbl" for="g1-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-48" type="checkbox">
+            <label class="checklbl" for="g1-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-49" type="checkbox">
+            <label class="checklbl" for="g1-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g1-50" type="checkbox">
+            <label class="checklbl" for="g1-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab2">
+    <label class="tab_class" for="tab2">２号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-1" type="checkbox">
+            <label class="checklbl" for="g2-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-2" type="checkbox">
+            <label class="checklbl" for="g2-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-3" type="checkbox">
+            <label class="checklbl" for="g2-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-4" type="checkbox">
+            <label class="checklbl" for="g2-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-5" type="checkbox">
+            <label class="checklbl" for="g2-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-6" type="checkbox">
+            <label class="checklbl" for="g2-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-7" type="checkbox">
+            <label class="checklbl" for="g2-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-8" type="checkbox">
+            <label class="checklbl" for="g2-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-9" type="checkbox">
+            <label class="checklbl" for="g2-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-10" type="checkbox">
+            <label class="checklbl" for="g2-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-11" type="checkbox">
+            <label class="checklbl" for="g2-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-12" type="checkbox">
+            <label class="checklbl" for="g2-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-13" type="checkbox">
+            <label class="checklbl" for="g2-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-14" type="checkbox">
+            <label class="checklbl" for="g2-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-15" type="checkbox">
+            <label class="checklbl" for="g2-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-16" type="checkbox">
+            <label class="checklbl" for="g2-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-17" type="checkbox">
+            <label class="checklbl" for="g2-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-18" type="checkbox">
+            <label class="checklbl" for="g2-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-19" type="checkbox">
+            <label class="checklbl" for="g2-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-20" type="checkbox">
+            <label class="checklbl" for="g2-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-21" type="checkbox">
+            <label class="checklbl" for="g2-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-22" type="checkbox">
+            <label class="checklbl" for="g2-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-23" type="checkbox">
+            <label class="checklbl" for="g2-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-24" type="checkbox">
+            <label class="checklbl" for="g2-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-25" type="checkbox">
+            <label class="checklbl" for="g2-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-26" type="checkbox">
+            <label class="checklbl" for="g2-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-27" type="checkbox">
+            <label class="checklbl" for="g2-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-28" type="checkbox">
+            <label class="checklbl" for="g2-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-29" type="checkbox">
+            <label class="checklbl" for="g2-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-30" type="checkbox">
+            <label class="checklbl" for="g2-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-31" type="checkbox">
+            <label class="checklbl" for="g2-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-32" type="checkbox">
+            <label class="checklbl" for="g2-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-33" type="checkbox">
+            <label class="checklbl" for="g2-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-34" type="checkbox">
+            <label class="checklbl" for="g2-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-35" type="checkbox">
+            <label class="checklbl" for="g2-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-36" type="checkbox">
+            <label class="checklbl" for="g2-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-37" type="checkbox">
+            <label class="checklbl" for="g2-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-38" type="checkbox">
+            <label class="checklbl" for="g2-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-39" type="checkbox">
+            <label class="checklbl" for="g2-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-40" type="checkbox">
+            <label class="checklbl" for="g2-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-41" type="checkbox">
+            <label class="checklbl" for="g2-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-42" type="checkbox">
+            <label class="checklbl" for="g2-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-43" type="checkbox">
+            <label class="checklbl" for="g2-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-44" type="checkbox">
+            <label class="checklbl" for="g2-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-45" type="checkbox">
+            <label class="checklbl" for="g2-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-46" type="checkbox">
+            <label class="checklbl" for="g2-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-47" type="checkbox">
+            <label class="checklbl" for="g2-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-48" type="checkbox">
+            <label class="checklbl" for="g2-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-49" type="checkbox">
+            <label class="checklbl" for="g2-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g2-50" type="checkbox">
+            <label class="checklbl" for="g2-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab3">
+    <label class="tab_class" for="tab3">３号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-1" type="checkbox">
+            <label class="checklbl" for="g3-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-2" type="checkbox">
+            <label class="checklbl" for="g3-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-3" type="checkbox">
+            <label class="checklbl" for="g3-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-4" type="checkbox">
+            <label class="checklbl" for="g3-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-5" type="checkbox">
+            <label class="checklbl" for="g3-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-6" type="checkbox">
+            <label class="checklbl" for="g3-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-7" type="checkbox">
+            <label class="checklbl" for="g3-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-8" type="checkbox">
+            <label class="checklbl" for="g3-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-9" type="checkbox">
+            <label class="checklbl" for="g3-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-10" type="checkbox">
+            <label class="checklbl" for="g3-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-11" type="checkbox">
+            <label class="checklbl" for="g3-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-12" type="checkbox">
+            <label class="checklbl" for="g3-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-13" type="checkbox">
+            <label class="checklbl" for="g3-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-14" type="checkbox">
+            <label class="checklbl" for="g3-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-15" type="checkbox">
+            <label class="checklbl" for="g3-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-16" type="checkbox">
+            <label class="checklbl" for="g3-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-17" type="checkbox">
+            <label class="checklbl" for="g3-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-18" type="checkbox">
+            <label class="checklbl" for="g3-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-19" type="checkbox">
+            <label class="checklbl" for="g3-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-20" type="checkbox">
+            <label class="checklbl" for="g3-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-21" type="checkbox">
+            <label class="checklbl" for="g3-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-22" type="checkbox">
+            <label class="checklbl" for="g3-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-23" type="checkbox">
+            <label class="checklbl" for="g3-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-24" type="checkbox">
+            <label class="checklbl" for="g3-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-25" type="checkbox">
+            <label class="checklbl" for="g3-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-26" type="checkbox">
+            <label class="checklbl" for="g3-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-27" type="checkbox">
+            <label class="checklbl" for="g3-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-28" type="checkbox">
+            <label class="checklbl" for="g3-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-29" type="checkbox">
+            <label class="checklbl" for="g3-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-30" type="checkbox">
+            <label class="checklbl" for="g3-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-31" type="checkbox">
+            <label class="checklbl" for="g3-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-32" type="checkbox">
+            <label class="checklbl" for="g3-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-33" type="checkbox">
+            <label class="checklbl" for="g3-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-34" type="checkbox">
+            <label class="checklbl" for="g3-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-35" type="checkbox">
+            <label class="checklbl" for="g3-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-36" type="checkbox">
+            <label class="checklbl" for="g3-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-37" type="checkbox">
+            <label class="checklbl" for="g3-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-38" type="checkbox">
+            <label class="checklbl" for="g3-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-39" type="checkbox">
+            <label class="checklbl" for="g3-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-40" type="checkbox">
+            <label class="checklbl" for="g3-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-41" type="checkbox">
+            <label class="checklbl" for="g3-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-42" type="checkbox">
+            <label class="checklbl" for="g3-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-43" type="checkbox">
+            <label class="checklbl" for="g3-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-44" type="checkbox">
+            <label class="checklbl" for="g3-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-45" type="checkbox">
+            <label class="checklbl" for="g3-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-46" type="checkbox">
+            <label class="checklbl" for="g3-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-47" type="checkbox">
+            <label class="checklbl" for="g3-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-48" type="checkbox">
+            <label class="checklbl" for="g3-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-49" type="checkbox">
+            <label class="checklbl" for="g3-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g3-50" type="checkbox">
+            <label class="checklbl" for="g3-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab4">
+    <label class="tab_class" for="tab4">４号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-1" type="checkbox">
+            <label class="checklbl" for="g4-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-2" type="checkbox">
+            <label class="checklbl" for="g4-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-3" type="checkbox">
+            <label class="checklbl" for="g4-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-4" type="checkbox">
+            <label class="checklbl" for="g4-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-5" type="checkbox">
+            <label class="checklbl" for="g4-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-6" type="checkbox">
+            <label class="checklbl" for="g4-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-7" type="checkbox">
+            <label class="checklbl" for="g4-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-8" type="checkbox">
+            <label class="checklbl" for="g4-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-9" type="checkbox">
+            <label class="checklbl" for="g4-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-10" type="checkbox">
+            <label class="checklbl" for="g4-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-11" type="checkbox">
+            <label class="checklbl" for="g4-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-12" type="checkbox">
+            <label class="checklbl" for="g4-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-13" type="checkbox">
+            <label class="checklbl" for="g4-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-14" type="checkbox">
+            <label class="checklbl" for="g4-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-15" type="checkbox">
+            <label class="checklbl" for="g4-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-16" type="checkbox">
+            <label class="checklbl" for="g4-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-17" type="checkbox">
+            <label class="checklbl" for="g4-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-18" type="checkbox">
+            <label class="checklbl" for="g4-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-19" type="checkbox">
+            <label class="checklbl" for="g4-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-20" type="checkbox">
+            <label class="checklbl" for="g4-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-21" type="checkbox">
+            <label class="checklbl" for="g4-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-22" type="checkbox">
+            <label class="checklbl" for="g4-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-23" type="checkbox">
+            <label class="checklbl" for="g4-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-24" type="checkbox">
+            <label class="checklbl" for="g4-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-25" type="checkbox">
+            <label class="checklbl" for="g4-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-26" type="checkbox">
+            <label class="checklbl" for="g4-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-27" type="checkbox">
+            <label class="checklbl" for="g4-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-28" type="checkbox">
+            <label class="checklbl" for="g4-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-29" type="checkbox">
+            <label class="checklbl" for="g4-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-30" type="checkbox">
+            <label class="checklbl" for="g4-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-31" type="checkbox">
+            <label class="checklbl" for="g4-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-32" type="checkbox">
+            <label class="checklbl" for="g4-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-33" type="checkbox">
+            <label class="checklbl" for="g4-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-34" type="checkbox">
+            <label class="checklbl" for="g4-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-35" type="checkbox">
+            <label class="checklbl" for="g4-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-36" type="checkbox">
+            <label class="checklbl" for="g4-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-37" type="checkbox">
+            <label class="checklbl" for="g4-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-38" type="checkbox">
+            <label class="checklbl" for="g4-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-39" type="checkbox">
+            <label class="checklbl" for="g4-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-40" type="checkbox">
+            <label class="checklbl" for="g4-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-41" type="checkbox">
+            <label class="checklbl" for="g4-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-42" type="checkbox">
+            <label class="checklbl" for="g4-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-43" type="checkbox">
+            <label class="checklbl" for="g4-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-44" type="checkbox">
+            <label class="checklbl" for="g4-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-45" type="checkbox">
+            <label class="checklbl" for="g4-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-46" type="checkbox">
+            <label class="checklbl" for="g4-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-47" type="checkbox">
+            <label class="checklbl" for="g4-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-48" type="checkbox">
+            <label class="checklbl" for="g4-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-49" type="checkbox">
+            <label class="checklbl" for="g4-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g4-50" type="checkbox">
+            <label class="checklbl" for="g4-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab5">
+    <label class="tab_class" for="tab5">５号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-1" type="checkbox">
+            <label class="checklbl" for="g5-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-2" type="checkbox">
+            <label class="checklbl" for="g5-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-3" type="checkbox">
+            <label class="checklbl" for="g5-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-4" type="checkbox">
+            <label class="checklbl" for="g5-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-5" type="checkbox">
+            <label class="checklbl" for="g5-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-6" type="checkbox">
+            <label class="checklbl" for="g5-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-7" type="checkbox">
+            <label class="checklbl" for="g5-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-8" type="checkbox">
+            <label class="checklbl" for="g5-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-9" type="checkbox">
+            <label class="checklbl" for="g5-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-10" type="checkbox">
+            <label class="checklbl" for="g5-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-11" type="checkbox">
+            <label class="checklbl" for="g5-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-12" type="checkbox">
+            <label class="checklbl" for="g5-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-13" type="checkbox">
+            <label class="checklbl" for="g5-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-14" type="checkbox">
+            <label class="checklbl" for="g5-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-15" type="checkbox">
+            <label class="checklbl" for="g5-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-16" type="checkbox">
+            <label class="checklbl" for="g5-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-17" type="checkbox">
+            <label class="checklbl" for="g5-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-18" type="checkbox">
+            <label class="checklbl" for="g5-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-19" type="checkbox">
+            <label class="checklbl" for="g5-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-20" type="checkbox">
+            <label class="checklbl" for="g5-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-21" type="checkbox">
+            <label class="checklbl" for="g5-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-22" type="checkbox">
+            <label class="checklbl" for="g5-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-23" type="checkbox">
+            <label class="checklbl" for="g5-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-24" type="checkbox">
+            <label class="checklbl" for="g5-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-25" type="checkbox">
+            <label class="checklbl" for="g5-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-26" type="checkbox">
+            <label class="checklbl" for="g5-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-27" type="checkbox">
+            <label class="checklbl" for="g5-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-28" type="checkbox">
+            <label class="checklbl" for="g5-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-29" type="checkbox">
+            <label class="checklbl" for="g5-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-30" type="checkbox">
+            <label class="checklbl" for="g5-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-31" type="checkbox">
+            <label class="checklbl" for="g5-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-32" type="checkbox">
+            <label class="checklbl" for="g5-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-33" type="checkbox">
+            <label class="checklbl" for="g5-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-34" type="checkbox">
+            <label class="checklbl" for="g5-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-35" type="checkbox">
+            <label class="checklbl" for="g5-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-36" type="checkbox">
+            <label class="checklbl" for="g5-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-37" type="checkbox">
+            <label class="checklbl" for="g5-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-38" type="checkbox">
+            <label class="checklbl" for="g5-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-39" type="checkbox">
+            <label class="checklbl" for="g5-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-40" type="checkbox">
+            <label class="checklbl" for="g5-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-41" type="checkbox">
+            <label class="checklbl" for="g5-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-42" type="checkbox">
+            <label class="checklbl" for="g5-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-43" type="checkbox">
+            <label class="checklbl" for="g5-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-44" type="checkbox">
+            <label class="checklbl" for="g5-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-45" type="checkbox">
+            <label class="checklbl" for="g5-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-46" type="checkbox">
+            <label class="checklbl" for="g5-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-47" type="checkbox">
+            <label class="checklbl" for="g5-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-48" type="checkbox">
+            <label class="checklbl" for="g5-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-49" type="checkbox">
+            <label class="checklbl" for="g5-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g5-50" type="checkbox">
+            <label class="checklbl" for="g5-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab6">
+    <label class="tab_class" for="tab6">６号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-1" type="checkbox">
+            <label class="checklbl" for="g6-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-2" type="checkbox">
+            <label class="checklbl" for="g6-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-3" type="checkbox">
+            <label class="checklbl" for="g6-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-4" type="checkbox">
+            <label class="checklbl" for="g6-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-5" type="checkbox">
+            <label class="checklbl" for="g6-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-6" type="checkbox">
+            <label class="checklbl" for="g6-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-7" type="checkbox">
+            <label class="checklbl" for="g6-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-8" type="checkbox">
+            <label class="checklbl" for="g6-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-9" type="checkbox">
+            <label class="checklbl" for="g6-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-10" type="checkbox">
+            <label class="checklbl" for="g6-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-11" type="checkbox">
+            <label class="checklbl" for="g6-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-12" type="checkbox">
+            <label class="checklbl" for="g6-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-13" type="checkbox">
+            <label class="checklbl" for="g6-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-14" type="checkbox">
+            <label class="checklbl" for="g6-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-15" type="checkbox">
+            <label class="checklbl" for="g6-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-16" type="checkbox">
+            <label class="checklbl" for="g6-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-17" type="checkbox">
+            <label class="checklbl" for="g6-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-18" type="checkbox">
+            <label class="checklbl" for="g6-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-19" type="checkbox">
+            <label class="checklbl" for="g6-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-20" type="checkbox">
+            <label class="checklbl" for="g6-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-21" type="checkbox">
+            <label class="checklbl" for="g6-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-22" type="checkbox">
+            <label class="checklbl" for="g6-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-23" type="checkbox">
+            <label class="checklbl" for="g6-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-24" type="checkbox">
+            <label class="checklbl" for="g6-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-25" type="checkbox">
+            <label class="checklbl" for="g6-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-26" type="checkbox">
+            <label class="checklbl" for="g6-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-27" type="checkbox">
+            <label class="checklbl" for="g6-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-28" type="checkbox">
+            <label class="checklbl" for="g6-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-29" type="checkbox">
+            <label class="checklbl" for="g6-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-30" type="checkbox">
+            <label class="checklbl" for="g6-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-31" type="checkbox">
+            <label class="checklbl" for="g6-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-32" type="checkbox">
+            <label class="checklbl" for="g6-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-33" type="checkbox">
+            <label class="checklbl" for="g6-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-34" type="checkbox">
+            <label class="checklbl" for="g6-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-35" type="checkbox">
+            <label class="checklbl" for="g6-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-36" type="checkbox">
+            <label class="checklbl" for="g6-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-37" type="checkbox">
+            <label class="checklbl" for="g6-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-38" type="checkbox">
+            <label class="checklbl" for="g6-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-39" type="checkbox">
+            <label class="checklbl" for="g6-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-40" type="checkbox">
+            <label class="checklbl" for="g6-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-41" type="checkbox">
+            <label class="checklbl" for="g6-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-42" type="checkbox">
+            <label class="checklbl" for="g6-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-43" type="checkbox">
+            <label class="checklbl" for="g6-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-44" type="checkbox">
+            <label class="checklbl" for="g6-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-45" type="checkbox">
+            <label class="checklbl" for="g6-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-46" type="checkbox">
+            <label class="checklbl" for="g6-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-47" type="checkbox">
+            <label class="checklbl" for="g6-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-48" type="checkbox">
+            <label class="checklbl" for="g6-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-49" type="checkbox">
+            <label class="checklbl" for="g6-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g6-50" type="checkbox">
+            <label class="checklbl" for="g6-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input type="radio" name="tab_name" id="tab7">
+    <label class="tab_class" for="tab7">７号</label>
+    <div class="content_class">
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-1" type="checkbox">
+            <label class="checklbl" for="g7-1">01</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-2" type="checkbox">
+            <label class="checklbl" for="g7-2">02</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-3" type="checkbox">
+            <label class="checklbl" for="g7-3">03</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-4" type="checkbox">
+            <label class="checklbl" for="g7-4">04</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-5" type="checkbox">
+            <label class="checklbl" for="g7-5">05</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-6" type="checkbox">
+            <label class="checklbl" for="g7-6">06</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-7" type="checkbox">
+            <label class="checklbl" for="g7-7">07</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-8" type="checkbox">
+            <label class="checklbl" for="g7-8">08</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-9" type="checkbox">
+            <label class="checklbl" for="g7-9">09</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-10" type="checkbox">
+            <label class="checklbl" for="g7-10">10</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-11" type="checkbox">
+            <label class="checklbl" for="g7-11">11</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-12" type="checkbox">
+            <label class="checklbl" for="g7-12">12</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-13" type="checkbox">
+            <label class="checklbl" for="g7-13">13</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-14" type="checkbox">
+            <label class="checklbl" for="g7-14">14</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-15" type="checkbox">
+            <label class="checklbl" for="g7-15">15</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-16" type="checkbox">
+            <label class="checklbl" for="g7-16">16</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-17" type="checkbox">
+            <label class="checklbl" for="g7-17">17</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-18" type="checkbox">
+            <label class="checklbl" for="g7-18">18</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-19" type="checkbox">
+            <label class="checklbl" for="g7-19">19</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-20" type="checkbox">
+            <label class="checklbl" for="g7-20">20</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-21" type="checkbox">
+            <label class="checklbl" for="g7-21">21</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-22" type="checkbox">
+            <label class="checklbl" for="g7-22">22</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-23" type="checkbox">
+            <label class="checklbl" for="g7-23">23</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-24" type="checkbox">
+            <label class="checklbl" for="g7-24">24</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-25" type="checkbox">
+            <label class="checklbl" for="g7-25">25</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-26" type="checkbox">
+            <label class="checklbl" for="g7-26">26</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-27" type="checkbox">
+            <label class="checklbl" for="g7-27">27</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-28" type="checkbox">
+            <label class="checklbl" for="g7-28">28</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-29" type="checkbox">
+            <label class="checklbl" for="g7-29">29</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-30" type="checkbox">
+            <label class="checklbl" for="g7-30">30</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-31" type="checkbox">
+            <label class="checklbl" for="g7-31">31</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-32" type="checkbox">
+            <label class="checklbl" for="g7-32">32</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-33" type="checkbox">
+            <label class="checklbl" for="g7-33">33</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-34" type="checkbox">
+            <label class="checklbl" for="g7-34">34</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-35" type="checkbox">
+            <label class="checklbl" for="g7-35">35</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-36" type="checkbox">
+            <label class="checklbl" for="g7-36">36</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-37" type="checkbox">
+            <label class="checklbl" for="g7-37">37</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-38" type="checkbox">
+            <label class="checklbl" for="g7-38">38</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-39" type="checkbox">
+            <label class="checklbl" for="g7-39">39</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-40" type="checkbox">
+            <label class="checklbl" for="g7-40">40</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-41" type="checkbox">
+            <label class="checklbl" for="g7-41">41</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-42" type="checkbox">
+            <label class="checklbl" for="g7-42">42</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-43" type="checkbox">
+            <label class="checklbl" for="g7-43">43</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-44" type="checkbox">
+            <label class="checklbl" for="g7-44">44</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-45" type="checkbox">
+            <label class="checklbl" for="g7-45">45</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-46" type="checkbox">
+            <label class="checklbl" for="g7-46">46</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-47" type="checkbox">
+            <label class="checklbl" for="g7-47">47</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-48" type="checkbox">
+            <label class="checklbl" for="g7-48">48</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-49" type="checkbox">
+            <label class="checklbl" for="g7-49">49</label>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="checkarea">
+            <input id="g7-50" type="checkbox">
+            <label class="checklbl" for="g7-50">50</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">決定</button>
+    </div>
+  </div>
+  <div class="loading hide"></div>
+</div>
+</body>
+</html>

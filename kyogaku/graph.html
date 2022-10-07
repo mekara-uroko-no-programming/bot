@@ -36,7 +36,8 @@ let getUrlVars = function() {
 }
 function getInit() {
   // タグ一覧取得
-  let sid = $("#sid").val();
+  //let sid = $("#sid").val();
+  let sid = "AKfycbyhDOFMcS8T7XG8k6-re9Vqdt5I2Qqe3fD12InlIituyks4cHM";
   gasGetCall(sid, {action: "getTagList"}, function(data) {
     // 取得したタグを加工
     let d = [];
@@ -73,7 +74,8 @@ function createSelect(list) {
 // グラフ用データ取得
 function getGraphData() {
   // タグ情報取得
-  let sid = $("#sid").val();
+  //let sid = $("#sid").val();
+  let sid = "AKfycbyhDOFMcS8T7XG8k6-re9Vqdt5I2Qqe3fD12InlIituyks4cHM";
   let tags = [];
   $("#exam :selected").map(function(i, el) {
     tags.push($(el).val());
@@ -98,10 +100,11 @@ function getGraphData() {
         if (!single[key]) {
           single[key] = {GOU: v["GOU"], NO: v["NO"], TITLE: v["TITLE"], COUNT: 0};
         }
-        single[key]["COUNT"]++;
+        console.log(single[key]);
+        single[key]["COUNT"] = single[key]["COUNT"] + 1;
       });
-      dispGraph1(count);
-      //dispGraph2(single);
+      //dispGraph1(count);
+      dispGraph2(single);
     });
   }
 }
@@ -151,6 +154,7 @@ function dispGraph1(count) {
 
 // グラフ表示(個別)
 function dispGraph2(single) {
+  console.log(single);
   let keys = Object.keys(single);
   let max = keys.reduce((acc, cur) => {
     return acc < single[cur]["COUNT"] ? single[cur]["COUNT"] : acc;
@@ -159,7 +163,7 @@ function dispGraph2(single) {
   let mydata = {
     labels: keys.map(key => {
       let r = single[key];
-      return `${r["GOU"]}-${r["NO"]}(${r["TITLE"]})`
+      return `${r["GOU"]}-${r["NO"]}`
     }),
     datasets: [{
       label: '出題数',
@@ -171,6 +175,39 @@ function dispGraph2(single) {
     }]
   };
   //「オプション設定」
+  let options = {
+    title: {
+      display: true,
+      text: "問題ごとの分布"
+    },
+    indexAxis: 'y',
+    elements: {
+      bar: {
+        borderWidth: 2,
+      }
+    },
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'right',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Horizontal Bar Chart'
+      }
+    },
+    
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: max > 0 ? max : 5
+        }
+      }]
+    }
+    
+  };
+  /*
   let options = {
     responsive: true,
     title: {
@@ -186,6 +223,7 @@ function dispGraph2(single) {
       }]
     }
   };
+  */
   // グラフ線画
   let canvas = document.getElementById('stage');
   if (window.chart) {
