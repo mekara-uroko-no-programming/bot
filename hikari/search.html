@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<!--<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>-->
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
 var WebSafeBase64 = {
   encode: function(str) {
@@ -26,6 +27,7 @@ var WebSafeBase64 = {
 };
 window.onload = function (e) {
   liff.init(function (data) {
+    liffId: "1656474352-bX8anMBY"
   });
 };
 function sendMsg() {
