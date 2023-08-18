@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!--<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>-->
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+var WebSafeBase64 = {
+  encode: function(str) {
+    var s = str.replace(/\+/g, "-").replace(/\//g, "_");
+    return btoa(unescape(encodeURIComponent(s)));
+  },
+  decode: function(str) {
+    var s = str.replace(/\-/g, "+").replace(/_/g , "/").replace(/%3D/g, "=");
+    return decodeURIComponent(escape(atob(s)));
+  }
+};
+window.onload = function (e) {
+  liff.init({
+    liffId: "2000446659-G16N4BMZ"
+  });
+};
+function sendMsg() {
+  var keyword = $("#keyword").val();
+  var books = [];
+  $('input[name="books"]:checked').each(function() {
+    var r = $(this).val();
+    books.push(r);
+  });
+  var msg = "";
+  if (!keyword) {
+    msg += "キーワードを入力してください\n"
+  }
+  if (books.length == 0) {
+    msg += "ご著書をチェックしてください\n"
+  }
+  if (msg) {
+    alert(msg);
+    return false;
+  }
+  var text = "本文検索" + "\n";
+  text += "キーワード:" + keyword + "\n";
+  text += "ご著書:" + books.join("|");
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+</script>
+<style type="text/css">
+.big {
+  font-size:15pt;
+}
+.box {
+  font-size: larger;
+  margin-left: 15px;
+}
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+</style>
+<title>ご著書検索</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-xs-12"><font size="5">キーワードを入力</font></div>
+    <div class="col-xs-12">
+      <input type="text" id="keyword" class="form-control big"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-xs-12"><font size="5">検索対象のご著書を選択</font></div>
+    <div class="col-xs-12">
+      <div class="row">
+        <input id="box1" name="books" type="checkbox" value="花束" checked/>
+        <label for="box1" class="box">１００の花束</label>
+      </div>
+      <div class="row">
+        <input id="box2" name="books" type="checkbox" value="タネ" checked/>
+        <label for="box2" class="box">１２３のこころのタネ</label>
+      </div>
+      <div class="row">
+        <input id="box3" name="books" type="checkbox" value="果実" checked/>
+        <label for="box3" class="box">心地よい果実</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
+      <button type="button" class="btn btn-lg btn-success" onClick="sendMsg();">検索</button>
+    </div>
+  </div>
+  <div class="row">
+    <input type="hidden" name="dateid">
+  </div>
+</div>
+</body>
+</html>

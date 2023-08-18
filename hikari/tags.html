@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+<script>
+var getUrlVars = function(){
+  var vars = {};
+  var param = location.search.substring(1).split('&');
+  for(var i = 0; i < param.length; i++) {
+    var keySearch = param[i].search(/=/);
+    var key = '';
+    if(keySearch != -1) key = param[i].slice(0, keySearch);
+    var val = param[i].slice(param[i].indexOf('=', 0) + 1);
+    if(key != '') vars[key] = decodeURI(val);
+  }
+  return vars;
+}
+window.onload = function (e) {
+  liff.init(function (data) {
+  });
+  var param = getUrlVars();
+  getTagList(param['sid']);
+};
+function sendMsg(key) {
+  var text = 'タグ:' + key;
+  liff.sendMessages([
+    {
+      'type': 'text',
+      'text':  text
+    }
+  ])
+  .then(() => {
+    liff.closeWindow();
+  })
+  .catch((err) => {
+    alert(err);
+    liff.closeWindow();
+  });
+}
+function getTagList(sid) {
+  var url = 'https://script.google.com/macros/s/@SID/exec';
+  url = url.replace('@SID', sid);
+  $.ajax({
+    url: url,
+    type: 'GET',
+    data: { action: "getTagList" },
+    beforeSend: function(){
+      $('.loading').removeClass('hide');
+    }
+  }).done(function(data){
+    $('.loading').addClass('hide');
+    var cnt = 0;
+    var tags = [];
+    for (var i =0; i < data.length; i++) {
+        var key = data[i]['TAG'];
+        var cnt = data[i]['COUNT'];
+        var color = getColor(key);
+        var tag = '<a href="#" onClick="sendMsg(&quot;@TAG&quot;);" class="@COLOR">@TAG (@COUNT)</a>';
+        tag = tag.replace(/@TAG/g, key);
+        tag = tag.replace(/@COUNT/g, cnt);
+        tag = tag.replace(/@COLOR/g, color);
+        tags.push(tag);
+    }
+    $('#btn-area').append('<br><br>');
+    for (var i = 0; i < tags.length; i++) {
+        $('#btn-area').append(tags[i]);
+        $('#btn-area').append('&nbsp;');
+    }
+  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+    alert(textStatus);
+    console.log("failed...");
+    console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+    console.log("textStatus     : " + textStatus);
+    console.log("errorThrown    : " + errorThrown.message);
+  });
+}
+function getColor(name) {
+  var ARR1 = ['花束', 'タネ', '果実'];
+  if (ARR1.indexOf(name) >= 0) {
+    return 'color-blue';
+  } else {
+    return 'color-yellow';
+  }
+}
+</script>
+<style type="text/css">
+.big { font-size:13pt; }
+.normal { font-size:10pt; }
+.hide {
+  display: none;
+}
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  background-image: url(./img/loading.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 20%;
+  background-size: 150px 150px;
+}
+/*タグクラウドのデザイン*/
+.widget_tag_cloud .tagcloud a{
+  position:relative;
+  background:#93c9ff;
+  display:inline-block;
+  height:36px;
+  color:#fff;
+  line-height:35px;
+  margin:5px 10px;
+  padding:0 5px;
+  text-decoration:none;
+  font-size:12px;
+}
+/*タグクラウド角を尖らせる*/
+.tagcloud a:before {
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-right: 15px solid #93c9ff;
+  content: '';
+  display: block;
+  margin-left: -15px;
+  position: absolute;
+  left: 0;
+}
+.color-blue {
+  background:#93c9ff !important;
+  color:#fff !important;
+}
+.color-blue:before {
+  border-right: 15px solid #93c9ff !important;
+}
+.color-orange {
+  background:#ff8c00 !important;
+  color:#fff !important;
+}
+.color-orange:before {
+  border-right: 15px solid #ff8c00 !important;
+}
+.color-yellow {
+  background:#fcc800 !important;
+  color:#fff !important;
+}
+.color-yellow:before {
+  border-right: 15px solid #fcc800 !important;
+}
+</style>
+<title>表示したいタグをタップしてください</title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="widget_tag_cloud">
+      <div id="btn-area" class="tagcloud col-sm-11">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <input type="hidden" name="dateid">
+  </div>
+</div>
+<div class="loading hide"></div>
+</body>
+</html>
